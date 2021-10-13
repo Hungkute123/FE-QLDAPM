@@ -10,3 +10,16 @@ interface ITabs {
   initialNum?: number;
   contentBody?: any;
 }
+
+interface ICardProduct {
+  title?: string;
+  price?: string;
+  thumbnail?: string;
+  rate?: number;
+  chapter?: number;
+}
+
+interface IListProduct {
+  listproducts?: Array<any>;
+  numCol?: number;
+}
