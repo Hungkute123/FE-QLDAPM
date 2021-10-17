@@ -6,8 +6,8 @@ export const ListProduct: React.FC<IListProduct> = ({ listproducts, numCol = 5 }
   return (
     <div className={`list-product list-product--${numCol}col`}>
       {listproducts &&
-        listproducts.map((item) => {
-          return <CardProduct />;
+        listproducts.map((item, i) => {
+          return <CardProduct key={i} />;
         })}
     </div>
   );
