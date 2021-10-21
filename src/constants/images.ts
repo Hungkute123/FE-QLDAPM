@@ -9,6 +9,9 @@ import IMenuStationery from '../assets/images/menu/stationery.png';
 import IMenuSuggestion from '../assets/images/menu/suggestion.png';
 import IMenuTrend from '../assets/images/menu/trend.png';
 
+import SvgVietnam from '../assets/svg/vietnam.svg';
+import SvgEnglish from '../assets/svg/english.svg';
+
 export {
   IMenuDiscount,
   IMenuTrend,
@@ -20,4 +23,6 @@ export {
   IMenuGame,
   IMenuFlashSale,
   IMenuEconomic,
+  SvgEnglish,
+  SvgVietnam,
 };

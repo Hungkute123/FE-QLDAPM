@@ -1,0 +1,104 @@
+.login-modal {
+  padding: 10px 10px 20px;
+  width: 100% !important;
+  max-width: 450px;
+  border-radius: 10px !important;
+  min-height: 400px;
+
+  &__header {
+    justify-content: space-between;
+    border-bottom: 0;
+    .tabs__title {
+      width: 45%;
+      border: 0;
+      padding: 5px;
+      height: fit-content;
+      font-weight: normal;
+      width: 100%;
+
+      hr {
+        transition: all 0.8s;
+        width: 100%;
+        border: 1px solid #c92127;
+        opacity: 0;
+        margin: 8px;
+        width: 0;
+      }
+
+      &:hover,
+      &:active,
+      &--select {
+        span {
+          color: #c92127;
+          font-weight: normal;
+        }
+        hr {
+          border: 1px solid #c92127;
+          width: 100%;
+          opacity: 1;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__login {
+    padding: 10px 20px;
+  }
+
+  &__register {
+    padding: 10px 20px;
+  }
+
+  &__group-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+  }
+
+  &__btn {
+    width: 250px;
+    height: 40px;
+    margin: auto;
+    margin-top: 15px;
+    font-size: 14px !important;
+
+    span {
+      position: relative;
+      top: 1px;
+      color: #fff;
+    }
+  }
+
+  &__text {
+    color: #aaa;
+    font-size: 13px;
+    text-align: center;
+    margin: 0px 30px;
+    margin-top: 30px;
+  }
+
+  &__forgot-pass {
+    color: #c92127;
+    cursor: pointer;
+    margin-left: auto;
+    text-align: right;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
