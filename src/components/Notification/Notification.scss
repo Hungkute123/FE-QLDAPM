@@ -1,0 +1,126 @@
+.btn-notification {
+    background: url(../../assets/images/icon/notification.png) no-repeat center center;
+    width: 25%;
+    height: 30px;
+    position: relative;
+    float: left;
+
+    a {
+        width: 100%;
+        height: 100%;
+        float: left;
+        font-size: 0;
+    }
+
+    .notification-des {
+        line-height: 18px;
+        text-transform: uppercase;
+        color: #f7941e;
+        font-size: 9px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .notify-right {
+        top: -12px;
+        right: -12px;
+    }
+
+    span.notify-right {
+        background: url(../../assets/images/icon/notify-right.png) no-repeat;
+        right: 0px;
+        top: -7px;
+    }
+
+    span.notify {
+        width: 32px;
+        height: 22px;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        line-height: normal;
+        font-size: 11px;
+        padding-top: 3px;
+        z-index: 1;
+    }
+
+    .notification-block {
+        margin-top: 5px;
+        position: absolute;
+        top: 0;
+        right: -8px;
+        z-index: 1002;
+        max-height: 500px;
+        overflow-y: auto;
+        background: #fff;
+        color: #666;
+        width: 400px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0px 4px 7px 0px rgb(50 50 50 / 20%);
+        -moz-box-shadow: 0px 4px 7px 0px rgba(50, 50, 50, 0.2);
+        box-shadow: 0px 4px 7px 0px rgb(50 50 50 / 20%);
+        -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+        transition: opacity 0.5s, transform 0.5s;
+        -webkit-transform: translate(0, 40px);
+        -moz-transform: translate(0, 40px);
+        -o-transform: translate(0, 40px);
+        -ms-transform: translate(0, 40px);
+        transform: translate(0, 40px);
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+
+        .total-notification {
+            background-color: rgb(255, 209, 118);
+            padding: 8px;
+
+            .notification-title {
+                font-size: 14px;
+                font-weight: bold;
+                display: block;
+            }
+
+            .notification-calendar {
+                font-size: 12px;
+                font-style: italic;
+                display: block;
+            }
+
+            .notification-body {
+                font-size: 12px;
+            }
+        }
+
+        .total-notification:hover {
+            background-color: rgb(1, 244, 151);
+        }
+    }
+
+    .notification-all {
+        background-color: #fff;
+        height: 40px;
+
+        a {
+            font-size: 15px;
+            line-height: 40px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        a:hover {
+            color: rgb(198, 33, 44);
+        }
+    }
+}
+
+.notification-block:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-notification:hover {
+    .notification-block {
+        opacity: 1;
+        visibility: visible;
+    }
+}

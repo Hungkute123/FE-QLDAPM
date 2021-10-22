@@ -6,13 +6,12 @@
   background-color: #f3f3f3;
   min-height: 100vh;
   &__header {
-    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0;
     z-index: 999;
   }
   &__center {
