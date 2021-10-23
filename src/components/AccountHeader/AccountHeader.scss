@@ -2,14 +2,16 @@
   display: inline-block;
   width: fit-content;
   position: relative;
+  padding-right: 16px;
   &__label {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: fit-content;
     cursor: pointer;
+
     span {
-      font-size: 14px;
+      font-size: 12px;
       margin-top: 2px;
       color: #f7941e;
     }
