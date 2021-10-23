@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useLocation, Route } from "react-router-dom";
+import React from "react";
+import { Route } from "react-router-dom";
 // import { doGetCurrentUser } from '../redux/slice';
 // import { EToken } from '../constants/login';
 // import { logout } from '../helpers/app';

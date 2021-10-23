@@ -15,6 +15,10 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
         use: 'babel-loader',
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -49,7 +53,6 @@ const config: webpack.Configuration = {
     overlay: true,
     historyApiFallback: true,
     hot: true,
-    // host: '0.0.0.0'
   },
   plugins: [
     new HtmlWebpackPlugin({
