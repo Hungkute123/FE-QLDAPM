@@ -23,3 +23,44 @@ interface IListProduct {
   listproducts?: Array<any>;
   numCol?: number;
 }
+
+interface IModal {
+  isOpen?: boolean;
+  setIsOpen?: any;
+}
+
+interface IButton {
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
+  disabled?: boolean;
+  width?: string | number;
+  height?: string | number;
+}
+
+interface IInput extends IStyle {
+  name?: string;
+  label?: string;
+  placeholder?: string;
+  value?: string | number | date;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  maxLength?: number | undefined;
+  onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
+  onkeypress?: React.KeyboardEventHandler<HTMLInputElement> | undefined;
+  onkeyup?: React.KeyboardEventHandler<HTMLInputElement> | undefined;
+  type?: 'text' | 'password' | 'date';
+  background?: Property.Background<string | number> | undefined;
+  borderRadius?: string | undefined;
+  width?: string | undefined;
+  height?: string | undefined;
+  className?: string | undefined;
+  error?: any;
+  colorText?: string;
+  marginLabel?: string;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  showPassword?: boolean;
+  zIndex?: number;
+  handleAction?: any;
+  titleAction?: string;
+  isDisable?: boolean;
+}
