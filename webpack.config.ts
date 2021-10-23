@@ -24,7 +24,7 @@ const config: webpack.Configuration = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -44,7 +44,7 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.scss'],
   },
   devServer: {
     contentBase: path.join(__dirname, 'build'),

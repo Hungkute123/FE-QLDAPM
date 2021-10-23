@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.scss';
-import { Menu, ListProduct } from '../../components';
-import { Tabs } from '../../components/common';
+import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader } from '../../components';
+import { Tabs, Button } from '../../components/common';
 
 export const Home = () => {
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <p>Hello ReactJs</p>
+      <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
+      <ChooseLanguage />
+      <AccountHeader />
       <Menu />
       <Tabs
         titleTabs={['Xu hướng theo ngày', 'Sách HOT - Giảm sốc', 'Bestseller Ngoại Văn']}
@@ -27,6 +31,7 @@ export const Home = () => {
           </div>,
         ]}
       ></Tabs>
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
