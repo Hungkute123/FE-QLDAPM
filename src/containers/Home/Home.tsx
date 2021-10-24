@@ -9,10 +9,7 @@ export const Home = () => {
 
   return (
     <div>
-      <p>Hello ReactJs</p>
       <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
-      <ChooseLanguage />
-      <AccountHeader />
       <Menu />
       <Tabs
         titleTabs={['Xu hướng theo ngày', 'Sách HOT - Giảm sốc', 'Bestseller Ngoại Văn']}
