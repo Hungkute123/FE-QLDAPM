@@ -15,7 +15,7 @@ export const Footer = () => {
         <Row>
           <div className="footer__content">
             <div className="footer__left">
-              <img src="./logo.png" alt="Logo Fahasa" className="footer__left--logo" />
+              <img src="/logo.png" alt="Logo Fahasa" className="footer__left--logo" />
               <p>
                 Lầu 5, 387-389 Hai Bà Trưng Quận 3 TP HCMCông Ty Cổ Phần Phát Hành Sách TP HCM -
                 FAHASA60 - 62 Lê Lợi, Quận 1, TP. HCM, Việt Nam
@@ -24,18 +24,18 @@ export const Footer = () => {
                 Fahasa.com nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và
                 nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống Fahasa trên toàn quốc.
               </p>
-              <img src="./bocongthuong.png" alt="Chứng nhận" className="footer__left--bct" />
+              <img src="/bocongthuong.png" alt="Chứng nhận" className="footer__left--bct" />
               <div className="footer__left--social">
-                <img src="./social/fb.png" alt="" />
-                <img src="./social/in.png" alt="" />
-                <img src="./social/youtube.png" alt="" />
-                <img src="./social/tumblr.png" alt="" />
-                <img src="./social/twitter.png" alt="" />
-                <img src="./social/pinterest.png" alt="" />
+                <img src="/social/fb.png" alt="" />
+                <img src="/social/in.png" alt="" />
+                <img src="/social/youtube.png" alt="" />
+                <img src="/social/tumblr.png" alt="" />
+                <img src="/social/twitter.png" alt="" />
+                <img src="/social/pinterest.png" alt="" />
               </div>
               <div className="footer__left--stores">
-                <img src="./social/android.png" alt="" />
-                <img src="./social/appstore.png" alt="" />
+                <img src="/social/android.png" alt="" />
+                <img src="/social/appstore.png" alt="" />
               </div>
             </div>
             <div className="footer__right">
@@ -135,28 +135,28 @@ export const Footer = () => {
               </Row>
               <div className="footer__right--gird">
                 <div className="footer__right--gird_item">
-                  <img src="./social/vnpost.png" alt="" />
+                  <img src="/social/vnpost.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/ahamove_logo.png" alt="" />
+                  <img src="/social/ahamove_logo.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/icon_giao_hang_nhanh.png" alt="" />
+                  <img src="/social/icon_giao_hang_nhanh.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/icon_snappy.png" alt="" />
+                  <img src="/social/icon_snappy.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/vnpay_logo.png" alt="" />
+                  <img src="/social/vnpay_logo.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/ZaloPay-logo-130x83.png" alt="" />
+                  <img src="/social/ZaloPay-logo-130x83.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/momopay.png" alt="" />
+                  <img src="/social/momopay.png" alt="" />
                 </div>
                 <div className="footer__right--gird_item">
-                  <img src="./social/shopeepay_logo.png" alt="" />
+                  <img src="/social/shopeepay_logo.png" alt="" />
                 </div>
               </div>
             </div>
