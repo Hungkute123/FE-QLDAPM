@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { Home } from '../containers';
-import { PrivateRouter } from './PrivateRouter';
-import { PublicRouter } from "./PublicRouter";
-import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
 
+import { Home, User } from '../containers';
+
+import { PrivateRouter } from './PrivateRouter';
+import { PublicRouter } from './PublicRouter';
+import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
 import { Header, Footer } from '../components/common';
 
 export const Routers = () => {
@@ -21,6 +22,34 @@ export const Routers = () => {
           isHasHeader={true}
           header={Header}
           titleHeader="Cộng đồng"
+          isHasFooter={true}
+          footer={Footer}
+        />
+      </Switch>
+
+      <Switch>
+        <PrivateRouter
+          exact={true}
+          path={'/account'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Tài khoản - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+      </Switch>
+
+      <Switch>
+        <PrivateRouter
+          exact={true}
+          path={'/account/edit'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Thông tin tài khoản - Fahasa"
           isHasFooter={true}
           footer={Footer}
         />
