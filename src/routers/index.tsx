@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import { Home, User } from '../containers';
 
+import { CatalogSearch, Home, OneStepCheckout,User } from '../containers';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
@@ -21,7 +21,24 @@ export const Routers = () => {
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
-          titleHeader="Cộng đồng"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/onestepcheckout/index'}
+          component={OneStepCheckout}
+          layout={OnlyHeaderLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+
+        <PrivateRouter
+          path={'/catalogsearch/result'}
+          component={CatalogSearch}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
           isHasFooter={true}
           footer={Footer}
         />

@@ -1,0 +1,16 @@
+.one-step-box {
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+
+  &__title {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 8px 0px;
+    border-bottom: 1px #ced4da solid;
+  }
+
+  &__body {
+    padding: 15px 0px;
+  }
+}
