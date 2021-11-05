@@ -63,3 +63,50 @@ export const MenuList = [
     title: 'Kinh tế',
   },
 ];
+
+export const FilterOption = [
+  {
+    title: 'ĐỘ TUỔI',
+    name: 'age',
+    list: [
+      { title: '11 - 15', href: '', id: 1 },
+      { title: '3+', href: '', id: 2 },
+      { title: '6+', href: '', id: 3 },
+      { title: '9+', href: '', id: 4 },
+    ],
+  },
+  {
+    title: 'HÌNH THỨC',
+    name: 'type',
+    list: [
+      { title: 'Bìa Mềm', href: '', id: 1 },
+      { title: 'Bộ Hộp', href: '', id: 2 },
+      { title: 'Bìa Cứng', href: '', id: 3 },
+    ],
+  },
+  {
+    title: 'MÀU SẮC',
+    name: 'color',
+    list: [
+      { title: 'Nhiều màu', href: '', id: 1 },
+      { title: 'Đơn màu', href: '', id: 2 },
+    ],
+  },
+  {
+    title: 'NGÔN NGỮ',
+    name: 'language',
+    list: [
+      { title: 'Tiếng Việt', href: '', id: 1 },
+      { title: 'Tiếng Anh', href: '', id: 2 },
+    ],
+  },
+  {
+    title: 'XUẤT XỨ',
+    name: 'madein',
+    list: [
+      { title: 'Việt Nam', href: '', id: 1 },
+      { title: 'Trung Quốc', href: '', id: 2 },
+      { title: 'Nhật Bản', href: '', id: 3 },
+    ],
+  },
+];

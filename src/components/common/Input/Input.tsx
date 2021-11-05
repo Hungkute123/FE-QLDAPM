@@ -28,6 +28,7 @@ export const Input = React.forwardRef<any, IInput>(
       titleAction,
       handleAction,
       isDisable,
+      buttonAction,
     },
     ref,
   ) => {
@@ -79,6 +80,12 @@ export const Input = React.forwardRef<any, IInput>(
             {titleAction && (
               <div className="input__showPass" onClick={handleAction}>
                 {titleAction}
+              </div>
+            )}
+
+            {buttonAction && (
+              <div className="input__showPass" onClick={handleAction}>
+                {buttonAction}
               </div>
             )}
           </div>

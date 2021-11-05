@@ -63,4 +63,11 @@ interface IInput extends IStyle {
   handleAction?: any;
   titleAction?: string;
   isDisable?: boolean;
+  buttonAction?: any;
+}
+
+interface IGroupOption {
+  title?: string;
+  name?: string;
+  listOption?: Array<{ title: string; id: number }>;
 }

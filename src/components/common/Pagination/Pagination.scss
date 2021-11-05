@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__num {
+    padding: min(1vw, 10px) min(1.2vw, 12px);
+    border-radius: 6px;
+    margin: 4px;
+    display: flex;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    font-size: min(1vw, 16px);
+    cursor: pointer;
+    transition: all 0.5s;
+    &--current {
+      background-color: #c92127;
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: sandybrown;
+    }
+
+    &--disabled {
+      background: rgb(85, 84, 100);
+    }
+  }
+}

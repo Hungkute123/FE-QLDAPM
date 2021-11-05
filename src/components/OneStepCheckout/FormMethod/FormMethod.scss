@@ -1,0 +1,26 @@
+.form-method {
+  &__item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+  &__label {
+    position: relative;
+    top: 3px;
+    margin-left: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  &__feedback {
+    margin-left: 20px;
+  }
+}

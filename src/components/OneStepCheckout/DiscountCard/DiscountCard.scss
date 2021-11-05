@@ -1,0 +1,45 @@
+.discount-card {
+  display: flex;
+  &__left {
+    display: flex;
+    position: relative;
+    top: 10px;
+    margin-right: 30px;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .input {
+      padding-bottom: 0px;
+      flex: 1;
+      width: 500px;
+      margin-right: 10px;
+
+      &__showPass {
+        width: 100px;
+        right: 2px;
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    span {
+      text-decoration: underline;
+      color: #007bff;
+      cursor: pointer;
+    }
+  }
+
+  &__span {
+    color: #9fa7ab;
+  }
+}

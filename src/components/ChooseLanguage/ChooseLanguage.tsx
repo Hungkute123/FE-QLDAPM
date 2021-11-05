@@ -4,7 +4,10 @@ import { SvgEnglish, SvgVietnam } from '../../constants/images';
 import { AiOutlineDown } from 'react-icons/ai';
 import { TiTick } from 'react-icons/ti';
 
-export const ChooseLanguage = () => {
+interface IChooseLanguage {
+  className?: string;
+}
+export const ChooseLanguage: React.FC<IChooseLanguage> = ({ className }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('Vietnamese');
 
@@ -21,7 +24,11 @@ export const ChooseLanguage = () => {
   };
 
   return (
-    <div className="choose-language" onMouseEnter={handleOnEnter} onMouseLeave={handleOnLeave}>
+    <div
+      className={`choose-language ${className}`}
+      onMouseEnter={handleOnEnter}
+      onMouseLeave={handleOnLeave}
+    >
       <div className="choose-language__label">
         <img src={selectedLanguage === 'Vietnamese' ? SvgVietnam : SvgEnglish} alt="image" />
         <AiOutlineDown size={15} />
