@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 // import { readCookie } from './../../../helpers/login';
 // import { logout } from '../../../helpers/logout';
 // import { EToken } from '../../../constants/login';
-
+import queryString from 'query-string';
 const baseURL = process.env.URL_MY_API;
 // const token = readCookie(EToken.COMUNITY_ACCESS_KEY);
 const buildysURL = process.env.REACT_APP_LINK_BUILDYS;
@@ -13,6 +13,7 @@ const axiosMy = axios.create({
     "content-type": "application/json",
     Authorization: "",
   },
+  paramsSerializer: params => queryString.stringify(params),
 });
 axiosMy.interceptors.response.use(
   (res: AxiosResponse<{ content: any; message: string; result: number }>) => {
