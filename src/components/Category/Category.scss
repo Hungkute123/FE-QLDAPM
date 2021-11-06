@@ -1,0 +1,73 @@
+.category {
+  display: inline-block;
+  min-width: 300px;
+  height: 42px;
+  line-height: 38px;
+  background: rgb(247, 148, 30);
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding: 2px 20px 0 20px;
+
+  &__dropdown {
+    display: none;
+    text-align: left;
+    position: absolute;
+    background-color: #fff;
+    top: 100%;
+    left: 0;
+    min-width: 300px;
+    font-size: 14px;
+    line-height: 42px;
+    font-weight: 400;
+    &--show {
+      display: block;
+    }
+    li {
+      position: relative;
+      height: 42px;
+      a {
+        line-height: 17px;
+        color: #343434;
+        padding: 12px 10px 13px 20px;
+        .caret {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          margin-left: 2px;
+          vertical-align: middle;
+          &:after {
+            content: url(https://cdn0.fahasa.com/skin/frontend/base/default/images/right_menu.png);
+            position: absolute;
+            color: #555;
+            font-weight: 400;
+            font-weight: 12px;
+            top: 10px;
+            right: 20px;
+          }
+        }
+      }
+     
+    }
+    li:hover {
+      cursor: pointer;
+      height: 42px;
+      background-color: #fcdab0;
+      display: block;
+      a {
+        color: #343434;
+      }
+      .group-category {
+        display: block !important;
+      }
+    }
+  }
+
+  &:hover {
+    .category__dropdown {
+      display: block;
+    }
+  }
+}
