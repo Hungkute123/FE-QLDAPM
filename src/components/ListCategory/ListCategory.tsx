@@ -6,35 +6,26 @@ import { getCategoryProductByIDParentLevelTwo } from '../../redux/slice/appSlice
 
 export const ListCategory: React.FC<IListCategory> = ({ title, idparent, keymap }) => {
   const { categoryLevelTwo } = useSelector((state: RootState) => state.categorySlice);
-  let tempCategory:any;
-  tempCategory = [];
-  const [category, SetCategory] = useState(tempCategory);
+ 
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(getCategoryProductByIDParentLevelTwo({ idparent: idparent }));
-   
-    SetCategory(categoryLevelTwo);
   }, []);
   const handleList = (item:any, i:number) =>{
     if(keymap == i ){
-      item.data.map((item: any, i: number) => {
-        return( <li key={i} className="list-category__detail">
-        {item.Name}
+      return item.data.map((item1: any, i1: number) => {
+        return( <li key={i1} className="list-category__detail">
+        {item1.Name}
       </li>)
        })
     }
-     return(<li className="list-category__detail">{i}</li>)
   }
   return (
     <div className="list-category">
       <div className="list-category__title">{title}</div>
       <ul>
-      <li  className="list-category__detail">
-           {idparent}
-         </li>
-      {category &&
-          category.map((item: any, i: number) => {
+      {categoryLevelTwo &&
+          categoryLevelTwo.map((item: any, i: number) => {
              return handleList(item,i)
         })}
         <li className="list-category__more">Xem thêm...</li>

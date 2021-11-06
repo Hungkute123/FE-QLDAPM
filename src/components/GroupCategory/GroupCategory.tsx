@@ -8,11 +8,12 @@ import { getCategoryProductByIDParentLevelOne } from '../../redux/slice/appSlice
 import './GroupCategory.scss';
 export const GroupCategory: React.FC<IGroupCategory> = ({ idparent, numCol = 4 }) => {
   const dispatch = useDispatch()
-  const {categoryLevelOne} = useSelector((state: RootState) => state.categorySlice);
+  const {categoryLevelOne,categoryLevelTwo} = useSelector((state: RootState) => state.categorySlice);
   
   useEffect(() => {
     dispatch( getCategoryProductByIDParentLevelOne({ idparent: idparent }));
-  }, [dispatch]);
+  }, [idparent]);
+  // handleCategoryLevelTwo(idparent)
   return (
     <div className="group-category">
       <div className={`group-category__detail group-category__detail--${numCol}col`}>

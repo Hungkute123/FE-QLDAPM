@@ -1,6 +1,8 @@
 .menuslideshow{
-    display: block;
+    display: flex;
     height: 420px;
     width: 100%;
+    margin: 0;
     margin-bottom: 15px;
+    justify-content: center;
 }

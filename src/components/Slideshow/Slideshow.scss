@@ -3,7 +3,8 @@
     height: 420px;
     float: right;
     cursor: pointer;
-    z-index: -100;
+    z-index: 0;
+    margin-left: 8px;
 }
 .carousel-indicators{
     opacity: 0;

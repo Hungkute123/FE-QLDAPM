@@ -6,7 +6,7 @@ import './MenuSlideshow.scss';
 export const MenuSlideshow = () => {
     return (
   <div className="menuslideshow">
-      <Category />
+      <Category className="category__dropdown--show"/>
       <Slideshow listbanner={['test']}/>
   </div>
 
