@@ -70,4 +70,5 @@ const config: webpack.Configuration = {
     new CopyWebpackPlugin({ patterns: [{ from: 'public/assets' }] }),
   ],
 };
+
 export default config;

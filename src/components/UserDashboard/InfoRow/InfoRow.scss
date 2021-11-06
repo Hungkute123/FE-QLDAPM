@@ -1,0 +1,27 @@
+.info-row {
+    padding-top: 10px;
+
+    &__row {
+        padding: 0 15px;
+    }
+
+    &__info,
+    &__value {
+        padding-right: 15px;
+    }
+
+    &__value {
+        &--center {
+            text-align: center;
+        }
+    }
+
+    &__url {
+        text-align: right;
+        display: none;
+
+        &--show {
+            display: block;
+        }
+    }
+}

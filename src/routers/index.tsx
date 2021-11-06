@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { Home } from '../containers';
-import { PrivateRouter } from './PrivateRouter';
-import { PublicRouter } from "./PublicRouter";
-import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
 
+
+import { CatalogSearch, Home, OneStepCheckout,User } from '../containers';
+import { PrivateRouter } from './PrivateRouter';
+import { PublicRouter } from './PublicRouter';
+import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
 import { Header, Footer } from '../components/common';
 
 export const Routers = () => {
@@ -20,7 +21,52 @@ export const Routers = () => {
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
-          titleHeader="Cộng đồng"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/onestepcheckout/index'}
+          component={OneStepCheckout}
+          layout={OnlyHeaderLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+
+        <PrivateRouter
+          path={'/catalogsearch/result'}
+          component={CatalogSearch}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+      </Switch>
+
+      <Switch>
+        <PrivateRouter
+          exact={true}
+          path={'/account'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Tài khoản - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+      </Switch>
+
+      <Switch>
+        <PrivateRouter
+          exact={true}
+          path={'/account/edit'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Thông tin tài khoản - Fahasa"
           isHasFooter={true}
           footer={Footer}
         />

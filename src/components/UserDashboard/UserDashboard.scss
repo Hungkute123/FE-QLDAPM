@@ -1,0 +1,166 @@
+.message {
+    background-color: #fff;
+    padding: 0 15px;
+    font-size: 13px;
+
+    &__content {
+        padding: 8px 20px;
+        background-color: white;
+        display: flex;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        flex-direction: row;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+
+        span {
+            padding: 0 8px 0 4px;
+        }
+
+        a {
+            font-weight: 600;
+            color: #dc3545;
+        }
+    }
+}
+
+.dashboard {
+    margin-top: 8px;
+    background-color: #fff;
+    padding: 0 15px;
+
+    &__account {
+        padding: 56px 20px 20px;
+        background-color: #fff;
+    }
+
+    &__title {
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+
+        h1 {
+            color: #565555 !important;
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 36px;
+        }
+    }
+
+    &__body {
+        margin: 0 0 20px;
+    }
+
+    &__icon {
+        padding: 0 111px 20px 30px;
+        text-align: center;
+
+        img {
+            width: 65px;
+            height: 65px;
+        }
+    }
+
+    &__accumulation {
+        padding: 0 111px 10px 30px;
+
+        p {
+            color: #f7941e;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+    }
+
+    &__fpoint {
+        padding: 0 15px 20px 15px;
+        text-align: center;
+
+        img {
+            max-width: 65%;
+        }
+    }
+
+    &__info {
+        padding: 15px 10px 20px 10px;
+        background-color: #fff6e3;
+        color: #333333;
+        font-size: 13px;
+        font-weight: 400;
+
+        p {
+            padding: 0 15px;
+            padding-bottom: 10px;
+        }
+
+        a {
+            color: #f7941e !important;
+            padding-right: 0px !important;
+        }
+
+        &--member {
+            display: inline;
+            font-weight: bold;
+            font-family: "Poppins", sans-serif;
+        }
+
+        &--acc {
+            border-bottom: 1px solid #ccc;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+    }
+
+    &__address {
+        padding: 15px;
+        margin: 0 0 20px;
+        font-size: 13px;
+
+        a {
+            color: #c00;
+        }
+
+        h3 {
+            text-transform: uppercase;
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 30px;
+            padding: 10px 0;
+        }
+
+        &--content {
+            h4 {
+                font-weight: normal;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 8px 0;
+            }
+
+            span {
+                line-height: 25px;
+                margin-bottom: 4px;
+                display: block;
+            }
+        }
+    }
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.pr-15 {
+    padding-right: 15px;
+}
