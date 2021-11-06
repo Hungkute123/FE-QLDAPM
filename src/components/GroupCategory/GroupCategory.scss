@@ -1,0 +1,23 @@
+.group-category {
+    position: absolute;
+    top: -1px;
+    left: 100%;
+    z-index: 900;
+    opacity: 1;
+    display: block;
+    height: 380px;
+    width: 930px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    &__detail {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      &--5col {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+    // &:nth-child(2){
+    //   top: -42px;
+    // }
+  }

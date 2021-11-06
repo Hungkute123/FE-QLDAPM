@@ -17,10 +17,12 @@ interface ICardProduct {
   thumbnail?: string;
   rate?: number;
   chapter?: number;
+  path?: string
 }
 
 interface IListProduct {
   listproducts?: Array<any>;
+  path?: string;
   numCol?: number;
 }
 
@@ -70,4 +72,17 @@ interface IGroupOption {
   title?: string;
   name?: string;
   listOption?: Array<{ title: string; id: number }>;
+}
+
+interface ICarousel {
+  listbanner: Array<any>,
+}
+interface IGroupCategory{
+  idparent?: number;
+  numCol?: number;
+}
+interface IListCategory{
+  title?: string;
+  idparent? : number;
+  keymap: number;
 }

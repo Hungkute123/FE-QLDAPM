@@ -1,0 +1,11 @@
+.home-banner {
+  height: 210px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  &__detail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+}
