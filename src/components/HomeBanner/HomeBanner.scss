@@ -3,6 +3,10 @@
   width: 100%;
   display: flex;
   margin-bottom: 20px;
+  justify-content: center;
+  img{
+    width: 300px;
+  }
   &__detail {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

@@ -6,7 +6,7 @@ import { RootState } from '../../redux/rootReducer';
 import { getCategoryProductByLevelZero, resetCategoryLevelTwo } from '../../redux/slice/appSlice/categorySlice';
 import LazyLoad from 'react-lazyload';
 
-export const Category = () => {
+export const Category:React.FC<ICategory> = ({className}) => {
   const [isShown, setIsShown] = useState(false);
   const [idParent, setIDParent] = useState(1);
   const { categoryLevelZero } = useSelector((state: RootState) => state.categorySlice);
@@ -23,7 +23,7 @@ export const Category = () => {
         dispatch(resetCategoryLevelTwo());
       }}>
       Danh Mục Sản Phẩm
-      <ul className="category__dropdown category__dropdown--show">
+      <ul className={`category__dropdown ${className}`}>
         {categoryLevelZero.data &&
           categoryLevelZero.data.map((item: any, i: number) => {
             return (

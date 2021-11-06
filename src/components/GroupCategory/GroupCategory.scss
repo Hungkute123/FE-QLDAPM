@@ -5,7 +5,8 @@
     z-index: 900;
     opacity: 1;
     display: block;
-    height: 380px;
+    min-height: 380px;
+    height: auto;
     width: 930px;
     background: #fff;
     border: 1px solid #eaeaea;

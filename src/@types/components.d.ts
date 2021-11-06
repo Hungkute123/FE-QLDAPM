@@ -86,3 +86,6 @@ interface IListCategory{
   idparent? : number;
   keymap: number;
 }
+interface ICategory{
+  className?: string | undefined;
+}
