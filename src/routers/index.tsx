@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-
-import { CatalogSearch, Home, OneStepCheckout,User, Cart } from '../containers';
+import { CatalogSearch, Home, OneStepCheckout, User, Cart } from '../containers';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
@@ -42,10 +41,8 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-      </Switch>
-      <Switch>
+
         <PrivateRouter
-          exact={true}
           path={'/cart'}
           component={Cart}
           layout={HeaderFooterLayout}
@@ -55,10 +52,8 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-      </Switch>
-      <Switch>
+
         <PrivateRouter
-          exact={true}
           path={'/account'}
           component={User}
           layout={HeaderFooterLayout}
@@ -68,11 +63,8 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-      </Switch>
 
-      <Switch>
         <PrivateRouter
-          exact={true}
           path={'/account/edit'}
           component={User}
           layout={HeaderFooterLayout}

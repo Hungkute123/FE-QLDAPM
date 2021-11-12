@@ -55,7 +55,7 @@ export const UserSidebar = ({ current }: Sidebar) => {
             {itemNav.map((item, move) => {
               return (
                 <li key={move} className={current == move ? 'current' : ''}>
-                  <a href={item.href}>{item.title}</a>
+                  <Link to={item.href}>{item.title}</Link>
                 </li>
               );
             })}
