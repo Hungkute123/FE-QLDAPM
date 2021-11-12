@@ -7,6 +7,7 @@ import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
 import { Header, Footer } from '../components/common';
+import { Seller } from '../containers/Seller/Seller';
 
 export const Routers = () => {
   const buildysURL = process.env.REACT_APP_LINK_BUILDYS;
@@ -36,6 +37,33 @@ export const Routers = () => {
         <PrivateRouter
           path={'/catalogsearch/result'}
           component={CatalogSearch}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/add-new-product'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/order-management'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/product-management'}
+          component={Seller}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
