@@ -55,13 +55,11 @@ export const Pagination: FC<IPagination> = ({
           <div
             key={i}
             className={
-              currentPage == item - 1
-                ? 'pagination__num pagination__num--current'
-                : 'pagination__num'
+              currentPage == item ? 'pagination__num pagination__num--current' : 'pagination__num'
             }
             onClick={() => {
               if (handleSelectedNumber) {
-                return handleSelectedNumber(item - 1);
+                return handleSelectedNumber(item);
               }
             }}
           >

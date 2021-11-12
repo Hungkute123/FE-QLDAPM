@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-
-import { CatalogSearch, Home, OneStepCheckout,User, Cart } from '../containers';
+import { CatalogSearch, Home, OneStepCheckout, User, Cart } from '../containers';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
@@ -18,6 +17,16 @@ export const Routers = () => {
           exact={true}
           path={'/'}
           component={Home}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/wishlist'}
+          component={User}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}

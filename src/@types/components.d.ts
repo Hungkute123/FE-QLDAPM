@@ -17,7 +17,7 @@ interface ICardProduct {
   thumbnail?: string;
   rate?: number;
   chapter?: number;
-  path?: string
+  path?: string;
 }
 
 interface IListProduct {
@@ -75,17 +75,43 @@ interface IGroupOption {
 }
 
 interface ICarousel {
-  listbanner: Array<any>,
+  listbanner: Array<any>;
 }
-interface IGroupCategory{
+interface IGroupCategory {
   idparent?: number;
   numCol?: number;
 }
-interface IListCategory{
+interface IListCategory {
   title?: string;
-  idparent? : number;
+  idparent?: number;
   keymap: number;
 }
-interface ICategory{
+interface ICategory {
   className?: string | undefined;
+}
+
+interface IProduct {
+  Description: string;
+  IDCategory: number;
+  IDProduct: string;
+  IDShop: number;
+  Image: string;
+  NameProduct: string;
+  PackagingSize: string;
+  Price: string;
+  Quantity: number;
+  Rating: any;
+  Status: number;
+  TypeProduct: string;
+  View: number;
+  Votes: number;
+  Weight: string;
+}
+
+interface ILoader {
+  className?: string;
+  colorLoader?: string;
+  height?: number;
+  width?: number;
+  isLoadMore?: boolean;
 }

@@ -13,5 +13,5 @@ export * from './UserInfo/UserInfo';
 
 export * from './CatalogSearch';
 export * from './OneStepCheckout';
-
+export * from './Account'
 

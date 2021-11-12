@@ -34,7 +34,7 @@ export const UserSidebar = ({ current }: Sidebar) => {
     { href: '/account', title: 'Sổ địa chỉ' },
     { href: '/account', title: 'Đơn hàng của tôi' },
     { href: '/account', title: 'Ví voucher' },
-    { href: '/account', title: 'Yêu thích' },
+    { href: '/wishlist', title: 'Yêu thích' },
     { href: '/account', title: 'Sách theo bộ' },
     { href: '/account', title: 'Tài Khoản F-point / Freeship' },
     { href: '/account', title: 'Nhận xét của tôi' },

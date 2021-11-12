@@ -9,23 +9,25 @@ export const GroupOption: React.FC<IGroupOption> = ({ title, listOption, name })
         <p>{title}</p>
       </div>
       <div className="group-option__list">
-        <Form>
-          {['checkbox'].map((type: any) => (
-            <div key={`default-${type}`}>
-              {listOption &&
-                listOption.map((item) => {
-                  return (
-                    <Form.Check
-                      className="group-option__option"
-                      type={type}
-                      id={`${name}-${item.id}`}
-                      label={item.title}
-                    />
-                  );
-                })}
-            </div>
-          ))}
-        </Form>
+        {/* <Form> */}
+        {['checkbox'].map((type: any) => (
+          <div key={`default-${type}`}>
+            {listOption &&
+              listOption.map((item) => {
+                return (
+                  <Form.Check
+                    className="group-option__option"
+                    type={type}
+                    name={name}
+                    id={`${name}-${item.id}`}
+                    label={item.title}
+                    value={item.title}
+                  />
+                );
+              })}
+          </div>
+        ))}
+        {/* </Form> */}
       </div>
     </div>
   );

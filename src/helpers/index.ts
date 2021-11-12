@@ -13,3 +13,24 @@ export function getQueryStringValue(key: string) {
     ),
   );
 }
+
+export const objToQueryUrl = (obj: any, attr: any): string => {
+  if (!obj) return '';
+
+  var query = [];
+  let count = 0;
+
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      if (encodeURIComponent(prop) === attr.name) {
+        if (attr.value) query.push(attr.name + '=' + attr.value);
+        count = 1;
+      } else query.push(encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop]));
+    }
+  }
+  if (count === 0 && attr.value) {
+    query.push(attr.name + '=' + attr.value);
+  }
+
+  return '?' + query.join('&');
+};
