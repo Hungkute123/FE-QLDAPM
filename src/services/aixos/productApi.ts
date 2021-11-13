@@ -12,7 +12,7 @@ const productApi = {
     const url = 'products/idproduct';
     return await axiosMy.get(url, { params });
   },
-  searchProduct: async (params: any) => {
+  searchProduct: async (params: IParamsSearchProduct) => {
     const url = 'products/search';
     return await axiosMy.get(url, { params });
   },
@@ -27,6 +27,10 @@ const productApi = {
   getProductRank: async (params: any) => {
     const url = 'products/rank';
     return await axiosMy.get(url, { params });
+  },
+  favoriteList: async () => {
+    const url = 'products/favorite-list';
+    return await axiosMy.get(url);
   },
 };
 export default productApi;

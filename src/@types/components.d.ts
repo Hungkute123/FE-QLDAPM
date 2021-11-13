@@ -13,11 +13,11 @@ interface ITabs {
 
 interface ICardProduct {
   title?: string;
-  price?: string;
+  price?: number;
   thumbnail?: string;
   rate?: number;
   chapter?: number;
-  path?: string
+  path?: string;
 }
 
 interface IListProduct {
@@ -71,21 +71,50 @@ interface IInput extends IStyle {
 interface IGroupOption {
   title?: string;
   name?: string;
-  listOption?: Array<{ title: string; id: number }>;
+  listOption?: Array<{ title: string; id: number; value: string }>;
+  handleChange?: any;
+  defaultValue?: string;
+  value?: string;
 }
 
 interface ICarousel {
-  listbanner: Array<any>,
+  listbanner: Array<any>;
 }
-interface IGroupCategory{
+interface IGroupCategory {
   idparent?: number;
   numCol?: number;
 }
-interface IListCategory{
+interface IListCategory {
   title?: string;
-  idparent? : number;
+  idparent?: number;
   keymap: number;
 }
-interface ICategory{
+interface ICategory {
   className?: string | undefined;
+}
+
+interface IProduct {
+  Description: string;
+  IDCategory: number;
+  IDProduct: string;
+  IDShop: number;
+  Image: string;
+  NameProduct: string;
+  PackagingSize: string;
+  Price: string;
+  Quantity: number;
+  Rating: any;
+  Status: number;
+  TypeProduct: string;
+  View: number;
+  Votes: number;
+  Weight: string;
+}
+
+interface ILoader {
+  className?: string;
+  colorLoader?: string;
+  height?: number;
+  width?: number;
+  isLoadMore?: boolean;
 }

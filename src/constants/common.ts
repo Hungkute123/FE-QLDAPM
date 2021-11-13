@@ -10,6 +10,7 @@ import {
   IMenuSuggestion,
   IMenuTrend,
 } from './images';
+import { AiFillStar } from 'react-icons/ai';
 
 export const MenuList = [
   {
@@ -66,47 +67,31 @@ export const MenuList = [
 
 export const FilterOption = [
   {
-    title: 'ĐỘ TUỔI',
-    name: 'age',
+    title: 'GIÁ CẢ',
+    name: 'price',
     list: [
-      { title: '11 - 15', href: '', id: 1 },
-      { title: '3+', href: '', id: 2 },
-      { title: '6+', href: '', id: 3 },
-      { title: '9+', href: '', id: 4 },
+      { title: '0 - 100.000đ', href: '', id: 1, value: '0 and 100000' },
+      { title: '100.000đ - 300.000đ', href: '', id: 2, value: '100000 and 300000' },
+      { title: '>300.000đ', href: '', id: 3, value: '> 300000' },
     ],
   },
   {
     title: 'HÌNH THỨC',
-    name: 'type',
+    name: 'typeproduct',
     list: [
-      { title: 'Bìa Mềm', href: '', id: 1 },
-      { title: 'Bộ Hộp', href: '', id: 2 },
-      { title: 'Bìa Cứng', href: '', id: 3 },
+      { title: 'Sách, vở', href: '', id: 1, value: 'Sách, vở' },
+      { title: 'Dụng cụ học tập', href: '', id: 2, value: 'Dụng cụ học tập' },
     ],
   },
   {
-    title: 'MÀU SẮC',
-    name: 'color',
+    title: 'Đánh giá',
+    name: 'votes',
     list: [
-      { title: 'Nhiều màu', href: '', id: 1 },
-      { title: 'Đơn màu', href: '', id: 2 },
-    ],
-  },
-  {
-    title: 'NGÔN NGỮ',
-    name: 'language',
-    list: [
-      { title: 'Tiếng Việt', href: '', id: 1 },
-      { title: 'Tiếng Anh', href: '', id: 2 },
-    ],
-  },
-  {
-    title: 'XUẤT XỨ',
-    name: 'madein',
-    list: [
-      { title: 'Việt Nam', href: '', id: 1 },
-      { title: 'Trung Quốc', href: '', id: 2 },
-      { title: 'Nhật Bản', href: '', id: 3 },
+      { title: '1 sao', href: '', id: 1, value: '1 sao' },
+      { title: '2 sao', href: '', id: 2, value: '2 sao' },
+      { title: '3 sao', href: '', id: 3, value: '3 sao' },
+      { title: '4 sao', href: '', id: 4, value: '4 sao' },
+      { title: '5 sao', href: '', id: 5, value: '5 sao' },
     ],
   },
 ];

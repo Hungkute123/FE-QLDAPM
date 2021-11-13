@@ -26,6 +26,16 @@ export const Routers = () => {
         />
 
         <PrivateRouter
+          path={'/wishlist'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
           path={'/onestepcheckout/index'}
           component={OneStepCheckout}
           layout={OnlyHeaderLayout}

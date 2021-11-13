@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.scss';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Notification from '../../Notification/Notification';
 import Cart from '../../Cart/Cart';
 import { AccountHeader } from '../../AccountHeader/AccountHeader';
 import { ChooseLanguage } from '../../ChooseLanguage/ChooseLanguage';
+import { getQueryStringValue } from '../../../helpers';
 
 export const Header = () => {
   const history = useHistory();
+  const location = useLocation();
+  const [textSearch, setTextSearch] = useState('');
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
     const searchInput = e.target.search;
 
     if (searchInput) {
+      setTextSearch(searchInput.value);
       history.push({
         pathname: `/catalogsearch/result`,
         search: `?text=${searchInput.value}`,
       });
     }
   };
+
+  useEffect(() => {
+    if (location.search) {
+      setTextSearch(getQueryStringValue('text'));
+    }
+  }, [location]);
 
   return (
     <div className="header">
@@ -37,7 +48,12 @@ export const Header = () => {
           <Col md={6} className="header-search-box">
             <Form className="form-inline" onSubmit={handleSubmit}>
               <Form.Group className="input-search">
-                <input type="text" name="search" placeholder="Tìm kiếm sản phẩm mong muốn..." />
+                <input
+                  type="text"
+                  defaultValue={textSearch}
+                  name="search"
+                  placeholder="Tìm kiếm sản phẩm mong muốn..."
+                />
               </Form.Group>
               <button type="submit" className="pull-right btn-search"></button>
             </Form>
