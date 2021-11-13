@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.scss';
-import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader } from '../../components';
+import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader} from '../../components';
 import { Tabs, Button } from '../../components/common';
 import { MenuSlideshow } from '../../components/MenuSlideshow/MenuSlideshow';
 import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
@@ -27,39 +27,39 @@ const Loading = () => (
 )
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const dispatch = useDispatch();
-  // const {
-  //   trend,
-  //   hot,
-  //   bestseller,
-  //   textbook,
-  //   mask,
-  //   handwash,
-  //   toptoy,
-  //   rubik,
-  //   paintingbook,
-  //   childrenreadingstories,
-  //   calculator,
-  //   shockingpricetoy,
-  // } = useSelector((state: RootState) => state.homeSlice);
-  // useEffect(() => {
-  //   dispatch(getProductTrend({ limit: 10 }));
-  //   dispatch(getTextbook({ IDCategory: 162, limit: 5 }));
-  //   setTimeout(()=>{dispatch(getMask({ IDCategory: 75, limit: 5 }));
-  //   dispatch(getHandWash({ IDCategory: 76, limit: 5 }));
-  //   dispatch(getTopToy({ IDCategory: 138, limit: 5 }));},1000);
-  //   setTimeout(()=>{ dispatch(getRubik({ IDCategory: 139, limit: 5 }));
-  //   dispatch(getPaintingBook({ IDCategory: 122, limit: 5 }));
-  //   dispatch(getChildrenReadingStories({ IDCategory: 54, limit: 5 }));},2000);
-  //   setTimeout(()=>{ dispatch(getCalculator({ IDCategory: 196, limit: 5 }));
-  //   dispatch(getShockingPriceToy({ IDCategory: 138, limit: 4 }));},3000);
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  const {
+    trend,
+    hot,
+    bestseller,
+    textbook,
+    mask,
+    handwash,
+    toptoy,
+    rubik,
+    paintingbook,
+    childrenreadingstories,
+    calculator,
+    shockingpricetoy,
+  } = useSelector((state: RootState) => state.homeSlice);
+  useEffect(() => {
+    dispatch(getProductTrend({ limit: 10 }));
+    dispatch(getTextbook({ IDCategory: 162, limit: 5 }));
+    setTimeout(()=>{dispatch(getMask({ IDCategory: 75, limit: 5 }));
+    dispatch(getHandWash({ IDCategory: 76, limit: 5 }));
+    dispatch(getTopToy({ IDCategory: 138, limit: 5 }));},1000);
+    setTimeout(()=>{ dispatch(getRubik({ IDCategory: 139, limit: 5 }));
+    dispatch(getPaintingBook({ IDCategory: 122, limit: 5 }));
+    dispatch(getChildrenReadingStories({ IDCategory: 54, limit: 5 }));},2000);
+    setTimeout(()=>{ dispatch(getCalculator({ IDCategory: 196, limit: 5 }));
+    dispatch(getShockingPriceToy({ IDCategory: 138, limit: 4 }));},3000);
+  }, [dispatch]);
 
   return (
     <div className="home">
       <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      {/* <MenuSlideshow />
+      <MenuSlideshow />
       <HomeBanner />
       <Menu />
       <div className="home__tabs">
@@ -221,7 +221,7 @@ export const Home = () => {
         ]}
       ></Tabs>
       </div>
-      </LazyLoad> */}
+      </LazyLoad> 
       
     </div>
   );
