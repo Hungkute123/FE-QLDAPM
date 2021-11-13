@@ -6,6 +6,7 @@
       "skipLibCheck": true,
       "esModuleInterop": true,
       "strict": true,
+      "strictNullChecks": false,
       "forceConsistentCasingInFileNames": true,
       "moduleResolution": "node",
       "resolveJsonModule": true,
@@ -14,7 +15,7 @@
       "jsx": "react",
       "sourceMap": true,
       "target": "es5",
-      "downlevelIteration": true
+      "downlevelIteration": true,
     },
     "include": ["src"]
   }

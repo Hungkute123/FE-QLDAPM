@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Category.scss';
-import { GroupCategory } from '../GroupCategory/GroupCategory';
+import { GroupCategory } from './GroupCategory/GroupCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import { getCategoryProductByLevelZero, resetCategoryLevelTwo } from '../../redux/slice/appSlice/categorySlice';

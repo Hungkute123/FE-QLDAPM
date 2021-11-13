@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.js';
 import "./assets/css/reset.css";
 import "./index.scss";
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

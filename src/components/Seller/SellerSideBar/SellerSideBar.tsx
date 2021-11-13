@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './UserSidebar.scss';
+import './SellerSideBar.scss';
 
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ interface Sidebar {
   current: number;
 }
 
-export const UserSidebar = ({ current }: Sidebar) => {
+export const SellerSideBar = ({ current }: Sidebar) => {
   const [social, setSocial] = useState([
     { href: 'https://www.facebook.com/fahasa/', title: 'Facebook', src: '/social/fb.png' },
     {
@@ -29,32 +29,26 @@ export const UserSidebar = ({ current }: Sidebar) => {
   ]);
 
   const [itemNav, setItemNav] = useState([
-    { href: '/account', title: 'Bảng điều khiển tài khoản' },
-    { href: '/account/edit', title: 'Thông tin tài khoản' },
-    { href: '/account', title: 'Sổ địa chỉ' },
-    { href: '/account', title: 'Đơn hàng của tôi' },
-    { href: '/account', title: 'Ví voucher' },
-    { href: '/wishlist', title: 'Yêu thích' },
-    { href: '/account', title: 'Sách theo bộ' },
-    { href: '/account', title: 'Tài Khoản F-point / Freeship' },
-    { href: '/account', title: 'Nhận xét của tôi' },
-    { href: '/account', title: 'Thông Báo' },
-    { href: '/account', title: 'Đăng ký nhận tin điện tử' },
+    { href: '/seller/product-management', title: 'Quản lý sản phẩm' },
+    { href: '/seller/order-management', title: 'Quản lý đơn hàng' },
+    { href: '/seller/add-new-product', title: 'Thêm sản phẩm' },
+    
+    
   ]);
 
   return (
     <div>
-      <div className="nav-account">
-        <div className="nav-account__title">
+      <div className="seller-sidebar">
+        <div className="seller-sidebar__title">
           <strong>
-            <span>Tài Khoản</span>
+            <span>Kênh người bán</span>
           </strong>
         </div>
-        <div className="nav-account__content">
+        <div className="seller-sidebar__content">
           <ul>
             {itemNav.map((item, move) => {
               return (
-                <li key={move} className={current == move ? 'current' : ''}>
+                <li key={move} className={current == move ? 'seller-sidebar__current' : ''}>
                   <Link to={item.href}>{item.title}</Link>
                 </li>
               );

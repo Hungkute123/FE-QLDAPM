@@ -15,6 +15,7 @@ const axiosMy = axios.create({
   },
   paramsSerializer: params => queryString.stringify(params),
 });
+
 axiosMy.interceptors.response.use(
   (res: AxiosResponse<{ content: any; message: string; result: number }>) => {
     if (res.data.result === 0) {
@@ -29,4 +30,5 @@ axiosMy.interceptors.response.use(
     throw err;
   }
 );
+
 export default axiosMy;
