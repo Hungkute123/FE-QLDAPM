@@ -10,6 +10,7 @@ import {
   IMenuSuggestion,
   IMenuTrend,
 } from './images';
+import { AiFillStar } from 'react-icons/ai';
 
 export const MenuList = [
   {
@@ -69,34 +70,28 @@ export const FilterOption = [
     title: 'GIÁ CẢ',
     name: 'price',
     list: [
-      { title: '0 - 100.000đ', href: '', id: 1 },
-      { title: '100.000đ - 300.000đ', href: '', id: 2 },
-      { title: '>300.000đ', href: '', id: 3 },
+      { title: '0 - 100.000đ', href: '', id: 1, value: '0 and 100000' },
+      { title: '100.000đ - 300.000đ', href: '', id: 2, value: '100000 and 300000' },
+      { title: '>300.000đ', href: '', id: 3, value: '> 300000' },
     ],
   },
   {
     title: 'HÌNH THỨC',
     name: 'typeproduct',
     list: [
-      { title: 'Sách, vở', href: '', id: 1 },
-      { title: 'Dụng cụ học tập', href: '', id: 2 },
+      { title: 'Sách, vở', href: '', id: 1, value: 'Sách, vở' },
+      { title: 'Dụng cụ học tập', href: '', id: 2, value: 'Dụng cụ học tập' },
     ],
   },
   {
-    title: 'Nhà xuất bản',
-    name: 'supplier',
+    title: 'Đánh giá',
+    name: 'votes',
     list: [
-      { title: 'NXB Trẻ', href: '', id: 1 },
-      { title: 'Nhà Xuất Bản Kim Đồng', href: '', id: 2 },
-      { title: 'Nhà xuất bản Giáo Dục', href: '', id: 3 },
-    ],
-  },
-  {
-    title: 'Chất liệu',
-    name: 'coverform',
-    list: [
-      { title: 'Bìa mềm', href: '', id: 1 },
-      { title: 'Bìa cứng', href: '', id: 2 },
+      { title: '1 sao', href: '', id: 1, value: '1 sao' },
+      { title: '2 sao', href: '', id: 2, value: '2 sao' },
+      { title: '3 sao', href: '', id: 3, value: '3 sao' },
+      { title: '4 sao', href: '', id: 4, value: '4 sao' },
+      { title: '5 sao', href: '', id: 5, value: '5 sao' },
     ],
   },
 ];

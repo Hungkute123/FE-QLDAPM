@@ -19,6 +19,11 @@ export const CatalogSearch = () => {
 
   const [textSearch, setTextSearch] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
+  const [orderBy, setOrderBy] = useState('ASC');
+  const [typeProduct, setTypeProduct] = useState('');
+  const [price, setPrice] = useState('');
+  const [votes, setVotes] = useState('');
+
   const dispatch = useAppDispatch();
   const { listSearchProduct, isLoading, pathSrc, numbersProduct } = useAppSelector(
     (state) => state.productSlice,
@@ -26,31 +31,25 @@ export const CatalogSearch = () => {
 
   const query = new URLSearchParams(search);
   const listQuery: any = {};
+
   query.forEach((value, name) => {
     listQuery[name] = value;
-    if (name === 'currentpage') listQuery[name] = parseInt(value) - 1;
-    if (name === 'consultantuserid') {
-      listQuery[name] = parseInt(value);
-    }
   });
 
   useEffect(() => {
+    handleGetCountProduct();
     if (search) {
       setTextSearch(getQueryStringValue('text'));
+      setPrice(getQueryStringValue('price'));
+      setVotes(getQueryStringValue('votes'));
+      setTypeProduct(getQueryStringValue('typeproduct'));
     }
   }, [search]);
 
   useEffect(() => {
-    dispatch(
-      doGetSearchListProduct({
-        search: textSearch,
-        limit: Elimit.productSearchLimit,
-        page: pageNumber - 1,
-      }),
-    );
-
-    dispatch(doGetCountSearchListProduct({ search: textSearch }));
-  }, [textSearch]);
+    handleDispatch();
+    handleGetCountProduct();
+  }, [price, votes, typeProduct, textSearch, pageNumber, orderBy]);
 
   useEffect(() => {
     window.scrollTo({
@@ -64,20 +63,58 @@ export const CatalogSearch = () => {
       search: objToQueryUrl(listQuery, { name: 'page', value: pageNumber }),
     });
 
+    // handleDispatch();
+  }, [pageNumber]);
+
+  useEffect(() => {
+    setPageNumber(1);
+    history.push({
+      pathname,
+      search: objToQueryUrl(listQuery, { name: 'orderby', value: orderBy }),
+    });
+
+    // handleDispatch();
+  }, [orderBy]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [textSearch]);
+
+  const handleDispatch = () => {
     dispatch(
       doGetSearchListProduct({
         search: textSearch,
         limit: Elimit.productSearchLimit,
         page: pageNumber - 1,
+        orderby: orderBy,
+        price: price,
+        typeproduct: typeProduct,
+        votes: votes,
       }),
     );
-  }, [pageNumber]);
+  };
+
+  const handleGetCountProduct = () => {
+    dispatch(
+      doGetCountSearchListProduct({
+        search: textSearch,
+        price: price,
+        typeproduct: typeProduct,
+        votes: votes,
+      }),
+    );
+  };
 
   return (
     <div className="catalog-search">
       <Row className="catalog-search__container">
         <Col md={3} className="catalog-search__left">
-          {listSearchProduct && listSearchProduct.length ? <FilterSidebar /> : <></>}
+          {/* {listSearchProduct && listSearchProduct.length ? (
+            <FilterSidebar listQuery={listQuery} />
+          ) : (
+            <></>
+          )} */}
+          <FilterSidebar listQuery={listQuery} />
           <DefaultSidebar />
         </Col>
         <Col md={9}>
@@ -105,22 +142,17 @@ export const CatalogSearch = () => {
 
                   <div className="catalog-search__sort">
                     <span>Sắp xếp theo :</span>
-                    <Form.Select className="catalog-search__select">
-                      <option>Giá tăng dần</option>
-                      <option>Giá giảm dần</option>
+                    <Form.Select
+                      className="catalog-search__select"
+                      name="orderby"
+                      onChange={(e: any) => {
+                        setOrderBy(e.target.value);
+                      }}
+                      defaultValue={orderBy}
+                    >
+                      <option value="ASC">Giá tăng dần</option>
+                      <option value="DESC">Giá giảm dần</option>
                     </Form.Select>
-                    {/* <Form.Select className="catalog-search__select">
-                      <option>Option 1</option>
-                      <option>Option 2</option>
-                      <option>Option 3</option>
-                      <option>Option 4</option>
-                    </Form.Select>
-                    <Form.Select className="catalog-search__select">
-                      <option>Option 1</option>
-                      <option>Option 2</option>
-                      <option>Option 3</option>
-                      <option>Option 4</option>
-                    </Form.Select> */}
                   </div>
                 </div>
 

@@ -34,3 +34,7 @@ export const objToQueryUrl = (obj: any, attr: any): string => {
 
   return '?' + query.join('&');
 };
+
+export const transformPriceFormat = (price: number) => {
+  return new Intl.NumberFormat().format(price);
+};

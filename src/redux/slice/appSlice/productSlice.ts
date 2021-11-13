@@ -45,6 +45,7 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     // get search list
     builder.addCase(doGetSearchListProduct.pending, (state, action) => {
+      state.listSearchProduct = [];
       state.isLoading = true;
     });
     builder.addCase(
@@ -61,6 +62,7 @@ export const productSlice = createSlice({
 
     //doGetCountSearchListProduct
     builder.addCase(doGetCountSearchListProduct.pending, (state, action) => {
+      state.numbersProduct = 0;
       state.isLoading = true;
     });
     builder.addCase(

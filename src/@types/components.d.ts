@@ -13,7 +13,7 @@ interface ITabs {
 
 interface ICardProduct {
   title?: string;
-  price?: string;
+  price?: number;
   thumbnail?: string;
   rate?: number;
   chapter?: number;
@@ -71,7 +71,10 @@ interface IInput extends IStyle {
 interface IGroupOption {
   title?: string;
   name?: string;
-  listOption?: Array<{ title: string; id: number }>;
+  listOption?: Array<{ title: string; id: number; value: string }>;
+  handleChange?: any;
+  defaultValue?: string;
+  value?: string;
 }
 
 interface ICarousel {
