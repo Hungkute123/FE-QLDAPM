@@ -1,12 +1,13 @@
 .header {
   background-color: #fff;
   min-height: 70px;
-
+  padding-bottom: 10px;
   .advertisement {
     width: 100%;
   }
 
   .main-header {
+    max-width: 1230px;
     padding-top: 8px;
     .row {
       align-items: center;
@@ -14,9 +15,9 @@
 
     .logo {
       img {
-        padding: 8px;
-        // height: 60px;
-        object-fit: cover;
+        padding: 8px 8px 8px 0;
+        height: auto;
+        width: 208px;
       }
     }
 
