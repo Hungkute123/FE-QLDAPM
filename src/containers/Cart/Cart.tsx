@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, Grid } from '@material-ui/core'
-import { Tabs, Button} from '../../components/common';
+import { Tabs, Button } from '../../components/common';
 import useStyles from './style'
 import './Cart.scss'
 import { ProductManagement } from "../../components";
@@ -22,46 +22,60 @@ export const Cart = () => {
         )
     };
     const products = [
-        {id: 1, name: 'Shoes', description: 'Running shoes'},
-        {id: 2, name: 'Macbook', description: 'Apple macbook'},
+        { id: 1, name: 'Shoes', description: 'Running shoes' },
+        { id: 2, name: 'Macbook', description: 'Apple macbook' },
     ]
     const FilledCart = () => {
         return (
             <>
-                {/* <div className="img-product-cart">
-                    <a href="https://www.fahasa.com/be-trai-xe-tai.html" title="Bé Trai - Xe Tải " >
-                        <img className="product-image" src="https://cdn0.fahasa.com/media/catalog/product/cache/1/thumbnail/150x/9df78eab33525d08d6e5fb8d27136e95/8/9/8936071673459.jpg" alt="Bé Trai - Xe Tải " />
-                    </a>
-                </div>
-             
-                    <div className="info-product-cart">
-                        <h2 className="product-name-full-text">
-                            <a href="https://www.fahasa.com/be-trai-xe-tai.html">
-                                Bé Trai - Xe Tải                         </a>
-                        </h2>
-                        <span className="new-price">8000đ</span>
-                        <br/>
-                        <span className="old-price">35.000đ</span>
+                <a href="https://www.fahasa.com/be-trai-xe-tai.html" title="Bé Trai - Xe Tải "><img className="product-image" src="https://cdn0.fahasa.com/media/catalog/product/cache/1/thumbnail/150x/9df78eab33525d08d6e5fb8d27136e95/8/9/8936071673459.jpg" alt="Bé Trai - Xe Tải " /></a>
+                <h2 className="product-name-full-text">
+                    <a href="https://www.fahasa.com/be-trai-xe-tai.html">Bé Trai - Xe Tải</a>
+                </h2>
+                <div className="price-original" >
+                    <span className="cart-price"><div className="cart-fhsItem-price">
+                        <div><span className="price">23.450 đ</span></div>
+                        <div className="fhsItem-price-old"><span className="price">35.000 đ</span></div>
                     </div>
+                    </span>
+                </div>
+                <div className="number-product-cart" >
                     <div className="product-view-quantity-box">
                         <div className="product-view-quantity-box-block">
-                            <a className="btn-subtract-qty">
-                                <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_minus2x.png"/>
-                            </a>
-                            <input type="text" className="qty-carts" title="Số lượng"/>
-                            <a className="btn-add-qty">
-                                <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png"/>
-                                </a>
+                            <a><img className="btn-subtract-qty" src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_minus2x.png" /></a>
+                            <input type="text" className="qty-carts" value="1" title="Số lượng" />
+                            <a><img className="btn-add-qty" src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png" /></a>
+                        </div>
+                        <div className="product-view-icon-remove-mobile" >
+
+                            <a href="https://www.fahasa.com/checkout/cart/delete/id/53169325/uenc/aHR0cHM6Ly93d3cuZmFoYXNhLmNvbTo4MS9jaGVja291dC9jYXJ0Lw,,/form_key/ta3KaDwjo4ypTD2d/" title="Xóa sản phẩm" id="53169325" className="btn-remove-mobile-cart"></a>
                         </div>
                     </div>
-                        
-                        <div className='cart-price-total'>
-                            <span className='text-price-total'>Thành Tiền</span>
-                                 <span className="price">8000đ</span>
-                                 </div>                                                                                                                                    </span>
-                */}
-        
-                </>
+                    <div className='cart-price-total'>
+                        <span className='text-price-total'>Thành Tiền </span>
+                        <span className="cart-price">
+
+                            <span className="price">23.450 đ</span>                                                                                                                                    </span>
+                    </div>
+                </div>
+                <div className="total-cart-page">
+                    <div className="title-cart-page-left">Thành tiền</div>
+                    <div className="number-cart-page-right"><span className="price">23.450 đ</span></div>
+                </div>
+                <div className="total-cart-page">
+                    <div className="title-cart-page-left">Phí vận chuyển (Miễn phí vận chuyển)</div>
+                    <div className="number-cart-page-right"><span className="price">0 đ</span></div>
+                </div>
+                <div className="border-product"></div>
+                <div className="total-cart-page title-final-total">
+                    <div className="title-cart-page-left">
+                        Tổng Số Tiền (gồm VAT)    </div>
+                    <div className="number-cart-page-right"><span className="price">23.450 đ</span></div>
+                </div>
+                <button type="button" title="Thanh toán" className="button btn-proceed-checkout btn-checkout">
+                    <span><span>Thanh toán</span></span></button>
+                <div className="retail-note"><a href="https://www.fahasa.com/chinh-sach-khach-si/" target="_blank">(Giảm giá trên web chỉ áp dụng cho bán lẻ)</a></div>
+            </>
         )
     }
     return (
