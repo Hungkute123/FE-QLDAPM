@@ -12,7 +12,8 @@ export const Header = () => {
   const history = useHistory();
   const location = useLocation();
   const [textSearch, setTextSearch] = useState('');
-
+  
+  
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -40,12 +41,12 @@ export const Header = () => {
       </div>
       <Container className="main-header">
         <Row>
-          <Col md={3} className="logo">
+          <Col md={2} className="logo">
             <a href="/">
               <img alt="Fahasa" src="/logo.png" />
             </a>
           </Col>
-          <Col md={6} className="header-search-box">
+          <Col md={7} className="header-search-box">
             <Form className="form-inline" onSubmit={handleSubmit}>
               <Form.Group className="input-search">
                 <input
@@ -60,6 +61,7 @@ export const Header = () => {
           </Col>
           <Col md={3} className="group-button-header">
             <Notification></Notification>
+            <Cart></Cart>
             <AccountHeader></AccountHeader>
             <ChooseLanguage className="header__language"></ChooseLanguage>
           </Col>

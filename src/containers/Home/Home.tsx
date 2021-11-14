@@ -26,7 +26,6 @@ const Loading = () => (
   </div>
 )
 export const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const {
     trend,
@@ -57,8 +56,6 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <MenuSlideshow />
       <HomeBanner />
       <Menu />
@@ -221,7 +218,8 @@ export const Home = () => {
         ]}
       ></Tabs>
       </div>
-      </LazyLoad> 
+      </LazyLoad>
+
       
     </div>
   );
