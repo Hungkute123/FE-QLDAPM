@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import { CatalogSearch, Home, OneStepCheckout, User, Cart } from '../containers';
+import { CatalogSearch, Home, OneStepCheckout, User, Cart, Detail} from '../containers';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
@@ -93,7 +93,16 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-
+        <PrivateRouter
+          path={'/detail-product'}
+          component={Detail}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Chi tiết sản phẩm"
+          isHasFooter={true}
+          footer={Footer}
+        />
         <PrivateRouter
           path={'/account'}
           component={User}

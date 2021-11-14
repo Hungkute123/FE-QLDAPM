@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.scss';
-import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader } from '../../components';
+import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader} from '../../components';
 import { Tabs, Button } from '../../components/common';
 import { MenuSlideshow } from '../../components/MenuSlideshow/MenuSlideshow';
 import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
@@ -56,7 +56,6 @@ export const Home = () => {
 
   return (
     <div className="home">
-      
       <MenuSlideshow />
       <HomeBanner />
       <Menu />
@@ -220,6 +219,7 @@ export const Home = () => {
       ></Tabs>
       </div>
       </LazyLoad>
+
       
     </div>
   );
