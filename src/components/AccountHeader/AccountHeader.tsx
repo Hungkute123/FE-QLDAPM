@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AccountHeader.scss';
 import { FiUser, FiSettings } from 'react-icons/fi';
 import { MdOutlineExitToApp } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 export const AccountHeader = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -26,7 +27,7 @@ export const AccountHeader = () => {
         <div className="account-header__list">
           <div className="account-header__option">
             <FiSettings size={20} />
-            <span>Bảng điều khiển của khách hàng</span>
+            <Link to="/account"><span>Bảng điều khiển của khách hàng</span></Link>
           </div>
           <div className="account-header__option">
             <MdOutlineExitToApp size={20} />

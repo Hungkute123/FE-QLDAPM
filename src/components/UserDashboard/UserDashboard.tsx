@@ -3,9 +3,9 @@ import './UserDashboard.scss';
 
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import { BsExclamationSquareFill } from 'react-icons/bs';
 
 import InfoRow from './InfoRow/InfoRow';
+import { UserMessage } from '../UserMessage/UserMessage';
 
 export const UserDashboard = () => {
   const [dashBoard, setDashBoard] = useState([
@@ -60,15 +60,7 @@ export const UserDashboard = () => {
   
   return (
     <div>
-      <div className="message">
-        <div className="message__content">
-          <BsExclamationSquareFill size={16} color="#dc3545" />
-          <span>
-            <span>Bạn vui lòng cập nhật thông tin tài khoản:</span>
-            <Link to="/account/edit">Cập nhật thông tin ngay</Link>
-          </span>
-        </div>
-      </div>
+      <UserMessage></UserMessage>
 
       <div className="dashboard">
         <div className="dashboard__account">

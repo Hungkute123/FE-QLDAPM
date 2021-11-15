@@ -74,6 +74,36 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
+        <PrivateRouter
+          path={'/account/address'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Sổ địa chỉ - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/account/address/edit'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Sổ địa chỉ - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/account/order'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Sổ địa chỉ - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
       </Switch>
     </Router>
   );

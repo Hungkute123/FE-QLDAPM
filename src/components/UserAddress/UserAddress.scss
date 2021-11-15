@@ -1,0 +1,73 @@
+.address {
+    padding: 0 15px;
+    background-color: #fff;
+    margin-top: 8px;
+
+    &__content {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    &__header {
+        text-align: right;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+
+        h1 {
+            padding-top: 7px;
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 36px;
+            color: #565555;
+            float: left;
+        }
+
+        a {
+            color: #fff;
+            font-size: 13px;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+    }
+
+    &__body {
+        h2,
+        h3 {
+            font-weight: bold;
+            font-size: 13px;
+            font-family: sans-serif;
+            line-height: 39px;
+        }
+
+        h2 {
+            text-transform: uppercase;
+        }
+
+        address {
+            margin: 0 0 3px;
+            font-style: normal;
+            line-height: 25px;
+        }
+
+        ol,
+        li {
+            list-style: none;
+        }
+
+        ol {
+            padding-left: 16px;
+        }
+
+        a {
+            color: #c92127;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 300ms ease-in 0s;
+        }
+    }
+}
