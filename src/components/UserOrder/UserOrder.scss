@@ -1,0 +1,116 @@
+.order {
+    background-color: #fff;
+
+    &__header {
+        background-color: #fff;
+    }
+
+    &__title {
+        padding: 10px;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+
+        h1 {
+            padding-top: 7px;
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 36px;
+            color: #565555;
+            float: left;
+        }
+    }
+
+    &__tab-content {
+        padding: 0 30px;
+        position: relative;
+    }
+
+    &__tab-item {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto;
+        padding: 10px;
+    }
+
+    &__item {
+        width: 150px;
+        text-align: center;
+        padding: 10px;
+        position: relative;
+        cursor: pointer;
+
+        &--focus {
+            border-bottom: 2px solid #f7941e;
+        }
+
+        &--focus-color {
+            color: #f7941e;
+        }
+
+        &--left {
+            height: 75%;
+            width: 1px;
+            background: #e0e0e0;
+            position: absolute;
+            top: 10px;
+            left: 0;
+        }
+
+        &--number {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        &--text {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        &--right {
+            height: 75%;
+            width: 1px;
+            background: #e0e0e0;
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+    }
+}
+
+.order-info {
+    margin-top: 36px;
+
+    &__content {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    table {
+        color: #616161;
+
+        tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        td,
+        th {
+            font-size: 14px;
+            padding: 15px 5px;
+        }
+
+        a {
+            color: #f7941e;
+        }
+    }
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: #565555;
+}

@@ -1,0 +1,77 @@
+.create-address {
+    margin-top: 8px;
+    padding: 0 15px;
+    background-color: #fff;
+
+    &__content {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    &__title {
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+
+        h1 {
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 36px;
+            color: #565555;
+        }
+    }
+
+    &__left,
+    &__right {
+        padding: 20px;
+        padding-top: 0;
+        width: 100%;
+
+        h2 {
+            font-size: 18px;
+            line-height: 39px;
+        }
+
+        input[type="text"] {
+            overflow: hidden;
+            margin: 5px 3px;
+            border: none;
+            border-bottom: 1px solid;
+            width: 100%;
+        }
+    }
+
+    &__button-set {
+        clear: both;
+        margin: 20px 0 0;
+        padding: 8px 0 0;
+        border-top: 1px solid #f2f2f2;
+        text-align: right;
+
+        &--required {
+            margin: 0 0 10px;
+            font-size: 11px;
+            text-align: right;
+            color: #eb340a;
+        }
+
+        &--back {
+            float: left;
+            margin: 0;
+
+            a {
+                color: #2489f4 !important;
+            }
+        }
+
+        &--btn {
+            margin-right: 5px;
+        }
+    }
+}
+
+.mt-10 {
+    margin-top: 10px !important;
+}

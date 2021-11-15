@@ -219,8 +219,6 @@ export const Home = () => {
       ></Tabs>
       </div>
       </LazyLoad>
-
-      
     </div>
   );
 };

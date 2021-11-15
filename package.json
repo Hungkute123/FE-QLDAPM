@@ -57,6 +57,7 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
+    "@types/react-slick": "^0.23.7",
     "@tinymce/tinymce-react": "^3.13.0",
     "@types/jquery": "^3.5.8",
     "@types/react-bootstrap-typeahead": "^5.1.8",
@@ -74,7 +75,8 @@
     "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
-    "sweetalert2": "^11.1.10",
+    "react-slick": "^0.28.1",
+    "sweetalert2": "^11.1.10"
     "tinymce": "^5.10.1"
   },
   "jest": {

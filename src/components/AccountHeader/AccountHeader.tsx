@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import './AccountHeader.scss';
 import { FiUser, FiSettings } from 'react-icons/fi';
 import { MdOutlineExitToApp } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { BsBoxArrowInRight } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import { LoginModal } from '../LoginModal/LoginModal';
+
 
 export const AccountHeader = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -22,6 +24,7 @@ export const AccountHeader = () => {
 
   return (
     <div className="account-header" onMouseEnter={handleOnEnter} onMouseLeave={handleOnLeave}>
+
       {!isUser ? (
         <div className="account-header__label">
           <BsBoxArrowInRight size={25} color={'#F7941E'} onClick={() => setIsOpen(true)} />

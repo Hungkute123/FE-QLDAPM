@@ -31,8 +31,8 @@ export const UserSidebar = ({ current }: Sidebar) => {
   const [itemNav, setItemNav] = useState([
     { href: '/account', title: 'Bảng điều khiển tài khoản' },
     { href: '/account/edit', title: 'Thông tin tài khoản' },
-    { href: '/account', title: 'Sổ địa chỉ' },
-    { href: '/account', title: 'Đơn hàng của tôi' },
+    { href: '/account/address', title: 'Sổ địa chỉ' },
+    { href: '/account/order', title: 'Đơn hàng của tôi' },
     { href: '/account', title: 'Ví voucher' },
     { href: '/wishlist', title: 'Yêu thích' },
     { href: '/account', title: 'Sách theo bộ' },

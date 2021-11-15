@@ -10,10 +10,12 @@ export * from './Category/Category';
 export * from './UserSidebar/UserSidebar';
 export * from './UserDashboard/UserDashboard';
 export * from './UserInfo/UserInfo';
+export * from './UserCreateAddress/UserCreateAddress';
+export * from './UserAddress/UserAddress';
+export * from './UserMessage/UserMessage';
+export * from './UserOrder/UserOrder';
 
 export * from './CatalogSearch';
 export * from './OneStepCheckout';
-export * from './Account'
-
 export * from './Seller';
 
