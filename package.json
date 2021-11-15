@@ -57,13 +57,10 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^13.1.9",
-<<<<<<< HEAD
     "@types/react-slick": "^0.23.7",
-=======
     "@tinymce/tinymce-react": "^3.13.0",
     "@types/jquery": "^3.5.8",
     "@types/react-bootstrap-typeahead": "^5.1.8",
->>>>>>> 3e20b6993bf229e5caa8c019d217441cc5ec80ac
     "axios": "^0.21.1",
     "bootstrap": "^5.1.3",
     "jquery": "^3.6.0",

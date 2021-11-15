@@ -15,6 +15,21 @@ import { useLocation } from 'react-router';
 export const User = () => {
   const location = useLocation();
 
+  const renderLayout = (children: any, index: number) => {
+    return (
+      <div className="account">
+        <Row>
+          <Col lg={3} md={3}>
+            <UserSidebar current={index}></UserSidebar>
+          </Col>
+          <Col lg={9} md={9}>
+            {children}
+          </Col>
+        </Row>
+      </div>
+    );
+  };
+
   switch (location.pathname) {
     case '/account':
       return (
@@ -29,7 +44,6 @@ export const User = () => {
           </Row>
         </div>
       );
-      break;
     case '/account/edit':
       return (
         <div className="account">
@@ -86,6 +100,9 @@ export const User = () => {
         </div>
       );
       break;
+
+    case '/wishlist':
+      return renderLayout(<Wishlist></Wishlist>, 5);
     default:
       return <div></div>;
   }

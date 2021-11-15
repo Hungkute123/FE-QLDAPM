@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.scss';
-import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader } from '../../components';
+import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader} from '../../components';
 import { Tabs, Button } from '../../components/common';
 import { MenuSlideshow } from '../../components/MenuSlideshow/MenuSlideshow';
 import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
@@ -26,7 +26,6 @@ const Loading = () => (
   </div>
 )
 export const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const {
     trend,
@@ -57,8 +56,6 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <MenuSlideshow />
       <HomeBanner />
       <Menu />
@@ -222,7 +219,6 @@ export const Home = () => {
       ></Tabs>
       </div>
       </LazyLoad>
-      
     </div>
   );
 };

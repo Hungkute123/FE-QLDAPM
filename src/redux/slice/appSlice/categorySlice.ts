@@ -46,13 +46,21 @@ export const categorySlice = createSlice({
       state.status = 'success';
       state.categoryLevelZero = action.payload;
     });
+    builder.addCase(getCategoryProductByIDParentLevelOne.pending, (state, action) => {
+      state.status = 'load';
+      state.categoryLevelOne = [];
+    });
     builder.addCase(getCategoryProductByIDParentLevelOne.fulfilled, (state, action) => {
       state.status = 'success';
       state.categoryLevelOne = action.payload;
     });
     builder.addCase(getCategoryProductByIDParentLevelOne.rejected, (state, action) => {
-      state.status = 'success';
+      state.status = 'rejected';
       state.categoryLevelOne = [];
+    });
+    builder.addCase(getCategoryProductByIDParentLevelTwo.pending, (state, action) => {
+      state.status = 'success';
+      state.categoryLevelTwo = [];
     });
     builder.addCase(getCategoryProductByIDParentLevelTwo.fulfilled, (state, action) => {
       state.status = 'success';
