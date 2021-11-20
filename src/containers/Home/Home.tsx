@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +26,6 @@ const Loading = () => (
   </div>
 )
 export const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const {
     trend,
@@ -220,7 +219,6 @@ export const Home = () => {
       ></Tabs>
       </div>
       </LazyLoad>
-      
     </div>
   );
 };

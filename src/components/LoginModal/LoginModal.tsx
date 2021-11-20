@@ -65,7 +65,7 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
       dispatch(sendOTP({ email: email }));
 
       return;
-    };
+    }
 
     Swal.fire({
       icon: 'error',

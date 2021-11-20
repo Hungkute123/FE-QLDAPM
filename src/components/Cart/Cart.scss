@@ -1,14 +1,24 @@
 .btn-cart {
-    background: url(../../assets/images/icon/icon-cart.png) no-repeat center center;
-    width: 25%;
-    height: 30px;
+    display: inline-block;
+    width: fit-content;
     position: relative;
-    float: left;
-
+    padding-right: 10px;
+    &__label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        cursor: pointer;
+        span {
+            font-size: 12px;
+            margin-top: 2px;
+            color: #f7941e;
+            text-transform: uppercase;
+        }
+    }
     a {
         width: 100%;
         height: 100%;
-        float: left;
         font-size: 0;
     }
 
@@ -27,7 +37,7 @@
     }
 
     span.notify-right {
-        background: url(../../../../assets/images/icon/notify-right.png) no-repeat;
+        background: url(../../assets/images/icon/notify-right.png) no-repeat;
         right: 0px;
         top: -7px;
     }
@@ -102,7 +112,7 @@
                 float: left;
                 width: 20%;
                 padding-top: 84px;
-                background: url(../../../../assets/images/icon/edit.png) no-repeat center center;
+                background: url(../../assets/images/icon/edit.png) no-repeat center center;
 
                 a {
                     height: 100%;

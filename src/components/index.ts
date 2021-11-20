@@ -4,7 +4,7 @@ export * from './ListProduct/ListProduct';
 export * from './LoginModal/LoginModal';
 export * from './ChooseLanguage/ChooseLanguage';
 export * from './AccountHeader/AccountHeader';
-export * from './Category/Category'
+export * from './Category/Category';
 
 // User Components
 export * from './UserSidebar/UserSidebar';
