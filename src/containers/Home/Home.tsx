@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './Home.scss';
-import { Menu, ListProduct, LoginModal, ChooseLanguage, AccountHeader } from '../../components';
-import { Tabs, Button } from '../../components/common';
-import { MenuSlideshow } from '../../components/MenuSlideshow/MenuSlideshow';
-import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/rootReducer';
 import LazyLoad from 'react-lazyload';
+import { useDispatch, useSelector } from 'react-redux';
+import { ListProduct, Menu } from '../../components';
+import { Button, Tabs } from '../../components/common';
+import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
+import { MenuSlideshow } from '../../components/MenuSlideshow/MenuSlideshow';
+import { RootState } from '../../redux/rootReducer';
 import {
   getCalculator,
   getChildrenReadingStories,
@@ -18,8 +17,9 @@ import {
   getRubik,
   getShockingPriceToy,
   getTextbook,
-  getTopToy,
+  getTopToy
 } from '../../redux/slice/appSlice/homeSlice';
+import './Home.scss';
 const Loading = () => (
   <div >
     <h5>Loading...</h5>
@@ -57,8 +57,6 @@ export const Home = () => {
 
   return (
     <div className="home">
-      <Button onClick={() => setIsOpen(true)}>Modal đăng nhập</Button>
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <MenuSlideshow />
       <HomeBanner />
       <Menu />
