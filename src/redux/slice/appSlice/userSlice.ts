@@ -13,11 +13,16 @@ export const sendOTP = createAsyncThunk('user/send-otp', async (params: any) => 
   return await userApi.sendOTP(params).then((res) => res.data);
 });
 
+export const getInfo = createAsyncThunk('user/get-info', async (params: any) => {
+  return await userApi.getInfo(params).then((res) => res.data);
+});
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
     isUser: false,
     OTP: '',
+    isAccount: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -31,6 +36,9 @@ export const userSlice = createSlice({
     builder.addCase(sendOTP.fulfilled, (state, action) => {
       state.OTP = action.payload.data;
       state.isUser = action.payload.isUser;
+    });
+    builder.addCase(getInfo.fulfilled, (state, action) => {
+      state.isAccount = action.payload.data;
     });
   },
 });
