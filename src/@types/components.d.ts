@@ -118,3 +118,43 @@ interface ILoader {
   width?: number;
   isLoadMore?: boolean;
 }
+
+interface DataTableUser {
+  fullname: string;
+  phonenumber: string;
+  username: string;
+  active: number;
+  typeofuser: number;
+}
+
+interface DataTableCategory {
+  cate_id: string;
+  cate_name: string;
+  cate_level: string;
+  cate_parent: string;
+}
+
+interface EnhancedTableToolbarProps {
+  numSelected: number;
+  handleAction?: any;
+  title?: string;
+}
+
+type Order = 'asc' | 'desc';
+
+interface HeadCell {
+  disablePadding: boolean;
+  id: keyof Data;
+  label: string;
+  numeric: boolean;
+}
+
+interface EnhancedTableProps {
+  numSelected: number;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  order: Order;
+  orderBy: string;
+  rowCount: number;
+  headCells: any;
+}

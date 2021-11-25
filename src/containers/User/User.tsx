@@ -8,6 +8,7 @@ import {
   UserCreateAddress,
   UserAddress,
   UserOrder,
+  Wishlist,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
