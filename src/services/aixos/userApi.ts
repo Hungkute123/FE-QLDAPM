@@ -13,6 +13,10 @@ const userApi = {
     const url = `user/send-otp`;
     return await axiosMy.get(url, { params });
   },
+  getInfo: async (params: any) => {
+    const url = `user/get-info`;
+    return await axiosMy.get(url, { params });
+  },
 };
 
 export default userApi;
