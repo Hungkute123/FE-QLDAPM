@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import { CatalogSearch, Home, OneStepCheckout, User, Cart, Detail} from '../containers';
+import { CatalogSearch, Home, OneStepCheckout, User, Cart, Detail, AdminHome } from '../containers';
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 import { BlankLayout, HeaderFooterLayout, OnlyFooterLayout, OnlyHeaderLayout } from '../layouts';
@@ -82,7 +82,6 @@ export const Routers = () => {
         />
       </Switch>
       <Switch>
-
         <PrivateRouter
           path={'/cart'}
           component={Cart}
@@ -153,6 +152,35 @@ export const Routers = () => {
           titleHeader="Sổ địa chỉ - Fahasa"
           isHasFooter={true}
           footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/admin/manage-user'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PrivateRouter
+          path={'/admin/manage-categories'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PrivateRouter
+          path={'/admin/manage-report'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PrivateRouter
+          path={'/admin/sales-report'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
         />
       </Switch>
     </Router>

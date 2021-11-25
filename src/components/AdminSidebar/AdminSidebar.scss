@@ -1,0 +1,86 @@
+.nav-account {
+    background-color: #fff;
+    margin-bottom: 30px;
+    position: relative;
+    border: 1px solid #e6e6e6;
+    -webkit-box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+    clear: both;
+    font-size: 13px;
+
+    &__title {
+        position: relative;
+        padding: 18px 20px 0;
+        border-bottom: 2px solid #f6f6f6;
+        font-weight: 600;
+
+        strong {
+            font-size: 20px;
+            color: #262626;
+            padding: 10px 15px 10px 0;
+            word-wrap: break-word;
+            display: inline-block;
+            font-family: "oswaldbook";
+            text-transform: uppercase;
+            background: #fff;
+        }
+
+        span {
+            color: #c92127;
+        }
+    }
+
+    &__content {
+        padding: 20px 10px;
+
+        li {
+            padding: 5px 0;
+        }
+
+        a {
+            display: block;
+            border-bottom: 1px solid #f2f2f2;
+            padding: 5px 0;
+            color: #646464;
+        }
+
+        a:hover {
+            color: #C92127;
+        }
+    }
+}
+
+.current {
+    color: #565555 !important;
+    font-weight: bold;
+
+    a {
+        color: #bf9a61;
+    }
+}
+
+.nav-online {
+    margin-bottom: 30px;
+
+    &__content {
+        vertical-align: middle;
+        display: flex;
+        padding: 8px 0;
+        background-color: white;
+
+        span {
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 7px;
+        }
+    }
+
+    &__left,
+    &__right {
+        padding: 0 15px;
+    }
+
+    &__right {
+        margin-top: 7px;
+    }
+}

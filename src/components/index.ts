@@ -18,4 +18,6 @@ export * from './UserOrder/UserOrder';
 export * from './CatalogSearch';
 export * from './OneStepCheckout';
 export * from './Seller';
-
+export * from './Account';
+export * from './Admin';
+export * from './AdminSidebar/AdminSidebar';
