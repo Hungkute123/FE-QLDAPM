@@ -14,6 +14,7 @@ export * from './UserCreateAddress/UserCreateAddress';
 export * from './UserAddress/UserAddress';
 export * from './UserMessage/UserMessage';
 export * from './UserOrder/UserOrder';
+export * from './ProductView/ProductView';
 
 export * from './CatalogSearch';
 export * from './OneStepCheckout';
@@ -21,3 +22,4 @@ export * from './Seller';
 export * from './Account';
 export * from './Admin';
 export * from './AdminSidebar/AdminSidebar';
+export * from './ProductView/ProductView';
