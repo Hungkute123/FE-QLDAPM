@@ -61,7 +61,7 @@ export const Home = () => {
       <Menu />
       <div className="home__tabs">
         <Tabs
-          titleTabs={['Xu hướng theo ngày', 'Sách HOT - Giảm sốc', 'Bestseller Ngoại Văn']}
+          titleTabs={['Xu hướng theo ngày', ]}
           bodyTabs={[
             <div>
               <ListProduct listproducts={trend.data} path={trend.Path} />

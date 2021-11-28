@@ -32,5 +32,16 @@ const productApi = {
     const url = 'products/favorite-list';
     return await axiosMy.get(url);
   },
+  getProductByIDUser: async () => {
+    const url = 'products/iduser';
+    return await axiosMy.get(url);
+  },
+  addNewProduct: async (requestOption: any) =>{
+    const url = 'products/add-new-product';
+    const config = {     
+      headers: { 'content-type': 'multipart/form-data' }
+  }
+    return await axiosMy.post(url, requestOption );
+  }
 };
 export default productApi;
