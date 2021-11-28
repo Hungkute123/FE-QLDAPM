@@ -1,0 +1,68 @@
+@mixin flex($align-item, $justify-content) {
+    display: flex;
+    align-items: $align-item;
+    justify-content: $justify-content;
+}
+.product {
+    @include flex(flex-start, flex-start);
+
+    &__images{
+        @include flex(flex-start, flex-start);
+
+        width: 60%;
+        flex-wrap: wrap;
+
+        &__list {
+            width: 20%;
+
+            &__item{
+                cursor: pointer;
+            }
+        }
+        &__main{
+            flex-grow: 1;
+            padding-top: 100%;
+            position: relative;
+            
+            img {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                height: 70%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+    &__info{
+        flex-grow: 1;
+        position: sticky;
+        top: 70px;
+        padding-top: 2rem;
+
+        &__title{
+            font-size: 2.5rem;
+            font-weight: normal;
+        }
+
+        &__item{
+            margin-top: 2rem;
+
+            &__price {
+                color: #ca5511;
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            &__title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+            Button {
+                margin-right: 3rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
