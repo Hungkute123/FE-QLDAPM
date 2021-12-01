@@ -9,6 +9,8 @@ import {
   UserAddress,
   UserOrder,
   Wishlist,
+  UserVoucher,
+  UserSeriesBook,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
@@ -96,6 +98,34 @@ export const User = () => {
             </Col>
             <Col lg={9} md={9}>
               <UserOrder></UserOrder>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
+    case '/account/voucher':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={4}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserVoucher></UserVoucher>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
+    case '/account/seriesbook':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={5}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserSeriesBook></UserSeriesBook>
             </Col>
           </Row>
         </div>
