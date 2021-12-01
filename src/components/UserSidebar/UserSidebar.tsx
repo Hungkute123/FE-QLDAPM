@@ -39,7 +39,7 @@ export const UserSidebar = ({ current }: Sidebar) => {
     { href: '/account/history', title: 'Tài Khoản F-point / Freeship' },
     { href: '/account/review', title: 'Nhận xét của tôi' },
     { href: '/account/notification', title: 'Thông Báo' },
-    { href: '/account/newslette', title: 'Đăng ký nhận tin điện tử' },
+    { href: '/account/newsletter', title: 'Đăng ký nhận tin điện tử' },
   ]);
 
   return (

@@ -210,7 +210,7 @@ export const Routers = () => {
         />
 
         <PrivateRouter
-          path={'/account/newslette'}
+          path={'/account/newsletter'}
           component={User}
           layout={HeaderFooterLayout}
           isHasHeader={true}
