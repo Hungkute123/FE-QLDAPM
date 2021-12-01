@@ -17,6 +17,7 @@ export * from './UserOrder/UserOrder';
 export * from './ProductView/ProductView';
 export * from './UserVoucher/UserVoucher';
 export * from './UserSeriesBook/UserSeriesBook';
+export * from './UserHistory/UserHistory';
 
 export * from './CatalogSearch';
 export * from './OneStepCheckout';

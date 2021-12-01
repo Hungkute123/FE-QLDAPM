@@ -11,6 +11,7 @@ import {
   Wishlist,
   UserVoucher,
   UserSeriesBook,
+  UserHistory,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
@@ -122,7 +123,7 @@ export const User = () => {
         <div className="account">
           <Row>
             <Col lg={3} md={3}>
-              <UserSidebar current={5}></UserSidebar>
+              <UserSidebar current={6}></UserSidebar>
             </Col>
             <Col lg={9} md={9}>
               <UserSeriesBook></UserSeriesBook>
@@ -131,9 +132,65 @@ export const User = () => {
         </div>
       );
       break;
-
+    case '/account/history':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={7}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserHistory></UserHistory>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
+    case '/account/review':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={8}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserSeriesBook></UserSeriesBook>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
+    case '/account/notification':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={9}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserSeriesBook></UserSeriesBook>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
+    case '/account/newslette':
+      return (
+        <div className="account">
+          <Row>
+            <Col lg={3} md={3}>
+              <UserSidebar current={10}></UserSidebar>
+            </Col>
+            <Col lg={9} md={9}>
+              <UserSeriesBook></UserSeriesBook>
+            </Col>
+          </Row>
+        </div>
+      );
+      break;
     case '/wishlist':
       return renderLayout(<Wishlist></Wishlist>, 5);
+      break;
     default:
       return <div></div>;
   }
