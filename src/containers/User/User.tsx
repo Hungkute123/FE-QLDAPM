@@ -12,6 +12,7 @@ import {
   UserVoucher,
   UserSeriesBook,
   UserHistory,
+  UserReview,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
@@ -154,7 +155,7 @@ export const User = () => {
               <UserSidebar current={8}></UserSidebar>
             </Col>
             <Col lg={9} md={9}>
-              <UserSeriesBook></UserSeriesBook>
+              <UserReview></UserReview>
             </Col>
           </Row>
         </div>
