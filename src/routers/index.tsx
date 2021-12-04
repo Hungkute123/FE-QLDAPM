@@ -14,7 +14,7 @@ export const Routers = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRouter
+        <PublicRouter
           exact={true}
           path={'/'}
           component={Home}
@@ -25,9 +25,9 @@ export const Routers = () => {
           footer={Footer}
         />
 
-        <PrivateRouter
-          path={'/wishlist'}
-          component={User}
+        <PublicRouter
+          path={'/catalogsearch/result'}
+          component={CatalogSearch}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
@@ -41,16 +41,6 @@ export const Routers = () => {
           layout={OnlyHeaderLayout}
           isHasHeader={true}
           header={Header}
-        />
-
-        <PrivateRouter
-          path={'/catalogsearch/result'}
-          component={CatalogSearch}
-          layout={HeaderFooterLayout}
-          isHasHeader={true}
-          header={Header}
-          isHasFooter={true}
-          footer={Footer}
         />
 
         <PrivateRouter
@@ -102,6 +92,9 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
+      </Switch>
+
+      <Switch>
         <PrivateRouter
           path={'/account'}
           component={User}
@@ -166,6 +159,16 @@ export const Routers = () => {
         />
 
         <PrivateRouter
+          path={'/wishlist'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
           path={'/account/seriesbook'}
           component={User}
           layout={HeaderFooterLayout}
@@ -219,7 +222,9 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
+      </Switch>
 
+      <Switch>
         <PrivateRouter
           path={'/admin/manage-user'}
           component={AdminHome}

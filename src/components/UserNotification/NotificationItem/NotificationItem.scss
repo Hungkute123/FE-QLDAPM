@@ -1,0 +1,53 @@
+.notification-item {
+    &__list {
+        display: block;
+        list-style: none;
+    }
+
+    &__item {
+        border-bottom: 1px solid #e6e6e6;
+        padding: 10px;
+    }
+
+    &__item::after,
+    &__header::after {
+        clear: both;
+        display: block;
+        content: "";
+    }
+
+    &__header {
+        margin-bottom: 10px;
+
+        &--title {
+            font-size: 14px;
+            font-weight: bold;
+            float: left;
+        }
+
+        &--date {
+            font-style: italic;
+            float: right;
+        }
+    }
+
+    &__icon {
+        width: 32px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    &__action {
+        float: right;
+        clear: both;
+        margin-top: 5px;
+    }
+
+    &__result {
+        margin-top: 18px;
+    }
+}
+
+.unseen {
+    background-color: #fff4cc;
+}

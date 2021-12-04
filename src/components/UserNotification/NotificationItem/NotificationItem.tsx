@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NotificationItem.scss';
 
 export const NotificationItem = () => {
   const className = 'notification-item';
+  const [unseen, setUnseen] = useState(true);
 
   return (
     <div>
-      <ul className={`${className}__list`}>
+      <ul className={`${unseen ? 'unseen' : ''} ${className}__list`}>
         <li className={`${className}__item`}>
           <div className={`${className}__header`}>
             <div className={`${className}__header--title`}>ĐƠN HÀNG CỦA QUÝ KHÁCH ĐÃ BỊ HỦY</div>
@@ -22,6 +23,8 @@ export const NotificationItem = () => {
             Đơn hàng 102295665 của quý khách đã bị hủy. Hẹn gặp lại quý khách trong các đơn hàng
             tiếp theo trên Fahasa.com nhé
           </div>
+          <div className={`${className}__action`}></div>
+          <div className={`${className}__result`}></div>
         </li>
       </ul>
     </div>

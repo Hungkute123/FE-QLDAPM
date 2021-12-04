@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { Redirect, Route, useLocation } from "react-router-dom";
-import { RootState } from "../redux/rootReducer";
-import { getInfo } from "../redux/slice/appSlice/userSlice";
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { Redirect, Route, useLocation } from 'react-router-dom';
+import { RootState } from '../redux/rootReducer';
+import { getInfo } from '../redux/slice/appSlice/userSlice';
 // import { doGetCurrentUser } from '../redux/slice';
 // import { EToken } from '../constants/login';
 // import { logout } from '../helpers/app';
 // import { readCookie } from '../helpers/login';
 // import { RootState } from '../redux/reducers/rootReducers';
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch } from '../redux/store';
 
 export const PrivateRouter: React.FC<IPrivateRouter> = ({
   component: Component,
@@ -44,10 +44,6 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
   }, [location]);
 
   const render = (props: any) => {
-    if (isAccount == false) {
-      return <Redirect to="/" />;
-    }
-
     return isFetch == false ? (
       <div style={{ marginTop: '20px' }}>
         <Spinner animation="grow" variant="primary" />
@@ -59,7 +55,7 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
         <Spinner animation="grow" variant="light" />
         <Spinner animation="grow" variant="dark" />
       </div>
-    ) : (
+    ) : isAccount ? (
       <Layout
         header={
           isHasHeader ? (
@@ -78,6 +74,8 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
       >
         <Component {...props} />
       </Layout>
+    ) : (
+      <div></div>
     );
   };
 
