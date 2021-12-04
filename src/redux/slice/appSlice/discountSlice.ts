@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import discountApi from '../../../services/aixos/discountApi';
 
-export const dogetDiscountByIDUser = createAsyncThunk(
+export const doGetDiscountByIDUser = createAsyncThunk(
   'discount/getDiscountByIDUser',
   async (params: any) => {
     return await discountApi.getDiscountByIDUser(params).then((res) => res.data);
@@ -24,15 +24,15 @@ const initialState = {
 } as IInitialState;
 
 export const discountSlice = createSlice({
-  name: 'category',
+  name: 'discount',
   initialState: initialState,
 
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(dogetDiscountByIDUser.fulfilled, (state, action) => {
+    builder.addCase(doGetDiscountByIDUser.fulfilled, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(dogetDiscountByIDUser.rejected, (state, action) => {
+    builder.addCase(doGetDiscountByIDUser.rejected, (state, action) => {
       state.isLoading = false;
     });
     builder.addCase(dogetDiscountByIDProduct.fulfilled, (state, action) => {

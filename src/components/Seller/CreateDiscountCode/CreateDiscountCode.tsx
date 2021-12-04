@@ -3,16 +3,20 @@ import { Button, Form } from 'react-bootstrap';
 import { ClearButton, Typeahead } from 'react-bootstrap-typeahead';
 import { BsSearch } from 'react-icons/bs';
 import Swal from 'sweetalert2';
-import { doaddNewDiscount, doGetProductByIDUser, useAppDispatch } from '../../../redux';
+import { doaddNewDiscount, doGetProductByIDUser, RootState, useAppDispatch } from '../../../redux';
 import { InputFormProduct } from '../AddNewProduct/InputFormProduct/InputFormProduct';
 import './CreateDiscountCode.scss';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 export const CreateDiscountCode = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const [listProduct, setListProduct] = useState([]);
   const [idProduct, setIDProduct] = useState('');
+  const {account} = useSelector((state: RootState) => state.userSlice);
   const getProduct = async () => {
-    const product = (await dispatch(doGetProductByIDUser())).payload;
+    const product = (await dispatch(doGetProductByIDUser({IDUser: account.IDUser}))).payload;
     setListProduct(product.data);
   };
   useEffect(() => {
@@ -63,6 +67,9 @@ export const CreateDiscountCode = () => {
       Swal.fire({
         icon: 'success',
         title: 'Tạo mã giảm giá thành công',
+      });
+      history.push({
+        pathname: `/seller/voucher`,
       });
     } else {
       Swal.fire({
