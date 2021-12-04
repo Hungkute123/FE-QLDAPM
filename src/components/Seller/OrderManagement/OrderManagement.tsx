@@ -8,7 +8,7 @@ export const OrderManagement = () => {
     <div className="product-management">
       <div className="product-management__content">
         <div className="product-management__title">
-          <h1>Quản lý sản phẩm</h1>
+          <h1>Quản lý đơn hàng</h1>
         </div>
         <Tabs defaultActiveKey="tab-one" id="tab-controller" className="mb-3">
           <Tab eventKey="tab-one" title="Đơn hàng chưa xử lý">

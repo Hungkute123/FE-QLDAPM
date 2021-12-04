@@ -38,9 +38,9 @@ const productApi = {
   },
   addNewProduct: async (requestOption: any) =>{
     const url = 'products/add-new-product';
-    const config = {     
-      headers: { 'content-type': 'multipart/form-data' }
-  }
+  //   const config = {     
+  //     headers: { 'content-type': 'multipart/form-data' }
+  // }
     return await axiosMy.post(url, requestOption );
   }
 };
