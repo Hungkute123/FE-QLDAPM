@@ -1,0 +1,47 @@
+@media (min-width: 768px) and (max-width: 1279px) {
+  .create-promotion {
+    margin-top: 36px;
+  }
+}
+.create-promotion {
+  padding: 20px 15px;
+  margin-top: 0 !important;
+  background-color: #fff;
+  margin-bottom: 15px;
+  &__content {
+    width: 50%;
+  }
+  &__title {
+    h1 {
+      font-size: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+      line-height: 36px;
+      color: #333333;
+      padding-bottom: 10px;
+    }
+  }
+  &__item {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  &__margin-15 {
+    margin: 15px 0 15px 0;
+  }
+  &__mr-40 {
+    margin-right: 40px;
+    margin-bottom: 15px;
+  }
+  &__level {
+    margin: 5px;
+  }
+  label {
+    padding-top: 2px !important;
+  } 
+  &__btn {
+    text-align: center;
+    padding: 20px 0 10px 0;
+}
+}

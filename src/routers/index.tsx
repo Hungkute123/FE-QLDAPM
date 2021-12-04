@@ -52,7 +52,42 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-
+        <PrivateRouter
+          path={'/seller/account-balance'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/voucher'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/revenue'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/edit-product'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
         <PrivateRouter
           path={'/seller/add-new-product'}
           component={Seller}
@@ -73,6 +108,24 @@ export const Routers = () => {
         />
         <PrivateRouter
           path={'/seller/product-management'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/create-promotion'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/seller/create-discount-code'}
           component={Seller}
           layout={HeaderFooterLayout}
           isHasHeader={true}

@@ -1,65 +1,69 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import './Seller.scss';
-import { OrderManagement, ProductManagement, AddNewProduct, SellerSideBar } from '../../components';
+import {
+  OrderManagement,
+  ProductManagement,
+  AddNewProduct,
+  SellerSideBar,
+  Revenue,
+  AccountBalance,
+  EditProduct,
+  DiscountManagement,
+} from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
+import { CreateDiscountCode } from '../../components/Seller/CreateDiscountCode/CreateDiscountCode';
+import { CreatePromotion } from '../../components/Seller/CreatePromotion/CreatePromotion';
 
-// const AddNewProduct = React.lazy(() =>
-//   import('../../components').then(({ AddNewProduct }) => ({ default: AddNewProduct })),
-// );
-// const OrderManagement = React.lazy(() =>
-//   import('../../components').then(({ OrderManagement }) => ({ default: OrderManagement })),
-// );
-// const ProductManagement = React.lazy(() =>
-//   import('../../components').then(({ ProductManagement }) => ({ default: ProductManagement })),
-// );
 export const Seller = () => {
+  const [kindScreen, setKindScreen] = useState(0);
   const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/seller/account-balance') setKindScreen(0);
+    if (location.pathname === '/seller/revenue') setKindScreen(1);
+    if (location.pathname === '/seller/add-new-product') setKindScreen(2);
+    if (location.pathname === '/seller/product-management') setKindScreen(3);
+    if (location.pathname === '/seller/order-management') setKindScreen(4);
+    if (location.pathname === '/seller/voucher') setKindScreen(5);
+    if (location.pathname === '/seller/edit-product') setKindScreen(6);
+    if (location.pathname === '/seller/create-discount-code') setKindScreen(7);
+    if (location.pathname === '/seller/create-promotion') setKindScreen(8);
+  }, [location]);
+  const renderBody = (kind: number) => {
+    switch (kind) {
+      case 0:
+        return <AccountBalance />;
+      case 1:
+        return <Revenue />;
+      case 2:
+        return <AddNewProduct />;
+      case 3:
+        return <ProductManagement />;
+      case 4:
+        return <OrderManagement />;
+      case 5:
+        return <DiscountManagement />;
+      case 6:
+        return <EditProduct />;
+      case 7:
+        return <CreateDiscountCode />;
+      case 8:
+        return <CreatePromotion />;
+      default:
+        return <></>;
+    }
+  };
 
-  switch (location.pathname) {
-    case '/seller/product-management':
-      return (
-        <div className="seller">
-          <Row>
-            <Col lg={3} md={3}>
-              <SellerSideBar current={0}></SellerSideBar>
-            </Col>
-            <Col lg={9} md={9}>
-              <ProductManagement></ProductManagement>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/seller/order-management':
-      return (
-        <div className="seller">
-          <Row>
-            <Col lg={3} md={3}>
-              <SellerSideBar current={1}></SellerSideBar>
-            </Col>
-            <Col lg={9} md={9}>
-              <OrderManagement></OrderManagement>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/seller/add-new-product':
-      return (
-        <div className="seller">
-          <Row>
-            <Col lg={3} md={3}>
-              <SellerSideBar current={2}></SellerSideBar>
-            </Col>
-            <Col lg={9} md={9}>
-              <AddNewProduct></AddNewProduct>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    default:
-      return <div></div>;
-  }
+  return (
+    <div className="seller">
+      <Row>
+        <Col lg={3} md={3}>
+          <SellerSideBar current={kindScreen}></SellerSideBar>
+        </Col>
+        <Col lg={9} md={9}>
+          {renderBody(kindScreen)}
+        </Col>
+      </Row>
+    </div>
+  );
 };
