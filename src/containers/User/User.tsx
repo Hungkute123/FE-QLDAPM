@@ -13,10 +13,11 @@ import {
   UserSeriesBook,
   UserHistory,
   UserReview,
+  UserNotification,
+  UserNewsLetter,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
-import { UserNewsLetter } from '../../components/UserNewsLetter/UserNewsLetter';
 
 export const User = () => {
   const location = useLocation();
@@ -170,7 +171,7 @@ export const User = () => {
               <UserSidebar current={9}></UserSidebar>
             </Col>
             <Col lg={9} md={9}>
-              <UserSeriesBook></UserSeriesBook>
+              <UserNotification></UserNotification>
             </Col>
           </Row>
         </div>
