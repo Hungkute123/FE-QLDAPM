@@ -23,6 +23,7 @@ export const userSlice = createSlice({
     isUser: false,
     OTP: '',
     isAccount: false,
+    account: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -38,7 +39,12 @@ export const userSlice = createSlice({
       state.isUser = action.payload.isUser;
     });
     builder.addCase(getInfo.fulfilled, (state, action) => {
-      state.isAccount = action.payload.data;
+      if (action.payload.data) {
+        state.account = action.payload.data;
+        state.isAccount = true;
+      } else {
+        state.isAccount = false;
+      }
     });
   },
 });

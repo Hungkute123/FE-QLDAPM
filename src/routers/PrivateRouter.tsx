@@ -1,5 +1,9 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Redirect, Route, useLocation } from "react-router-dom";
+import { RootState } from "../redux/rootReducer";
+import { getInfo } from "../redux/slice/appSlice/userSlice";
 // import { doGetCurrentUser } from '../redux/slice';
 // import { EToken } from '../constants/login';
 // import { logout } from '../helpers/app';
@@ -23,59 +27,59 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
   withoutAvatar,
 }) => {
   const dispatch = useAppDispatch();
+  const location = useLocation().pathname;
+  const [isFetch, setIsFectch] = useState(false);
+  const isAccount = useSelector((state: RootState) => state.userSlice.isAccount);
+  const fecthInfo = async () => {
+    const check = (await dispatch(getInfo({ jwt: localStorage.getItem('jwt') }))).payload;
+    if (check === true || check === false || String(typeof check) === 'object') {
+      setIsFectch(true);
+    }
+  };
+  useEffect(() => {
+    fecthInfo();
+    return () => {
+      console.log('isAccount:', isAccount);
+    };
+  }, [location]);
 
-  // const tokenCareer = window.localStorage.getItem(EToken.CAREER_GUIDANCE_ACCESS_KEY);
-  // const tokenComunity = window.localStorage.getItem(EToken.COMUNITY_ACCESS_KEY);
-  // const errorCurrentUser = useSelector((state: RootState) => state.user.err.response?.status);
-  // const titleRedux = useSelector((state: RootState) => state.header.title);
+  const render = (props: any) => {
+    if (isAccount == false) {
+      return <Redirect to="/" />;
+    }
 
-  // useEffect(() => {
-  //   dispatch(doGetCurrentUser());
-  // }, []);
+    return isFetch == false ? (
+      <div style={{ marginTop: '20px' }}>
+        <Spinner animation="grow" variant="primary" />
+        <Spinner animation="grow" variant="secondary" />
+        <Spinner animation="grow" variant="success" />
+        <Spinner animation="grow" variant="danger" />
+        <Spinner animation="grow" variant="warning" />
+        <Spinner animation="grow" variant="info" />
+        <Spinner animation="grow" variant="light" />
+        <Spinner animation="grow" variant="dark" />
+      </div>
+    ) : (
+      <Layout
+        header={
+          isHasHeader ? (
+            <Header
+              title={titleHeader}
+              type={typeHeader}
+              onClick={props.history.goBack}
+              path={backPath}
+              withoutAvatar={withoutAvatar}
+            />
+          ) : (
+            <></>
+          )
+        }
+        footer={isHasFooter ? <Footer /> : <></>}
+      >
+        <Component {...props} />
+      </Layout>
+    );
+  };
 
-  // let query = new URLSearchParams(useLocation().search).get('text');
-
-  return (
-    <Route
-      exact={exact}
-      path={path}
-      render={(props) => {
-        // if (
-        //   !tokenCareer ||
-        //   !tokenComunity ||
-        //   !readCookie(EToken.CAREER_GUIDANCE_ACCESS_KEY) ||
-        //   !readCookie(EToken.COMUNITY_ACCESS_KEY)
-        // ) {
-        //   logout();
-        // }
-
-        // if (errorCurrentUser === 401) {
-        //   logout();
-        // }
-
-        return (
-          <Layout
-            header={
-              isHasHeader ? (
-                <Header
-                  title={titleHeader}
-                  // titleDynamic={query}
-                  type={typeHeader}
-                  onClick={props.history.goBack}
-                  path={backPath}
-                  // titleRedux={titleRedux}
-                  withoutAvatar={withoutAvatar}
-                />
-              ) : (
-                <></>
-              )
-            }
-            footer={isHasFooter ? <Footer /> : <></>}
-          >
-            <Component {...props} />
-          </Layout>
-        );
-      }}
-    />
-  );
+  return <Route exact={exact} path={path} render={render} />;
 };

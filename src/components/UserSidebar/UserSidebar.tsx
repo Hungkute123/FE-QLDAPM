@@ -33,13 +33,13 @@ export const UserSidebar = ({ current }: Sidebar) => {
     { href: '/account/edit', title: 'Thông tin tài khoản' },
     { href: '/account/address', title: 'Sổ địa chỉ' },
     { href: '/account/order', title: 'Đơn hàng của tôi' },
-    { href: '/account', title: 'Ví voucher' },
+    { href: '/account/voucher', title: 'Ví voucher' },
     { href: '/wishlist', title: 'Yêu thích' },
-    { href: '/account', title: 'Sách theo bộ' },
-    { href: '/account', title: 'Tài Khoản F-point / Freeship' },
-    { href: '/account', title: 'Nhận xét của tôi' },
-    { href: '/account', title: 'Thông Báo' },
-    { href: '/account', title: 'Đăng ký nhận tin điện tử' },
+    { href: '/account/seriesbook', title: 'Sách theo bộ' },
+    { href: '/account/history', title: 'Tài Khoản F-point / Freeship' },
+    { href: '/account/review', title: 'Nhận xét của tôi' },
+    { href: '/account/notification', title: 'Thông Báo' },
+    { href: '/account/newsletter', title: 'Đăng ký nhận tin điện tử' },
   ]);
 
   return (

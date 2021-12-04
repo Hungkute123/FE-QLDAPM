@@ -15,6 +15,12 @@ export * from './UserAddress/UserAddress';
 export * from './UserMessage/UserMessage';
 export * from './UserOrder/UserOrder';
 export * from './ProductView/ProductView';
+export * from './UserVoucher/UserVoucher';
+export * from './UserSeriesBook/UserSeriesBook';
+export * from './UserHistory/UserHistory';
+export * from './UserReview/UserReview';
+export * from './UserNewsLetter/UserNewsLetter';
+export * from './UserNotification/UserNotification';
 
 export * from './CatalogSearch';
 export * from './OneStepCheckout';

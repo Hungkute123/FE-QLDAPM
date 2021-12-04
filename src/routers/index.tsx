@@ -208,6 +208,72 @@ export const Routers = () => {
         />
 
         <PrivateRouter
+          path={'/account/voucher'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Voucher - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/account/seriesbook'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Sách theo bộ - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/account/history'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Tài khoản F-point/Freeship- Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/account/review'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Nhận xét - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/account/notification'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Thông báo - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
+          path={'/account/newsletter'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Đăng ký nhận thư điện tử - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
           path={'/admin/manage-user'}
           component={AdminHome}
           layout={HeaderFooterLayout}

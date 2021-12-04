@@ -1,0 +1,49 @@
+.user-newsletter {
+    padding: 0 15px;
+    background-color: #fff;
+
+    &__content {
+        padding: 20px;
+        padding-top: 56px;
+    }
+
+    &__title {
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+
+        h1 {
+            color: #565555 !important;
+            font-size: 20px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            line-height: 36px;
+        }
+    }
+
+    &__table {
+        margin-top: 8px;
+    }
+
+    &__back {
+        clear: both;
+        margin: 20px 0 0;
+        padding: 8px 0 0;
+        border-top: 1px solid #f2f2f2;
+        text-align: right;
+    }
+
+    &__link {
+        float: left;
+        margin: 0;
+
+        a {
+            color: #2489f4 !important;
+        }
+    }
+
+    &__btn {
+        margin-right: 5px;
+    }
+}

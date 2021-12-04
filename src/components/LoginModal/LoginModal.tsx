@@ -12,8 +12,10 @@ import { RootState } from '../../redux/rootReducer';
 import { loginWithEmail, registerWithEmail, sendOTP } from '../../redux/slice/appSlice/userSlice';
 
 export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [emailLogin, setEmailLogin] = useState('');
+  const [passwordLogin, setPasswordLogin] = useState('');
+  const [emailRegister, setEmailRegister] = useState('');
+  const [passwordRegister, setPasswordRegister] = useState('');
   const [codeOTP, setCodeOTP] = useState('');
   const { isUser, OTP } = useSelector((state: RootState) => state.userSlice);
 
@@ -32,7 +34,7 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
   };
 
   const handleLogin = async () => {
-    if (!checkEmail(email)) {
+    if (!checkEmail(emailLogin)) {
       Swal.fire({
         icon: 'error',
         title: 'EMAIL SAI CÚ PHÁP',
@@ -42,7 +44,7 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
       return;
     }
 
-    const login = (await dispatch(loginWithEmail({ email: email, pass: password }))).payload;
+    const login = (await dispatch(loginWithEmail({ email: emailLogin, pass: passwordLogin }))).payload;
 
     if (login.data) {
       Swal.fire({
@@ -60,9 +62,9 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
   };
 
   const handleAction = () => {
-    if (checkEmail(email)) {
-      Swal.fire(`Hệ thống đã gửi mã OTP đến email ${email}`);
-      dispatch(sendOTP({ email: email }));
+    if (checkEmail(emailRegister)) {
+      Swal.fire(`Hệ thống đã gửi mã OTP đến email ${emailRegister}`);
+      dispatch(sendOTP({ email: emailRegister }));
 
       return;
     }
@@ -85,7 +87,7 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
       return;
     }
 
-    const register = (await dispatch(registerWithEmail({ email: email, pass: password }))).payload;
+    const register = (await dispatch(registerWithEmail({ email: emailRegister, pass: passwordRegister }))).payload;
 
     if (register.data) {
       Swal.fire({
@@ -123,14 +125,14 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
               label="Số điện thoại/Email"
               type="text"
               placeholder="Nhập số điện thoại hoặc email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmailLogin(e.target.value)}
             />
             <Input
               label="Mật khẩu"
               type="password"
               showPassword={true}
               placeholder="Nhập mật khẩu"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPasswordLogin(e.target.value)}
             />
             <span className="login-modal__forgot-pass">Quên mật khẩu?</span>
             <div className="login-modal__group-btn">
@@ -156,7 +158,7 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
               type="text"
               placeholder="Nhập email"
               titleAction="Gửi mã OTP"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmailRegister(e.target.value)}
               handleAction={handleAction}
             />
             <Input
@@ -172,12 +174,12 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
               showPassword={true}
               placeholder="Nhập mật khẩu"
               isDisable={OTP == '' ? true : false}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPasswordRegister(e.target.value)}
             />
             <div className="login-modal__group-btn">
               <Button
                 variant="secondary"
-                disabled={email != '' && password != '' && codeOTP != '' ? false : true}
+                disabled={emailRegister != '' && passwordRegister != '' && codeOTP != '' ? false : true}
                 className="login-modal__btn"
                 onClick={handleRegister}
               >
