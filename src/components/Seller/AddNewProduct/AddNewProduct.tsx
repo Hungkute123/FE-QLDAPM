@@ -19,10 +19,12 @@ import {
 } from '../../../redux';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 //import 'bootstrap-fileinput/css/fileinput.min.css';
 
 export const AddNewProduct = () => {
   const dispatch = useAppDispatch();
+  const history  = useHistory()
   const [categoryLevelOne, SetCategoryLeveOne] = useState([]);
   const [categoryLevelTwo, SetCategoryLeveTwo] = useState([]);
   const [categoryLevelThree, SetCategoryLeveThree] = useState([]);
@@ -41,6 +43,7 @@ export const AddNewProduct = () => {
   const [selectedFileThree, setSelectedFileThree] = useState();
   const [preview, setPreview] = useState('');
   const [contentEditor, setContentEditor] = useState();
+  const {account} = useSelector((state: RootState) => state.userSlice);
   const editorRef = useRef(null);
   useEffect(() => {
     const getCategoryLevelZero = async () => {
@@ -67,6 +70,7 @@ export const AddNewProduct = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
+    formData.append('id_user', String(account.IDUser));
     formData.append('id_category', String(idCategory));
     formData.append('product_name', e.target.elements.product_name.value);
     formData.append('cover_image', selectedFile);
@@ -112,6 +116,9 @@ export const AddNewProduct = () => {
       Swal.fire({
         icon: 'success',
         title: 'Thêm sản phẩm thành công',
+      });
+      history.push({
+        pathname: `/seller/product-management`,
       });
     } else {
       Swal.fire({
@@ -495,7 +502,6 @@ export const AddNewProduct = () => {
                 id="product_discount"
                 name="product_discount"
                 maxLength={14}
-                required={true}
                 min="0"
               />
             </div>

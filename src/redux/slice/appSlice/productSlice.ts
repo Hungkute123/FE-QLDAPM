@@ -24,9 +24,12 @@ export const doAddNewProduct = createAsyncThunk('product/doAddNewProduct', async
   return await productApi.addNewProduct(body).then((res) => res.data);
 });
 
-export const doGetProductByIDUser = createAsyncThunk('product/doGetProductByIDUser', async () => {
-  return await productApi.getProductByIDUser().then((res) => res.data);
-});
+export const doGetProductByIDUser = createAsyncThunk(
+  'product/doGetProductByIDUser',
+  async (params: any) => {
+    return await productApi.getProductByIDUser(params).then((res) => res.data);
+  },
+);
 
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
