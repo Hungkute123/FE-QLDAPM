@@ -43,7 +43,7 @@ export const Routers = () => {
           header={Header}
         />
 
-        <PrivateRouter
+        <PublicRouter
           path={'/catalogsearch/result'}
           component={CatalogSearch}
           layout={HeaderFooterLayout}
@@ -135,7 +135,7 @@ export const Routers = () => {
         />
       </Switch>
       <Switch>
-        <PrivateRouter
+        <PublicRouter
           path={'/cart'}
           component={Cart}
           layout={HeaderFooterLayout}
@@ -145,7 +145,7 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/detail-product'}
           component={Detail}
           layout={HeaderFooterLayout}
