@@ -25,15 +25,23 @@ export const doChangeActiveUser = createAsyncThunk('user/active-user', async (pa
   return await userApi.activeUser(params).then((res) => res.data);
 });
 
+interface IInitialState {
+  isUser: boolean,
+  OTP: string,
+  isAccount: boolean,
+  account: IAccount,
+  listUser: any;
+}
+const initialState = {
+  isUser: false,
+  OTP: '',
+  isAccount: false,
+  account: {},
+  listUser: [],
+} as IInitialState;
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    isUser: false,
-    OTP: '',
-    isAccount: false,
-    account: {},
-    listUser: [],
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginWithEmail.fulfilled, (state, action) => {
@@ -64,7 +72,7 @@ export const userSlice = createSlice({
       const userid = action.payload.data;
 
       if (userid) {
-        const index = state.listUser.findIndex((item) => item.userid === parseInt(userid));
+        const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
         console.log('index', index);
 
         if (index >= 0) {

@@ -32,9 +32,9 @@ const productApi = {
     const url = 'products/favorite-list';
     return await axiosMy.get(url);
   },
-  getProductByIDUser: async () => {
+  getProductByIDUser: async (params: any) => {
     const url = 'products/iduser';
-    return await axiosMy.get(url);
+    return await axiosMy.get(url , {params});
   },
   addNewProduct: async (requestOption: any) =>{
     const url = 'products/add-new-product';

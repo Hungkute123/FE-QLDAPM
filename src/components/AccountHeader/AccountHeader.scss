@@ -51,7 +51,7 @@
     padding: 10px;
     cursor: pointer;
     font-size: 14px;
-
+    color:black !important;
     &:first-child {
       border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
     }
@@ -69,4 +69,8 @@
   &__svg {
     margin-left: auto;
   }
+  a{
+    color: rgb(56, 55, 55)  !important;
+  }
 }
+

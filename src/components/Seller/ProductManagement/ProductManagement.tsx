@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { BsEye, BsPencilSquare } from 'react-icons/bs';
-import { doGetProductByIDUser, useAppDispatch } from '../../../redux';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { doGetProductByIDUser, RootState, useAppDispatch } from '../../../redux';
 import './ProductManagement.scss';
 
 export const ProductManagement = () => {
   const dispatch = useAppDispatch();
+  const history  = useHistory()
   const [listProduct, setListProduct] = useState([]);
-
+  const {account} = useSelector((state: RootState) => state.userSlice);
   const getProduct = async () => {
-    const product = (await dispatch(doGetProductByIDUser())).payload;
+    const product = (await dispatch(doGetProductByIDUser({IDUser: account.IDUser}))).payload;
     setListProduct(product.data);
   };
   useEffect(() => {
@@ -56,6 +59,11 @@ export const ProductManagement = () => {
                 <tr>
                   <td></td>
                   <td>Bạn chưa thêm sản phẩm nào</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               ) : (
                 listProduct.map((item: any, i: number) => {

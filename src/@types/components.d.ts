@@ -158,3 +158,18 @@ interface EnhancedTableProps {
   rowCount: number;
   headCells: any;
 }
+
+interface IAccount {
+  IDUser: number;
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
+  Email: string;
+  Password: string;
+  DateOfBirth: string;
+  Gender: string;
+  TypeOfUser: number;
+  Active: number;
+  iat: number;
+  exp: number;
+}
