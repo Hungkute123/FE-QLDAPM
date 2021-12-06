@@ -17,6 +17,14 @@ export const getInfo = createAsyncThunk('user/get-info', async (params: any) => 
   return await userApi.getInfo(params).then((res) => res.data);
 });
 
+export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
+  return await userApi.getAllUser().then((res) => res.data);
+});
+
+export const doChangeActiveUser = createAsyncThunk('user/active-user', async (params: any) => {
+  return await userApi.activeUser(params).then((res) => res.data);
+});
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -24,6 +32,7 @@ export const userSlice = createSlice({
     OTP: '',
     isAccount: false,
     account: {},
+    listUser: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -44,6 +53,23 @@ export const userSlice = createSlice({
         state.isAccount = true;
       } else {
         state.isAccount = false;
+      }
+    });
+
+    builder.addCase(doGetAllUser.fulfilled, (state, action) => {
+      state.listUser = action.payload.data;
+    });
+
+    builder.addCase(doChangeActiveUser.fulfilled, (state, action) => {
+      const userid = action.payload.data;
+
+      if (userid) {
+        const index = state.listUser.findIndex((item) => item.userid === parseInt(userid));
+        console.log('index', index);
+
+        if (index >= 0) {
+          state.listUser[index].active = !state.listUser[index].active;
+        }
       }
     });
   },

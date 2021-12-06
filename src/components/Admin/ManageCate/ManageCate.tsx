@@ -13,50 +13,36 @@ import {
 } from '@material-ui/core';
 import { getComparator, stableSort, EnhancedTableToolbar, EnhancedTableHead } from '../';
 import { useHistory } from 'react-router';
-
-function createData(
-  cate_id: string,
-  cate_name: string,
-  cate_level: string,
-  cate_parent: string,
-): DataTableCategory {
-  return {
-    cate_id,
-    cate_name,
-    cate_level,
-    cate_parent,
-  };
-}
-
-const rows = [
-  createData('1', 'Nguyễn Tấn Đạt', '1', 'dat1'),
-  createData('2', 'Nguyễn Tấn Đạt', '1', 'dat1'),
-  createData('3', 'Nguyễn Tấn Đạt', '2', 'dat1'),
-  createData('4', 'Nguyễn Tấn Đạt', '1', 'dat1'),
-  createData('5', 'Nguyễn Tấn Đạt', '3', 'dat1'),
-];
+import {
+  useAppDispatch,
+  useAppSelector,
+  getCategoryProductByIDParentLevelOne,
+  getCategoryProductByIDParentLevelTwo,
+  getCategoryProductByLevelZero,
+} from '../../../redux';
+import { Form } from 'react-bootstrap';
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'cate_id',
+    id: 'IDCategory',
     numeric: false,
     disablePadding: true,
     label: 'ID',
   },
   {
-    id: 'cate_name',
+    id: 'Name',
     numeric: false,
     disablePadding: true,
     label: 'Tên danh mục',
   },
   {
-    id: 'cate_level',
+    id: 'Level',
     numeric: true,
     disablePadding: false,
     label: 'Cấp danh mục',
   },
   {
-    id: 'cate_parent',
+    id: 'ParentName',
     numeric: true,
     disablePadding: false,
     label: 'Danh mục cha',
@@ -65,12 +51,20 @@ const headCells: readonly HeadCell[] = [
 
 export const ManageCate = () => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof DataTableCategory>('cate_id');
+  const [orderBy, setOrderBy] = React.useState<keyof DataTableCategory>('IDCategory');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [level, setLevel] = React.useState(0);
+
+  const { categoryLevelZero } = useAppSelector((state) => state.categorySlice);
+
+  React.useEffect(() => {
+    dispatch(getCategoryProductByLevelZero({ level: level }));
+  }, [level]);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: any) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -80,7 +74,7 @@ export const ManageCate = () => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.cate_id);
+      const newSelecteds = categoryLevelZero.data?.map((n: any) => n.IDCategory);
       setSelected(newSelecteds);
       return;
     }
@@ -123,98 +117,122 @@ export const ManageCate = () => {
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows =
+    page > 0 && categoryLevelZero && categoryLevelZero.data
+      ? Math.max(0, (1 + page) * rowsPerPage - categoryLevelZero.length)
+      : 0;
 
-  const handleEditRow = (username: string) => {
-    history.push(`/admin/manage-user/${username}`);
+  const handleEditRow = (IDCategory: string) => {
+    history.push(`/admin/category/${IDCategory}`);
+  };
+
+  const handleOnChangeSelect = (e: any) => {
+    setLevel(e.target.value);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', position: 'relative' }}>
       <Paper>
         <EnhancedTableToolbar
           numSelected={selected.length}
           title="Quản lý danh sách các danh mục"
         />
-        <TableContainer>
-          <Table>
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-              headCells={headCells}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.cate_id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+        {categoryLevelZero && categoryLevelZero.data ? (
+          <>
+            <TableContainer>
+              <Table>
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={categoryLevelZero.data.length}
+                  headCells={headCells}
+                />
+                <TableBody>
+                  {categoryLevelZero.data &&
+                    stableSort(categoryLevelZero.data, getComparator(order, orderBy))
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      ?.map((row: any, index) => {
+                        const isItemSelected = isSelected(row.IDCategory);
+                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
+                        return (
+                          <TableRow
+                            hover
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={row.IDCategory}
+                            selected={isItemSelected}
+                          >
+                            <TableCell
+                              padding="checkbox"
+                              onClick={(event) => handleClick(event, row.IDCategory)}
+                            >
+                              <Checkbox
+                                color="primary"
+                                checked={isItemSelected}
+                                inputProps={{
+                                  'aria-labelledby': labelId,
+                                }}
+                              />
+                            </TableCell>
+                            <TableCell component="th" id={labelId} scope="row" padding="none">
+                              {row.IDCategory}
+                            </TableCell>
+                            <TableCell align="left">{row.Name}</TableCell>
+                            <TableCell align="left">{parseInt(row.Level) + 1}</TableCell>
+                            <TableCell align="left">{row?.ParentName}</TableCell>
+                            <TableCell>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => handleEditRow(row.IDCategory)}
+                              >
+                                Chỉnh sửa
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                  {emptyRows > 0 && (
                     <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.cate_id}
-                      selected={isItemSelected}
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
                     >
-                      <TableCell
-                        padding="checkbox"
-                        onClick={(event) => handleClick(event, row.cate_id)}
-                      >
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.cate_id}
-                      </TableCell>
-                      <TableCell align="right">{row.cate_name}</TableCell>
-                      <TableCell align="right">{row.cate_level}</TableCell>
-                      <TableCell align="right">{row.cate_parent}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handleEditRow(row.cate_id)}
-                        >
-                          Chỉnh sửa
-                        </Button>
-                      </TableCell>
+                      <TableCell colSpan={6} />
                     </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 30]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 20, 30]}
+              component="div"
+              count={categoryLevelZero.data.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />{' '}
+          </>
+        ) : (
+          <></>
+        )}
       </Paper>
+
+      <Form.Select
+        style={{ position: 'absolute', top: 20, right: 20, width: '300px' }}
+        aria-label="Chọn cấp của danh mục"
+        onChange={handleOnChangeSelect}
+      >
+        <option value="0">Danh mục cấp 1</option>
+        <option value="1">Danh mục cấp 2</option>
+        <option value="2">Danh mục cấp 3</option>
+      </Form.Select>
     </Box>
   );
 };
