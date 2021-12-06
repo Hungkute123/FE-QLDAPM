@@ -13,37 +13,7 @@ import {
 } from '@material-ui/core';
 import { getComparator, stableSort, EnhancedTableToolbar, EnhancedTableHead } from '../';
 import { useHistory } from 'react-router';
-
-function createData(
-  fullname: string,
-  phonenumber: string,
-  username: string,
-  active: number,
-  typeofuser: number,
-): DataTableUser {
-  return {
-    fullname,
-    phonenumber,
-    username,
-    active,
-    typeofuser,
-  };
-}
-
-const rows = [
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat1', 1, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat2', 1, 2),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat3', 0, 3),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat4', 0, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat5', 1, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat6', 0, 3),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat7', 1, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat8', 0, 2),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat19', 0, 2),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat16', 0, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat13', 1, 1),
-  createData('Nguyễn Tấn Đạt', '0912562336', 'dat12', 1, 3),
-];
+import { useAppDispatch, doGetAllUser, useAppSelector, doChangeActiveUser } from '../../../redux';
 
 const headCells: readonly HeadCell[] = [
   {
@@ -59,10 +29,10 @@ const headCells: readonly HeadCell[] = [
     label: 'Số điện thoại',
   },
   {
-    id: 'username',
+    id: 'email',
     numeric: true,
     disablePadding: false,
-    label: 'Tên đăng nhập',
+    label: 'Email',
   },
   {
     id: 'active',
@@ -80,12 +50,14 @@ const headCells: readonly HeadCell[] = [
 
 export const ManageUser = () => {
   const history = useHistory();
+  const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof DataTableUser>('fullname');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { listUser } = useAppSelector((state) => state.userSlice);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: any) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -95,7 +67,7 @@ export const ManageUser = () => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.username);
+      const newSelecteds = listUser.map((n) => n.userid);
       setSelected(newSelecteds);
       return;
     }
@@ -138,11 +110,15 @@ export const ManageUser = () => {
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - listUser.length) : 0;
 
-  const handleEditRow = (username: string) => {
-    history.push(`/admin/manage-user/${username}`);
+  const handleEditRow = (active: number, userid: string) => {
+    dispatch(doChangeActiveUser({ active: active, userid: userid }));
   };
+
+  React.useEffect(() => {
+    dispatch(doGetAllUser());
+  }, []);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -156,14 +132,14 @@ export const ManageUser = () => {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={listUser.length}
               headCells={headCells}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(listUser, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.username);
+                .map((row: any, index) => {
+                  const isItemSelected = isSelected(row.userid);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -172,12 +148,12 @@ export const ManageUser = () => {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.username}
+                      key={row.userid}
                       selected={isItemSelected}
                     >
                       <TableCell
                         padding="checkbox"
-                        onClick={(event) => handleClick(event, row.username)}
+                        onClick={(event) => handleClick(event, row.userid)}
                       >
                         <Checkbox
                           color="primary"
@@ -187,30 +163,31 @@ export const ManageUser = () => {
                           }}
                         />
                       </TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.fullname}
+                        {row.firstname && row.lastname ? row.firstname + ' ' + row.lastname : ''}
                       </TableCell>
-                      <TableCell align="right">{row.phonenumber}</TableCell>
-                      <TableCell align="right">{row.username}</TableCell>
-                      <TableCell align="right">
-                        {row.active === 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
+                      <TableCell align="left">{row.phonenumber}</TableCell>
+
+                      <TableCell style={{ minWidth: '150px' }} align="left">
+                        {row.active ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
                       </TableCell>
-                      <TableCell align="right">
-                        {row.typeofuser === 1
+                      <TableCell align="left">
+                        {row.typeofuser === 0
                           ? 'Người dùng'
-                          : row.typeofuser === 2
+                          : row.typeofuser === 1
                           ? 'Người bán'
-                          : row.typeofuser === 3
+                          : row.typeofuser === 2
                           ? 'Quản trị viên'
                           : ''}
                       </TableCell>
-                      <TableCell>
+                      <TableCell style={{ minWidth: '200px' }}>
                         <Button
                           variant="contained"
-                          color="primary"
-                          onClick={() => handleEditRow(row.username)}
+                          color={row.active ? 'inherit' : 'primary'}
+                          onClick={() => handleEditRow(row.active, row.userid)}
                         >
-                          Chỉnh sửa
+                          {row.active ? 'Hủy kích hoạt' : 'Kích hoạt'}
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -231,7 +208,7 @@ export const ManageUser = () => {
         <TablePagination
           rowsPerPageOptions={[10, 20, 30]}
           component="div"
-          count={rows.length}
+          count={listUser.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

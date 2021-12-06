@@ -128,10 +128,10 @@ interface DataTableUser {
 }
 
 interface DataTableCategory {
-  cate_id: string;
-  cate_name: string;
-  cate_level: string;
-  cate_parent: string;
+  IDCategory: string;
+  Name: string;
+  Level: string;
+  ParentName: string;
 }
 
 interface EnhancedTableToolbarProps {

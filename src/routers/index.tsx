@@ -288,6 +288,13 @@ export const Routers = () => {
           header={Header}
         />
         <PrivateRouter
+          path={'/admin/category/:IDCategory'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PrivateRouter
           path={'/admin/manage-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}
