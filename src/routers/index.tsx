@@ -273,35 +273,35 @@ export const Routers = () => {
           footer={Footer}
         />
 
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-user'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-categories'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/category/:IDCategory'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/sales-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}

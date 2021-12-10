@@ -41,12 +41,9 @@ export const doDeleteCategory = createAsyncThunk(
   },
 );
 
-export const doAddCategory = createAsyncThunk(
-  'category/doAddCategory',
-  async (params: any) => {
-    return await categoryApi.addCategory(params).then((res) => res.data);
-  },
-);
+export const doAddCategory = createAsyncThunk('category/doAddCategory', async (params: any) => {
+  return await categoryApi.addCategory(params).then((res) => res.data);
+});
 
 interface IInitialState {
   categoryLevelZero: any;
@@ -69,10 +66,13 @@ export const categorySlice = createSlice({
 
   reducers: {
     resetCategoryLevelTwo(state) {
-      state.categoryLevelTwo= [];
+      state.categoryLevelTwo = [];
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getCategoryProductByLevelZero.pending, (state, action) => {
+      state.categoryLevelZero = [];
+    });
     builder.addCase(getCategoryProductByLevelZero.fulfilled, (state, action) => {
       state.status = 'success';
       state.categoryLevelZero = action.payload;
@@ -110,5 +110,5 @@ export const categorySlice = createSlice({
 });
 
 const { reducer, actions } = categorySlice;
-export const {resetCategoryLevelTwo} = actions;
+export const { resetCategoryLevelTwo } = actions;
 export default reducer;
