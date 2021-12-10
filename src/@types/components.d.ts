@@ -18,6 +18,7 @@ interface ICardProduct {
   rate?: number;
   chapter?: number;
   path?: string;
+  Id?: string;
 }
 
 interface IListProduct {

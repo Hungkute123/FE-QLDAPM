@@ -146,7 +146,7 @@ export const Routers = () => {
           footer={Footer}
         />
         <PublicRouter
-          path={'/detail-product'}
+          path={'/:IDProduct'}
           component={Detail}
           layout={HeaderFooterLayout}
           isHasHeader={true}
