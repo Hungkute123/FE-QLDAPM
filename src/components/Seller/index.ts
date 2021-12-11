@@ -8,3 +8,4 @@ export * from './DiscountManagement/DiscountManagement';
 export * from './CreateDiscountCode/CreateDiscountCode';
 export * from './CreatePromotion/CreatePromotion';
 export * from './SellerSideBar/SellerSideBar';
+export * from './EditDiscountCode/EditDiscountCode';

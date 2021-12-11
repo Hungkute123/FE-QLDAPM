@@ -80,7 +80,7 @@ export const Routers = () => {
           footer={Footer}
         />
         <PrivateRouter
-          path={'/seller/edit-product'}
+          path={'/seller/edit-product/:id'}
           component={Seller}
           layout={HeaderFooterLayout}
           isHasHeader={true}
@@ -126,6 +126,15 @@ export const Routers = () => {
         />
         <PrivateRouter
           path={'/seller/create-discount-code'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PublicRouter
+          path={'/seller/edit-discount-code/:id'}
           component={Seller}
           layout={HeaderFooterLayout}
           isHasHeader={true}

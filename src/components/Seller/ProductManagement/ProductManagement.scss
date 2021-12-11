@@ -21,6 +21,15 @@
       line-height: 36px;
       color: #333333;
       padding-bottom: 10px;
+      display: inline-block;
+    }
+    &__input {
+      float: right;
+      input {
+        border: 1px rgb(71, 69, 69) solid;
+        height: 22px;
+        border-radius: 0px;
+      }
     }
   }
   &__table {
@@ -29,6 +38,28 @@
     &__head {
       // background-color: #F2F3F7;
       font-weight: 600;
+    }
+  }
+  &__pagination {
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-evenly;
+    -ms-flex-pack: justify;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding: 0 15rem;
+    a {
+      border-radius: 7px;
+      padding: 0.1rem 1rem;
+      border: gray 1px solid;
+      cursor: pointer;
     }
   }
 }
