@@ -20,6 +20,17 @@ export const doGetFavoriteList = createAsyncThunk('product/doGetFavoriteList', a
   return await productApi.favoriteList().then((res) => res.data);
 });
 
+export const doAddNewProduct = createAsyncThunk('product/doAddNewProduct', async (body: any) => {
+  return await productApi.addNewProduct(body).then((res) => res.data);
+});
+
+export const doGetProductByIDUser = createAsyncThunk(
+  'product/doGetProductByIDUser',
+  async (params: any) => {
+    return await productApi.getProductByIDUser(params).then((res) => res.data);
+  },
+);
+
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
   favoriteList: Array<IProduct>;
@@ -89,6 +100,26 @@ export const productSlice = createSlice({
       },
     );
     builder.addCase(doGetFavoriteList.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //doAddNewProduct
+    builder.addCase(doAddNewProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doAddNewProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doAddNewProduct.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //
+    builder.addCase(doGetProductByIDUser.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDUser.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDUser.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

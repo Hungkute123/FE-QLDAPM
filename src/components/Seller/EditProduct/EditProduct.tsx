@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
-import './AddNewProduct.scss';
-import { InputFormProduct } from './InputFormProduct/InputFormProduct';
-//import 'bootstrap-fileinput';
+import './EditProduct.scss';
 import { Editor } from '@tinymce/tinymce-react';
 import { ClearButton, Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import { FormBook } from './FormBook/FormBook';
-import { FormItem } from './FormItem/FormItem';
 import { BsSearch } from 'react-icons/bs';
 import {
   doAddNewProduct,
@@ -19,12 +15,12 @@ import {
 } from '../../../redux';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { useHistory } from 'react-router-dom';
-//import 'bootstrap-fileinput/css/fileinput.min.css';
+import { InputFormProduct } from '../AddNewProduct/InputFormProduct/InputFormProduct';
+import { FormBook } from '../AddNewProduct/FormBook/FormBook';
+import { FormItem } from '../AddNewProduct/FormItem/FormItem';
 
-export const AddNewProduct = () => {
+export const EditProduct = () => {
   const dispatch = useAppDispatch();
-  const history  = useHistory()
   const [categoryLevelOne, SetCategoryLeveOne] = useState([]);
   const [categoryLevelTwo, SetCategoryLeveTwo] = useState([]);
   const [categoryLevelThree, SetCategoryLeveThree] = useState([]);
@@ -43,7 +39,6 @@ export const AddNewProduct = () => {
   const [selectedFileThree, setSelectedFileThree] = useState();
   const [preview, setPreview] = useState('');
   const [contentEditor, setContentEditor] = useState();
-  const {account} = useSelector((state: RootState) => state.userSlice);
   const editorRef = useRef(null);
   useEffect(() => {
     const getCategoryLevelZero = async () => {
@@ -70,7 +65,6 @@ export const AddNewProduct = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('id_user', String(account.IDUser));
     formData.append('id_category', String(idCategory));
     formData.append('product_name', e.target.elements.product_name.value);
     formData.append('cover_image', selectedFile);
@@ -78,7 +72,6 @@ export const AddNewProduct = () => {
     formData.append('image_two', selectedFileTwo);
     formData.append('image_three', selectedFileThree);
     formData.append('product_price', e.target.elements.product_price.value);
-    formData.append('product_discount', e.target.elements.product_discount.value);
     formData.append('product_weight', e.target.elements.product_weight.value);
     formData.append(
       'product_package_size',
@@ -112,13 +105,11 @@ export const AddNewProduct = () => {
     }
     formData.append('status', String(status));
     const isSucccess = (await dispatch(doAddNewProduct(formData))).payload;
+    console.log(isSucccess);
     if (isSucccess.data === true) {
       Swal.fire({
         icon: 'success',
         title: 'Thêm sản phẩm thành công',
-      });
-      history.push({
-        pathname: `/seller/product-management`,
       });
     } else {
       Swal.fire({
@@ -267,9 +258,9 @@ export const AddNewProduct = () => {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <div className="add-new-product">
-          <div className="add-new-product__content">
-            <div className="add-new-product__title">
+        <div className="edit-product">
+          <div className="edit-product__content">
+            <div className="edit-product__title">
               <h1>Thông tin cơ bản</h1>
             </div>
             <InputFormProduct
@@ -281,12 +272,12 @@ export const AddNewProduct = () => {
               maxLength={100}
               required={true}
             />
-            <div className="add-new-product__item">Ảnh đại diện sản phẩm</div>
-            <div className="add-new-product__input">
-              <div className="add-new-product__input__image">
+            <div className="edit-product__item">Ảnh đại diện sản phẩm</div>
+            <div className="edit-product__input">
+              <div className="edit-product__input__image">
                 {selectedFile && <img src={preview} />}
               </div>
-              <div className="add-new-product__input__upload">
+              <div className="edit-product__input__upload">
                 <label htmlFor="image">
                   <input
                     type="file"
@@ -308,12 +299,12 @@ export const AddNewProduct = () => {
               <Row>
                 <Col lg={4} md={4}>
                   {' '}
-                  <div className="add-new-product__input">
-                    <div className="add-new-product__input__image add-new-product__input__image--100">
+                  <div className="edit-product__input">
+                    <div className="edit-product__input__image edit-product__input__image--100">
                       {selectedFileOne && <img src={previewOne} />}
                     </div>
-                    <div className="add-new-product__input__upload">
-                      <label className="add-new-product__input__upload__label" htmlFor="image">
+                    <div className="edit-product__input__upload">
+                      <label className="edit-product__input__upload__label" htmlFor="image">
                         <input
                           type="file"
                           onChange={onSelectFileOne}
@@ -332,12 +323,12 @@ export const AddNewProduct = () => {
                 </Col>
                 <Col lg={4} md={4}>
                   {' '}
-                  <div className="add-new-product__input">
-                    <div className="add-new-product__input__image add-new-product__input__image--100">
+                  <div className="edit-product__input">
+                    <div className="edit-product__input__image edit-product__input__image--100">
                       {selectedFileTwo && <img src={previewTwo} />}
                     </div>
-                    <div className="add-new-product__input__upload">
-                      <label className="add-new-product__input__upload__label" htmlFor="image">
+                    <div className="edit-product__input__upload">
+                      <label className="edit-product__input__upload__label" htmlFor="image">
                         <input
                           type="file"
                           onChange={onSelectFileTwo}
@@ -356,12 +347,12 @@ export const AddNewProduct = () => {
                 </Col>
                 <Col lg={4} md={4}>
                   {' '}
-                  <div className="add-new-product__input">
-                    <div className="add-new-product__input__image add-new-product__input__image--100">
+                  <div className="edit-product__input">
+                    <div className="edit-product__input__image edit-product__input__image--100">
                       {selectedFileThree && <img src={previewThree} />}
                     </div>
-                    <div className="add-new-product__input__upload">
-                      <label className="add-new-product__input__upload__label" htmlFor="image">
+                    <div className="edit-product__input__upload">
+                      <label className="edit-product__input__upload__label" htmlFor="image">
                         <input
                           type="file"
                           onChange={onSelectFileThree}
@@ -380,8 +371,8 @@ export const AddNewProduct = () => {
                 </Col>
               </Row>
             </Container>
-            <div className="add-new-product__item">Danh mục sản phẩm</div>
-            <div className="add-new-product__category">
+            <div className="edit-product__item">Danh mục sản phẩm</div>
+            <div className="edit-product__category">
               <Container>
                 <Row>
                   <Col
@@ -393,7 +384,7 @@ export const AddNewProduct = () => {
                       height: '370px',
                     }}
                   >
-                    <div className="add-new-product__level">Danh mục sản phẩm cấp một</div>
+                    <div className="edit-product__level">Danh mục sản phẩm cấp một</div>
                     <Typeahead
                       id="category_level_one"
                       labelKey="Name"
@@ -419,7 +410,7 @@ export const AddNewProduct = () => {
                       height: '370px',
                     }}
                   >
-                    <div className={`add-new-product__level`}>Danh mục sản phẩm cấp hai</div>
+                    <div className={`edit-product__level`}>Danh mục sản phẩm cấp hai</div>
                     <Typeahead
                       id="category_level_two"
                       name="category_level_two"
@@ -428,7 +419,7 @@ export const AddNewProduct = () => {
                       placeholder="Chọn danh mục"
                       onChange={handleChangeCategoryTwo}
                       className={`${
-                        isCategoryLevelTwo ? 'add-new-product__show' : 'add-new-product__hide'
+                        isCategoryLevelTwo ? 'edit-product__show' : 'edit-product__hide'
                       }`}
                     >
                       {({ onClear, selected }) => (
@@ -440,7 +431,7 @@ export const AddNewProduct = () => {
                     </Typeahead>
                   </Col>
                   <Col lg={4} md={4} className="col-sm-6">
-                    <div className="add-new-product__level">Danh mục sản phẩm cấp ba</div>
+                    <div className="edit-product__level">Danh mục sản phẩm cấp ba</div>
                     <Typeahead
                       id="category_level_three"
                       name="category_level_three"
@@ -449,7 +440,7 @@ export const AddNewProduct = () => {
                       placeholder="Chọn danh mục"
                       onChange={handleChangeCategoryThree}
                       className={`${
-                        isCategoryLevelThree ? 'add-new-product__show' : 'add-new-product__hide'
+                        isCategoryLevelThree ? 'edit-product__show' : 'edit-product__hide'
                       }`}
                     >
                       {({ onClear, selected }) => (
@@ -463,8 +454,8 @@ export const AddNewProduct = () => {
                 </Row>
               </Container>
             </div>
-            <div className="add-new-product__item">Mô Tả sản phẩm</div>
-            <div className="add-new-product__textarea">
+            <div className="edit-product__item">Mô Tả sản phẩm</div>
+            <div className="edit-product__textarea">
               <Editor
                 tagName="description"
                 onInit={(evt, editor) => (editorRef.current = editor)}
@@ -482,7 +473,7 @@ export const AddNewProduct = () => {
                 onEditorChange={handleEditorChange}
               />
             </div>
-            <div className="add-new-product__margin-10">
+            <div className="edit-product__margin-10">
               <InputFormProduct
                 title="Giá sản phẩm"
                 type="number"
@@ -494,18 +485,7 @@ export const AddNewProduct = () => {
                 min="0"
               />
             </div>
-            <div className="add-new-product__margin-10">
-              <InputFormProduct
-                title="Khuyến mãi"
-                type="number"
-                placeholder="Nhập khuyến mãi sản phẩm theo %"
-                id="product_discount"
-                name="product_discount"
-                maxLength={14}
-                min="0"
-              />
-            </div>
-            <div className="add-new-product__margin-10">
+            <div className="edit-product__margin-10">
               <InputFormProduct
                 title="Khối lượng sản phẩm"
                 type="number"
@@ -516,7 +496,7 @@ export const AddNewProduct = () => {
                 min="0"
               />
             </div>
-            <div className="add-new-product__margin-10">
+            <div className="edit-product__margin-10">
               <InputFormProduct
                 title="Kho hàng"
                 type="number"
@@ -526,11 +506,11 @@ export const AddNewProduct = () => {
                 min="0"
               />
             </div>
-            <div className="add-new-product__margin-10">
-              <div className="add-new-product__item">
+            <div className="edit-product__margin-10">
+              <div className="edit-product__item">
                 Kích thước đóng gói (Phí vận chuyển thực tế sẽ thay đổi nếu bạn nhập sai kích thước)
               </div>
-              <div className="add-new-product__package">
+              <div className="edit-product__package">
                 <Container>
                   <Row>
                     <Col
@@ -542,7 +522,7 @@ export const AddNewProduct = () => {
                         height: '50px',
                       }}
                     >
-                      <div className="add-new-product__level">
+                      <div className="edit-product__level">
                         <InputFormProduct
                           title="Chiều rộng"
                           type="number"
@@ -563,7 +543,7 @@ export const AddNewProduct = () => {
                         height: '50px',
                       }}
                     >
-                      <div className="add-new-product__level">
+                      <div className="edit-product__level">
                         <InputFormProduct
                           title="Chiều dài"
                           type="number"
@@ -576,7 +556,7 @@ export const AddNewProduct = () => {
                       </div>
                     </Col>
                     <Col lg={4} md={4}>
-                      <div className="add-new-product__level">
+                      <div className="edit-product__level">
                         <InputFormProduct
                           title="Chiều cao"
                           type="number"
@@ -593,8 +573,8 @@ export const AddNewProduct = () => {
               </div>
             </div>
 
-            <div className="add-new-product__margin-10">
-              <span className="add-new-product__title2">Sản phẩm thuộc loại</span>
+            <div className="edit-product__margin-10">
+              <span className="edit-product__title2">Sản phẩm thuộc loại</span>
               <span>
                 <Form.Check
                   inline
@@ -619,14 +599,14 @@ export const AddNewProduct = () => {
           </div>
         </div>
 
-        <div className={`${isBook ? 'add-new-product__show' : 'add-new-product__hide'}`}>
-          <div className="add-new-product">
-            <div className="add-new-product__content">
-              <div className="add-new-product__title">
+        <div className={`${isBook ? 'edit-product__show' : 'edit-product__hide'}`}>
+          <div className="edit-product">
+            <div className="edit-product__content">
+              <div className="edit-product__title">
                 <h1>Thông tin chi tiết</h1>
               </div>
               <FormBook required={isBook}></FormBook>
-              <div className="add-new-product__btn">
+              <div className="edit-product__btn">
                 <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
                   Lưu & Ẩn
                 </Button>
@@ -637,14 +617,14 @@ export const AddNewProduct = () => {
             </div>
           </div>
         </div>
-        <div className={`${isItem ? 'add-new-product__show' : 'add-new-product__hide'}`}>
-          <div className="add-new-product">
-            <div className="add-new-product__content">
-              <div className="add-new-product__title">
+        <div className={`${isItem ? 'edit-product__show' : 'edit-product__hide'}`}>
+          <div className="edit-product">
+            <div className="edit-product__content">
+              <div className="edit-product__title">
                 <h1>Thông tin chi tiết</h1>
               </div>
               <FormItem required={isItem}></FormItem>
-              <div className="add-new-product__btn">
+              <div className="edit-product__btn">
                 <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
                   Lưu & Ẩn
                 </Button>

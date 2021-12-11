@@ -11,6 +11,10 @@ interface IInputFormProduct {
   handleChange?: any;
   id?: string;
   maxLength?: number;
+  required?: boolean;
+  min?: string;
+  max?: string;
+  disabled?: boolean;
 }
 
 export const InputFormProduct: React.FC<IInputFormProduct> = ({
@@ -21,6 +25,10 @@ export const InputFormProduct: React.FC<IInputFormProduct> = ({
   handleChange,
   id,
   maxLength,
+  required = false,
+  min,
+  max,
+  disabled = false
 }) => {
   return (
     // <Form onChange={handleChange}>
@@ -29,7 +37,17 @@ export const InputFormProduct: React.FC<IInputFormProduct> = ({
         <Form.Label>{title}</Form.Label>
       </span>
       <div className="input-form-product__input">
-        <Form.Control type={type} id={id} name={id} placeholder={placeholder}  maxLength={maxLength} />
+        <Form.Control
+          type={type}
+          id={id}
+          name={id}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          required={required}
+          min={min}
+          max={max}
+          disabled={disabled}
+        />
         <div className="input-form-product__err">{error}</div>
       </div>
     </div>

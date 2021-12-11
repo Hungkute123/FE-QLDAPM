@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './AccountHeader.scss';
 import { FiUser, FiSettings } from 'react-icons/fi';
 import { MdOutlineExitToApp } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import { BsBoxArrowInRight } from 'react-icons/bs';
+import { Link, useHistory } from 'react-router-dom';
+import { BsBoxArrowInRight, BsShop } from 'react-icons/bs';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
@@ -11,9 +11,11 @@ import { getInfo } from '../../redux/slice/appSlice/userSlice';
 import { useAppDispatch } from '../../redux/store';
 
 export const AccountHeader = () => {
+  const history = useHistory();
   const [showOptions, setShowOptions] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const isAccount = useSelector((state: RootState) => state.userSlice.isAccount);
+  const [isSeller, setIsSeller] = useState(false);
+  const {isAccount, account} = useSelector((state: RootState) => state.userSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,7 +32,12 @@ export const AccountHeader = () => {
   const handleOnLeave = () => {
     setShowOptions(false);
   };
-
+  const handleLogout = () =>{
+    window.localStorage.clear();
+    history.push({
+      pathname: `/account/`,
+    });
+  }
   return (
     <div className="account-header" onMouseEnter={handleOnEnter} onMouseLeave={handleOnLeave}>
       {!isAccount ? (
@@ -51,16 +58,25 @@ export const AccountHeader = () => {
             }`}
           >
             <div className="account-header__list">
+            <div className="account-header__option">
+                <BsShop size={20} />
+                <span>
+                  <Link to="/seller/account-balance">Kênh người bán</Link>
+                </span>
+              </div>
               <div className="account-header__option">
                 <FiSettings size={20} />
                 <span>
                   <Link to="/account">Bảng điều khiển của khách hàng</Link>
                 </span>
               </div>
-              <div className="account-header__option">
-                <MdOutlineExitToApp size={20} />
-                <span>Thoát</span>
+              
+              <div className="account-header__option" onClick={handleLogout} >
+              <button><MdOutlineExitToApp size={20} />
+                <span>Thoát</span></button>
+                
               </div>
+              
             </div>
           </div>
         </div>

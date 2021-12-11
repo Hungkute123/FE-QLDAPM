@@ -28,12 +28,13 @@
     height: 25px !important;
     padding: 4px 0;
     line-height: 25px;
-    color: #000 !important;
+    color: black !important;
     &:hover {
-        color: #ff6600;
+        color: #ff6600 !important;
         background-color: #fff !important;
     }
   }
+  
   &__more{
     font-size: 12px;
     height: 25px !important;

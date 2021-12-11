@@ -16,15 +16,21 @@ export const sendOTP = createAsyncThunk('user/send-otp', async (params: any) => 
 export const getInfo = createAsyncThunk('user/get-info', async (params: any) => {
   return await userApi.getInfo(params).then((res) => res.data);
 });
-
+interface IInitialState {
+  isUser: boolean,
+  OTP: string,
+  isAccount: boolean,
+  account: IAccount,
+}
+const initialState = {
+  isUser: false,
+  OTP: '',
+  isAccount: false,
+  account: {},
+} as IInitialState;
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    isUser: false,
-    OTP: '',
-    isAccount: false,
-    account: {},
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginWithEmail.fulfilled, (state, action) => {
