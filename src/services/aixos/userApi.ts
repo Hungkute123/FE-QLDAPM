@@ -37,6 +37,15 @@ const userApi = {
     const url = 'user/update-user-address';
     return await axiosMy.patch(url, requestOption );
   },
+
+  getAllUser: async () => {
+    const url = `user/get-all-user`;
+    return await axiosMy.get(url);
+  },
+  activeUser: async (params: any) => {
+    const url = `user/active-user`;
+    return await axiosMy.get(url, { params });
+  },
 };
 
 export default userApi;

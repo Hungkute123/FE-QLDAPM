@@ -29,3 +29,4 @@ export * from './Account';
 export * from './Admin';
 export * from './AdminSidebar/AdminSidebar';
 export * from './ProductView/ProductView';
+export * from './ModalConfirm/ModalConfirm';

@@ -46,6 +46,14 @@ export const updateUserAddress = createAsyncThunk(
   },
 );
 
+export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
+  return await userApi.getAllUser().then((res) => res.data);
+});
+
+export const doChangeActiveUser = createAsyncThunk('user/active-user', async (params: any) => {
+  return await userApi.activeUser(params).then((res) => res.data);
+});
+
 interface IInitialState {
   isUser: boolean;
   OTP: string;
@@ -54,7 +62,9 @@ interface IInitialState {
   status: boolean;
   message: string;
   informationVAT: IInformationVAT;
+  listUser: any;
 }
+
 const initialState = {
   isUser: false,
   OTP: '',
@@ -63,6 +73,7 @@ const initialState = {
   status: false,
   message: '',
   informationVAT: {},
+  listUser: [],
 } as IInitialState;
 
 export const userSlice = createSlice({
@@ -107,6 +118,23 @@ export const userSlice = createSlice({
     builder.addCase(updateUserAddress.fulfilled, (state, action) => {
       state.status = action.payload.data;
       state.message = action.payload.message;
+    });
+
+    builder.addCase(doGetAllUser.fulfilled, (state, action) => {
+      state.listUser = action.payload.data;
+    });
+
+    builder.addCase(doChangeActiveUser.fulfilled, (state, action) => {
+      const userid = action.payload.data;
+
+      if (userid) {
+        const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
+        console.log('index', index);
+
+        if (index >= 0) {
+          state.listUser[index].active = !state.listUser[index].active;
+        }
+      }
     });
   },
 });

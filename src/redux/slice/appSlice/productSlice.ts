@@ -30,7 +30,12 @@ export const doGetProductByIDUser = createAsyncThunk(
     return await productApi.getProductByIDUser(params).then((res) => res.data);
   },
 );
-
+export const doGetProductByIDProduct = createAsyncThunk(
+  '/product/doGetProductByIDProduct',
+  async (params:any) => {
+    return await productApi.getProductByIDProduct(params).then((res) => res.data);
+  }
+)
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
   favoriteList: Array<IProduct>;
@@ -120,6 +125,15 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(doGetProductByIDUser.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(doGetProductByIDProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDProduct.rejected, (state, action) => {
       state.isLoading = false;
     });
   },
