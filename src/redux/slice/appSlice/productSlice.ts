@@ -40,6 +40,7 @@ export const doPatchProduct = createAsyncThunk('product/doPatchProduct', async (
   return await productApi.patchProduct(body).then((res) => res.data);
 });
 
+
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
   favoriteList: Array<IProduct>;

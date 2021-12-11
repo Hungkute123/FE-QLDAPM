@@ -144,7 +144,7 @@ export const Routers = () => {
         />
       </Switch>
       <Switch>
-        <PrivateRouter
+        <PublicRouter
           path={'/cart'}
           component={Cart}
           layout={HeaderFooterLayout}
@@ -155,7 +155,7 @@ export const Routers = () => {
           footer={Footer}
         />
         <PublicRouter
-          path={'/detail-product'}
+          path={'/:IDProduct'}
           component={Detail}
           layout={HeaderFooterLayout}
           isHasHeader={true}
@@ -282,28 +282,35 @@ export const Routers = () => {
           footer={Footer}
         />
 
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-user'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-categories'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
+          path={'/admin/category/:IDCategory'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PublicRouter
           path={'/admin/manage-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/sales-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}

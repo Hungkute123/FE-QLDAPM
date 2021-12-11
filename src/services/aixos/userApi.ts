@@ -17,6 +17,15 @@ const userApi = {
     const url = `user/get-info`;
     return await axiosMy.get(url, { params });
   },
+
+  getAllUser: async () => {
+    const url = `user/get-all-user`;
+    return await axiosMy.get(url);
+  },
+  activeUser: async (params: any) => {
+    const url = `user/active-user`;
+    return await axiosMy.get(url, { params });
+  },
 };
 
 export default userApi;

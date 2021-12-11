@@ -16,17 +16,28 @@ export const sendOTP = createAsyncThunk('user/send-otp', async (params: any) => 
 export const getInfo = createAsyncThunk('user/get-info', async (params: any) => {
   return await userApi.getInfo(params).then((res) => res.data);
 });
+
+export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
+  return await userApi.getAllUser().then((res) => res.data);
+});
+
+export const doChangeActiveUser = createAsyncThunk('user/active-user', async (params: any) => {
+  return await userApi.activeUser(params).then((res) => res.data);
+});
+
 interface IInitialState {
-  isUser: boolean;
-  OTP: string;
-  isAccount: boolean;
-  account: IAccount;
+  isUser: boolean,
+  OTP: string,
+  isAccount: boolean,
+  account: IAccount,
+  listUser: any;
 }
 const initialState = {
   isUser: false,
   OTP: '',
   isAccount: false,
   account: {},
+  listUser: [],
 } as IInitialState;
 export const userSlice = createSlice({
   name: 'user',
@@ -52,8 +63,23 @@ export const userSlice = createSlice({
         state.isAccount = false;
       }
     });
+
     builder.addCase(getInfo.rejected, (state, action) => {
       state.isAccount = false;
+    builder.addCase(doGetAllUser.fulfilled, (state, action) => {
+      state.listUser = action.payload.data;
+    });
+    builder.addCase(doChangeActiveUser.fulfilled, (state, action) => {
+      const userid = action.payload.data;
+
+      if (userid) {
+        const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
+        console.log('index', index);
+
+        if (index >= 0) {
+          state.listUser[index].active = !state.listUser[index].active;
+        }
+      }
     });
   },
 });
