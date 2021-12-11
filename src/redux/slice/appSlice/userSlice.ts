@@ -16,18 +16,55 @@ export const sendOTP = createAsyncThunk('user/send-otp', async (params: any) => 
 export const getInfo = createAsyncThunk('user/get-info', async (params: any) => {
   return await userApi.getInfo(params).then((res) => res.data);
 });
+
+export const updateInfo = createAsyncThunk('user/update-info', async (params: any) => {
+  return await userApi.updateInfo(params).then((res) => res.data);
+});
+
+export const addInformationVAT = createAsyncThunk(
+  'user/add-information-vat',
+  async (params: any) => {
+    return await userApi.addInformationVAT(params).then((res) => res.data);
+  },
+);
+
+export const getInformationVAT = createAsyncThunk(
+  'user/get-information-vat',
+  async (params: any) => {
+    return await userApi.getInformationVAT(params).then((res) => res.data);
+  },
+);
+
+export const addUserAddress = createAsyncThunk('user/add-user-address', async (params: any) => {
+  return await userApi.addUserAddress(params).then((res) => res.data);
+});
+
+export const updateUserAddress = createAsyncThunk(
+  'user/update-user-address',
+  async (params: any) => {
+    return await userApi.getInfo(params).then((res) => res.data);
+  },
+);
+
 interface IInitialState {
-  isUser: boolean,
-  OTP: string,
-  isAccount: boolean,
-  account: IAccount,
+  isUser: boolean;
+  OTP: string;
+  isAccount: boolean;
+  account: IAccount;
+  status: boolean;
+  message: string;
+  informationVAT: IInformationVAT;
 }
 const initialState = {
   isUser: false,
   OTP: '',
   isAccount: false,
   account: {},
+  status: false,
+  message: '',
+  informationVAT: {},
 } as IInitialState;
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -51,6 +88,25 @@ export const userSlice = createSlice({
       } else {
         state.isAccount = false;
       }
+    });
+    builder.addCase(updateInfo.fulfilled, (state, action) => {
+      state.status = action.payload.data;
+      state.message = action.payload.message;
+    });
+    builder.addCase(addInformationVAT.fulfilled, (state, action) => {
+      state.status = action.payload.data;
+      state.message = action.payload.message;
+    });
+    builder.addCase(getInformationVAT.fulfilled, (state, action) => {
+      state.informationVAT = action.payload.data;
+    });
+    builder.addCase(addUserAddress.fulfilled, (state, action) => {
+      state.status = action.payload.data;
+      state.message = action.payload.message;
+    });
+    builder.addCase(updateUserAddress.fulfilled, (state, action) => {
+      state.status = action.payload.data;
+      state.message = action.payload.message;
     });
   },
 });

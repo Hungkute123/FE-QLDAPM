@@ -172,4 +172,14 @@ interface IAccount {
   Active: number;
   iat: number;
   exp: number;
+  Vip: string;
+}
+
+interface IInformationVAT {
+  IDUser: number;
+  Name: string;
+  CompanyName: string;
+  CompanyAddress: string;
+  CompanyCode: string;
+  CompanyEmail: string;
 }
