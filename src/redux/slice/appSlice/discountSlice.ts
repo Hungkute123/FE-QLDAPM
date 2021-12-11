@@ -16,6 +16,15 @@ export const dogetDiscountByIDProduct = createAsyncThunk(
 export const doaddNewDiscount = createAsyncThunk('discount/addNewDiscount', async (body: any) => {
   return await discountApi.addNewDiscount(body).then((res) => res.data);
 });
+export const doGetDiscountByIDDiscount = createAsyncThunk(
+  'discount/getDiscountByIDDiscount',
+  async (params: any) => {
+    return await discountApi.getDiscountByIDDiscount(params).then((res) => res.data);
+  },
+);
+export const doPatchDiscount = createAsyncThunk('discount/patchDiscount', async (body: any) => {
+  return await discountApi.patchDiscount(body).then((res) => res.data);
+});
 interface IInitialState {
   isLoading: boolean;
 }
@@ -45,6 +54,18 @@ export const discountSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(doaddNewDiscount.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(doGetDiscountByIDDiscount.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetDiscountByIDDiscount.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(doPatchDiscount.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doPatchDiscount.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

@@ -43,7 +43,7 @@ export const Routers = () => {
           header={Header}
         />
 
-        <PrivateRouter
+        <PublicRouter
           path={'/catalogsearch/result'}
           component={CatalogSearch}
           layout={HeaderFooterLayout}
@@ -80,7 +80,7 @@ export const Routers = () => {
           footer={Footer}
         />
         <PrivateRouter
-          path={'/seller/edit-product'}
+          path={'/seller/edit-product/:id'}
           component={Seller}
           layout={HeaderFooterLayout}
           isHasHeader={true}
@@ -133,6 +133,15 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
+        <PublicRouter
+          path={'/seller/edit-discount-code/:id'}
+          component={Seller}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
       </Switch>
       <Switch>
         <PrivateRouter
@@ -145,7 +154,7 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/detail-product'}
           component={Detail}
           layout={HeaderFooterLayout}

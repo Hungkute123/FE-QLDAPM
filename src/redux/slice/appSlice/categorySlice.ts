@@ -19,6 +19,12 @@ export const getCategoryProductByIDParentLevelTwo = createAsyncThunk(
     return await categoryApi.getCategoryProductByIDParent(params).then((res) => res.data);
   },
 );
+export const getDetailCategoryByID = createAsyncThunk(
+  'category/getDetailCategoryByID',
+  async (params: any) => {
+    return await categoryApi.getDetailCategoryByID(params).then((res) => res.data);
+  },
+);
 interface IInitialState {
   categoryLevelZero: any;
   categoryLevelOne: any;
@@ -65,6 +71,9 @@ export const categorySlice = createSlice({
     builder.addCase(getCategoryProductByIDParentLevelTwo.fulfilled, (state, action) => {
       state.status = 'success';
       state.categoryLevelTwo.push(action.payload);
+    });
+    builder.addCase(getDetailCategoryByID.fulfilled, (state, action) => {
+      state.status = 'success';
     });
   },
 });

@@ -30,6 +30,15 @@ export const doGetProductByIDUser = createAsyncThunk(
     return await productApi.getProductByIDUser(params).then((res) => res.data);
   },
 );
+export const doGetProductByIDProduct = createAsyncThunk(
+  'product/doGetProductByIDProduct',
+  async (params: any) => {
+    return await productApi.getProductByIDProduct(params).then((res) => res.data);
+  },
+);
+export const doPatchProduct = createAsyncThunk('product/doPatchProduct', async (body: any) => {
+  return await productApi.patchProduct(body).then((res) => res.data);
+});
 
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
@@ -112,7 +121,7 @@ export const productSlice = createSlice({
     builder.addCase(doAddNewProduct.rejected, (state, action) => {
       state.isLoading = false;
     });
-    //
+    //do Get Product By IDUser
     builder.addCase(doGetProductByIDUser.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -120,6 +129,26 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(doGetProductByIDUser.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do Get Product By IDProduct
+    builder.addCase(doGetProductByIDProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetProductByIDProduct.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do patch product
+    builder.addCase(doPatchProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doPatchProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doPatchProduct.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

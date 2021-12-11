@@ -42,6 +42,10 @@ const productApi = {
   //     headers: { 'content-type': 'multipart/form-data' }
   // }
     return await axiosMy.post(url, requestOption );
+  },
+  patchProduct: async (requestOption: any) =>{
+    const url = 'products/patch-product';
+    return await axiosMy.patch(url, requestOption );
   }
 };
 export default productApi;

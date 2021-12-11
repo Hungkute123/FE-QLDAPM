@@ -17,10 +17,10 @@ export const getInfo = createAsyncThunk('user/get-info', async (params: any) => 
   return await userApi.getInfo(params).then((res) => res.data);
 });
 interface IInitialState {
-  isUser: boolean,
-  OTP: string,
-  isAccount: boolean,
-  account: IAccount,
+  isUser: boolean;
+  OTP: string;
+  isAccount: boolean;
+  account: IAccount;
 }
 const initialState = {
   isUser: false,
@@ -51,6 +51,9 @@ export const userSlice = createSlice({
       } else {
         state.isAccount = false;
       }
+    });
+    builder.addCase(getInfo.rejected, (state, action) => {
+      state.isAccount = false;
     });
   },
 });
