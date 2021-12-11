@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { AdminSidebar, ManageCate, ManageReport, ManageUser, SellerReport } from '../../components';
+import {
+  AdminSidebar,
+  ManageCate,
+  ManageReport,
+  ManageUser,
+  SellerReport,
+  CategoryDetail,
+} from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
 
@@ -12,7 +19,7 @@ export const AdminHome = () => {
     if (location.pathname === '/admin/manage-categories') setKindScreen(1);
     if (location.pathname === '/admin/manage-report') setKindScreen(2);
     if (location.pathname === '/admin/sales-report') setKindScreen(3);
-    // if (location.pathname === '/admin/sales-report') setKindScreen(4);
+    if (location.pathname.includes('/admin/category/')) setKindScreen(4);
   }, [location]);
 
   const renderBody = (kind: number) => {
@@ -25,6 +32,8 @@ export const AdminHome = () => {
         return <ManageReport />;
       case 3:
         return <SellerReport />;
+      case 4:
+        return <CategoryDetail />;
       default:
         return <></>;
     }

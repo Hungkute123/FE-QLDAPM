@@ -43,6 +43,16 @@ export const Routers = () => {
           header={Header}
         />
 
+        <PublicRouter
+          path={'/catalogsearch/result'}
+          component={CatalogSearch}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
+
         <PrivateRouter
           path={'/seller/account-balance'}
           component={Seller}
@@ -134,7 +144,7 @@ export const Routers = () => {
         />
       </Switch>
       <Switch>
-        <PrivateRouter
+        <PublicRouter
           path={'/cart'}
           component={Cart}
           layout={HeaderFooterLayout}
@@ -144,8 +154,8 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-        <PrivateRouter
-          path={'/detail-product'}
+        <PublicRouter
+          path={'/:IDProduct'}
           component={Detail}
           layout={HeaderFooterLayout}
           isHasHeader={true}
@@ -286,29 +296,37 @@ export const Routers = () => {
         />
       </Switch>
 
+
       <Switch>
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-user'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/manage-categories'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
+          path={'/admin/category/:IDCategory'}
+          component={AdminHome}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+        />
+        <PublicRouter
           path={'/admin/manage-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}
           isHasHeader={true}
           header={Header}
         />
-        <PrivateRouter
+        <PublicRouter
           path={'/admin/sales-report'}
           component={AdminHome}
           layout={HeaderFooterLayout}
