@@ -30,3 +30,5 @@ export * from './Admin';
 export * from './AdminSidebar/AdminSidebar';
 export * from './ProductView/ProductView';
 export * from './ModalConfirm/ModalConfirm';
+export * from './Helmet/Helmet';
+export * from './CartItem/CartItem';

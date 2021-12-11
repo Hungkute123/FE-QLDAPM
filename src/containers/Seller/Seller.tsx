@@ -9,11 +9,12 @@ import {
   AccountBalance,
   EditProduct,
   DiscountManagement,
+  CreateDiscountCode,
+  CreatePromotion,
+  EditDiscountCode,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
-import { CreateDiscountCode } from '../../components/Seller/CreateDiscountCode/CreateDiscountCode';
-import { CreatePromotion } from '../../components/Seller/CreatePromotion/CreatePromotion';
 
 export const Seller = () => {
   const [kindScreen, setKindScreen] = useState(0);
@@ -25,9 +26,15 @@ export const Seller = () => {
     if (location.pathname === '/seller/product-management') setKindScreen(3);
     if (location.pathname === '/seller/order-management') setKindScreen(4);
     if (location.pathname === '/seller/voucher') setKindScreen(5);
-    if (location.pathname === '/seller/edit-product') setKindScreen(6);
+    if (location.pathname.slice(0, location.pathname.lastIndexOf('/')) === '/seller/edit-product')
+      setKindScreen(6);
     if (location.pathname === '/seller/create-discount-code') setKindScreen(7);
     if (location.pathname === '/seller/create-promotion') setKindScreen(8);
+    if (
+      location.pathname.slice(0, location.pathname.lastIndexOf('/')) ===
+      '/seller/edit-discount-code'
+    )
+      setKindScreen(9);
   }, [location]);
   const renderBody = (kind: number) => {
     switch (kind) {
@@ -49,6 +56,8 @@ export const Seller = () => {
         return <CreateDiscountCode />;
       case 8:
         return <CreatePromotion />;
+      case 9:
+        return <EditDiscountCode />;
       default:
         return <></>;
     }

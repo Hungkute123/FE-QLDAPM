@@ -19,7 +19,12 @@ export const getCategoryProductByIDParentLevelTwo = createAsyncThunk(
     return await categoryApi.getCategoryProductByIDParent(params).then((res) => res.data);
   },
 );
-
+export const getDetailCategoryByID = createAsyncThunk(
+  'category/getDetailCategoryByID',
+  async (params: any) => {
+    return await categoryApi.getDetailCategoryByID(params).then((res) => res.data);
+  },
+);
 export const doGetOneCategory = createAsyncThunk(
   'category/doGetOneCategory',
   async (params: any) => {
@@ -98,7 +103,9 @@ export const categorySlice = createSlice({
       state.categoryLevelTwo.push(action.payload);
     });
 
-    //
+    builder.addCase(getDetailCategoryByID.fulfilled, (state, action) => {
+      state.status = 'success';
+    });
     builder.addCase(doGetOneCategory.pending, (state, action) => {
       state.oneCategory = {};
     });
