@@ -35,7 +35,7 @@ export const AccountHeader = () => {
   const handleLogout = () =>{
     window.localStorage.clear();
     history.push({
-      pathname: `/account/`,
+      pathname: `/account`,
     });
   }
   return (
