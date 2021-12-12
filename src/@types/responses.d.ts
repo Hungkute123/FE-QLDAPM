@@ -9,3 +9,10 @@ interface IResponseCountSearchProduct {
   message: string;
   Path: string;
 }
+
+interface IStatistic {
+  IDYear: string;
+  IDMonth: string;
+  CountUserRegister: number;
+  CountOrder: number;
+}

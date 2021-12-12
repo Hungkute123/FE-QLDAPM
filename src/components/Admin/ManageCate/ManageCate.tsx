@@ -21,6 +21,7 @@ import {
   getCategoryProductByLevelZero,
 } from '../../../redux';
 import { Form } from 'react-bootstrap';
+import { Button as Button2 } from 'react-bootstrap';
 
 const headCells: readonly HeadCell[] = [
   {
@@ -224,15 +225,33 @@ export const ManageCate = () => {
         )}
       </Paper>
 
-      <Form.Select
-        style={{ position: 'absolute', top: 20, right: 20, width: '300px' }}
-        aria-label="Chọn cấp của danh mục"
-        onChange={handleOnChangeSelect}
+      <div
+        style={{
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          top: 20,
+          right: 20,
+          width: '500px',
+        }}
       >
-        <option value="0">Danh mục cấp 1</option>
-        <option value="1">Danh mục cấp 2</option>
-        <option value="2">Danh mục cấp 3</option>
-      </Form.Select>
+        <Button2
+          onClick={() => history.push('/admin/category/0')}
+          style={{ marginRight: '10px' }}
+          variant="success"
+        >
+          Thêm danh mục
+        </Button2>
+        <Form.Select
+          style={{ width: '300px' }}
+          aria-label="Chọn cấp của danh mục"
+          onChange={handleOnChangeSelect}
+        >
+          <option value="0">Danh mục cấp 1</option>
+          <option value="1">Danh mục cấp 2</option>
+          <option value="2">Danh mục cấp 3</option>
+        </Form.Select>
+      </div>
     </Box>
   );
 };
