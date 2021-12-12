@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
-import { Col, Row, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import './UserInfo.scss';
+
+import { Col, Row, Form, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+
+import { RootState } from '../../redux/rootReducer';
+import { useAppDispatch, useAppSelector } from '../../redux';
+import {
+  addInformationVAT,
+  getInformationVAT,
+  updateInfo,
+} from '../../redux/slice/appSlice/userSlice';
 
 interface Input {
   title: string;
@@ -8,17 +18,23 @@ interface Input {
   value: string | number | boolean | undefined;
   func: Object | any;
   type: string;
+  required: boolean;
 }
 
 export const UserInfo = () => {
+  // useAppDispatch
+  const dispatch = useAppDispatch();
+
+  // useSelector
+  const userInfo = useAppSelector((state: RootState) => state.userSlice.account);
+
   // State Info
-  const [surName, setSurName] = useState('');
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('Nữ');
-  const [birthday, setBirthday] = useState('');
-  const [vip, setVip] = useState('');
+  const [surName, setSurName] = useState(userInfo.FirstName);
+  const [name, setName] = useState(userInfo.LastName);
+  const [phone, setPhone] = useState(userInfo.PhoneNumber);
+  const [gender, setGender] = useState(userInfo.Gender);
+  const [birthday, setBirthday] = useState(userInfo.DateOfBirth);
+  const [vip, setVip] = useState(userInfo.Vip);
   const [changePass, setChangePass] = useState(false);
   const [passOld, setPassOld] = useState('');
   const [passNew, setPassNew] = useState('');
@@ -31,14 +47,28 @@ export const UserInfo = () => {
   const [tax, setTax] = useState('');
   const [emailOrder, setEmailOrder] = useState('');
 
+  const fetchInformation = async () => {
+    const informationVAT = (await dispatch(getInformationVAT({ jwt: localStorage.getItem('jwt') }))).payload.data;
+    setNameOrder(informationVAT.Name);
+    setNameCompany(informationVAT.CompanyName);
+    setAddressCompany(informationVAT.CompanyAddress);
+    setTax(informationVAT.CompanyCode);
+    setEmailOrder(informationVAT.CompanyEmail);
+  }
+
+  // useEffect
+  useEffect(() => {
+    fetchInformation();
+  }, []);
+
   // Function Create Input
-  const fInput = ({ title, placeholder, value, func, type }: Input) => {
+  const fInput = ({ title, placeholder, value, func, type, required }: Input) => {
     return (
       <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
         <Form.Label column sm="2">
           {title}
         </Form.Label>
-        {['text', 'email', 'date', 'number', 'password'].includes(type) ? (
+        {['text', 'date', 'number', 'password'].includes(type) ? (
           <Col sm="10">
             <Form.Control
               type={type}
@@ -48,11 +78,13 @@ export const UserInfo = () => {
               isValid={value == '' ? false : true}
               onChange={(e) => func(e.target.value)}
               value={value as number | string[] | undefined}
+              required={required}
             />
           </Col>
         ) : (
           ''
         )}
+
         {type == 'select' ? (
           <Col sm="10">
             <Form.Control
@@ -64,13 +96,14 @@ export const UserInfo = () => {
               onChange={(e) => func(e.target.value)}
               value={value as number | string[] | undefined}
             >
-              <option value="girl">Nữ</option>
-              <option value="boy">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Nam">Nam</option>
             </Form.Control>
           </Col>
         ) : (
           ''
         )}
+
         {type == 'checkbox' ? (
           <Col sm="10">
             <Form.Check
@@ -84,8 +117,131 @@ export const UserInfo = () => {
         ) : (
           ''
         )}
+
+        {type == 'email' ? (
+          <Col sm="10">
+            <Form.Control
+              type={type}
+              size="sm"
+              value={value as number | string[] | undefined}
+              disabled
+            />
+          </Col>
+        ) : (
+          ''
+        )}
       </Form.Group>
     );
+  };
+
+  // Xu Ly Luu Thong Ca Nhan
+  const handleSaveInfo = async (e: any) => {
+    e.preventDefault();
+
+    const user = {
+      Email: userInfo.Email,
+      FirstName: surName,
+      LastName: name,
+      PhoneNumber: phone,
+      DateOfBirth: birthday,
+      Gender: gender,
+      Vip: vip,
+    };
+
+    const key = {
+      IDUser: userInfo.IDUser,
+    };
+
+    if (changePass) {
+      if (passNew != rePass) {
+        Swal.fire({
+          icon: 'error',
+          title: 'MẬT KHẨU KHÔNG TRÙNG KHỚP',
+        });
+
+        return;
+      }
+
+      const userPass = {
+        ...user,
+        Password: passNew,
+      };
+
+      const keyPass = {
+        ...key,
+        Password: passOld,
+      };
+
+      const status = (
+        await dispatch(
+          updateInfo({ jwt: localStorage.getItem('jwt'), key: keyPass, user: userPass }),
+        )
+      ).payload.data;
+
+      if (status) {
+        Swal.fire({
+          icon: 'success',
+          title: 'CẬP NHẬT THÔNG TIN THÀNH CÔNG',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'CẬP NHẬT THÔNG TIN THẤT BẠI',
+        });
+      }
+
+      return;
+    }
+
+    const status = (
+      await dispatch(updateInfo({ jwt: localStorage.getItem('jwt'), key: key, user: user }))
+    ).payload.data;
+
+    if (status) {
+      Swal.fire({
+        icon: 'success',
+        title: 'CẬP NHẬT THÔNG TIN THÀNH CÔNG',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'CẬP NHẬT THÔNG TIN THẤT BẠI',
+      });
+    }
+  };
+
+  // Xu Ly Luu Thong Tin Hoa Don GTGT
+  const handleAddInformationVAT = async (e: any) => {
+    e.preventDefault();
+
+    const information = {
+      IDUser: userInfo.IDUser,
+      Name: nameOrder,
+      CompanyName: nameCompany,
+      CompanyAddress: addressCompany,
+      CompanyCode: tax,
+      CompanyEmail: emailOrder,
+    };
+
+    console.log(information);
+
+    const status = (
+      await dispatch(
+        addInformationVAT({ jwt: localStorage.getItem('jwt'), Information: information }),
+      )
+    ).payload.data;
+
+    if (status) {
+      Swal.fire({
+        icon: 'success',
+        title: 'CẬP NHẬT THÔNG TIN XUẤT HÓA ĐƠN GTGT THÀNH CÔNG',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'CẬP NHẬT THÔNG TIN XUẤT HÓA ĐƠN GTGT THẤT BẠI',
+      });
+    }
   };
 
   return (
@@ -95,13 +251,14 @@ export const UserInfo = () => {
           <div className="info__title">
             <h1>Thông tin tài khoản</h1>
           </div>
-          <Form key="info_account">
+          <Form key="info_account" onSubmit={handleSaveInfo} id="form_info" name="form_info">
             {fInput({
               title: 'Họ*',
               placeholder: 'Nhập họ',
               value: surName,
               func: setSurName,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Tên*',
@@ -109,6 +266,7 @@ export const UserInfo = () => {
               value: name,
               func: setName,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Số điện thoại',
@@ -116,13 +274,15 @@ export const UserInfo = () => {
               value: phone,
               func: setPhone,
               type: 'number',
+              required: true,
             })}
             {fInput({
               title: 'Email',
-              placeholder: 'Chưa có email',
-              value: email,
-              func: setEmail,
+              placeholder: '',
+              value: userInfo.Email,
+              func: '',
               type: 'email',
+              required: true,
             })}
             {fInput({
               title: 'Giới tính*',
@@ -130,6 +290,7 @@ export const UserInfo = () => {
               value: gender,
               func: setGender,
               type: 'select',
+              required: true,
             })}
             {fInput({
               title: 'Ngày sinh*',
@@ -137,6 +298,7 @@ export const UserInfo = () => {
               value: birthday,
               func: setBirthday,
               type: 'date',
+              required: true,
             })}
             {fInput({
               title: 'Vip',
@@ -144,6 +306,7 @@ export const UserInfo = () => {
               value: vip,
               func: setVip,
               type: 'text',
+              required: false,
             })}
 
             {fInput({
@@ -152,6 +315,7 @@ export const UserInfo = () => {
               value: changePass,
               func: setChangePass,
               type: 'checkbox',
+              required: false,
             })}
 
             <div className={`${changePass ? 'info__show' : 'info__hide'}`}>
@@ -161,6 +325,7 @@ export const UserInfo = () => {
                 value: passOld,
                 func: setPassOld,
                 type: 'password',
+                required: false,
               })}
               {fInput({
                 title: 'Mật khẩu mới*',
@@ -168,6 +333,7 @@ export const UserInfo = () => {
                 value: passNew,
                 func: setPassNew,
                 type: 'password',
+                required: false,
               })}
               {fInput({
                 title: 'Nhập lại mật khẩu mới*',
@@ -175,10 +341,13 @@ export const UserInfo = () => {
                 value: rePass,
                 func: setRePass,
                 type: 'password',
+                required: false,
               })}
             </div>
             <div className="info__btn">
-              <Button variant="danger">Lưu thay đổi</Button>
+              <Button variant="danger" type="submit">
+                Lưu thay đổi
+              </Button>
             </div>
           </Form>
         </div>
@@ -189,13 +358,19 @@ export const UserInfo = () => {
           <div className="info__title">
             <h1>Thông tin xuất hóa đơn GTGT</h1>
           </div>
-          <Form key="info_account">
+          <Form
+            key="info_account"
+            id="form_gtgt"
+            name="form_gtgt"
+            onSubmit={handleAddInformationVAT}
+          >
             {fInput({
               title: 'Họ tên người mua hàng',
               placeholder: 'Nhập họ tên người mua hàng',
               value: nameOrder,
               func: setNameOrder,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Tên công ty',
@@ -203,6 +378,7 @@ export const UserInfo = () => {
               value: nameCompany,
               func: setNameCompany,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Địa chỉ công ty',
@@ -210,6 +386,7 @@ export const UserInfo = () => {
               value: addressCompany,
               func: setAddressCompany,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Mã số thuế công ty',
@@ -217,6 +394,7 @@ export const UserInfo = () => {
               value: tax,
               func: setTax,
               type: 'text',
+              required: true,
             })}
             {fInput({
               title: 'Email nhận hóa đơn',
@@ -224,9 +402,12 @@ export const UserInfo = () => {
               value: emailOrder,
               func: setEmailOrder,
               type: 'text',
+              required: true,
             })}
             <div className="info__btn">
-              <Button variant="danger">Lưu thay đổi</Button>
+              <Button variant="danger" type="submit">
+                Lưu thay đổi
+              </Button>
             </div>
           </Form>
         </div>

@@ -17,6 +17,26 @@ const userApi = {
     const url = `user/get-info`;
     return await axiosMy.get(url, { params });
   },
+  updateInfo: async (requestOption: any) =>{
+    const url = 'user/update-info';
+    return await axiosMy.patch(url, requestOption );
+  },
+  addInformationVAT: async (requestOption: any) =>{
+    const url = 'user/add-information-vat';
+    return await axiosMy.post(url, requestOption );
+  },
+  getInformationVAT: async (params: any) => {
+    const url = `user/get-information-vat`;
+    return await axiosMy.get(url, { params });
+  },
+  addUserAddress: async (requestOption: any) =>{
+    const url = 'user/add-user-address';
+    return await axiosMy.post(url, requestOption );
+  },
+  updateUserAddress: async (requestOption: any) =>{
+    const url = 'user/update-user-address';
+    return await axiosMy.patch(url, requestOption );
+  },
 
   getAllUser: async () => {
     const url = `user/get-all-user`;
