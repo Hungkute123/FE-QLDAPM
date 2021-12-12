@@ -6,6 +6,7 @@ import modalSlice from '../slice/appSlice/modalSlice';
 import productSlice from '../slice/appSlice/productSlice';
 import userSlice from '../slice/appSlice/userSlice';
 import statisticSlice from '../slice/appSlice/statisticSlice';
+import cartSlice from "../slice/appSlice/cartSlice";
 
 export const rootReducer = combineReducers({
   modalSlice,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   userSlice,
   discountSlice,
   statisticSlice,
+  cartSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

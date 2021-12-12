@@ -9,22 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import productApi from '../../services/aixos/productApi';
 import { RootState } from '../../redux/rootReducer';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { addProduct } from '../../redux';
 export const ProductView = () => {
     const [quantity, setQuantity] = useState(1);
     const productId = useParams();
-    // console.log(productId);
-    // const dispatch = useDispatch();
-    // const product = useSelector((state: RootState) => state.productSlice); 
-    // useEffect(() => {
-    //     dispatch(doGetProductByIDProduct(productId))
-    // }, [dispatch]);
-    // console.log("product: ", product);
-   
-    
-    // useEffect(async()  {
-    //     const res =  await productApi.getProductByIDProduct(productId);
-    //     console.log(res);
-    // },[]);
     useEffect(() => {
         async function fetchMyAPI() {
           let response = await productApi.getProductByIDProduct(productId)
@@ -38,7 +27,13 @@ export const ProductView = () => {
       }, [])
     const [product, setProduct] = useState<any>({});
     const [path, setPath] = useState();
+    const dispatch = useDispatch();
     
+    const handleClick = () => {
+        dispatch(
+            addProduct({product, quantity, path: path})
+        );
+    };
     return (
         <div className="product">
             <div className="product__images">
@@ -77,7 +72,7 @@ export const ProductView = () => {
                    <div className="product__info__item__title">Số lượng: {product.Quantity}</div>    
                </div>
                <div className="product__info__item">
-                        <Button>Thêm vào giỏ</Button>
+                        <Button onClick={handleClick}>Thêm vào giỏ</Button>
                         <Button>Mua ngay</Button>
                 </div>
             </div>
