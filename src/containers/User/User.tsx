@@ -27,7 +27,7 @@ export const User = () => {
       <div className="account">
         <Row>
           <Col lg={3} md={3}>
-            <UserSidebar current={index}></UserSidebar>
+            <UserSidebar current={index} key={index}></UserSidebar>
           </Col>
           <Col lg={9} md={9}>
             {children}
