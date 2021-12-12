@@ -119,11 +119,12 @@ export const userSlice = createSlice({
       state.status = action.payload.data;
       state.message = action.payload.message;
     });
-
+    builder.addCase(getInfo.rejected, (state, action) => {
+      state.isAccount = false;
+    });
     builder.addCase(doGetAllUser.fulfilled, (state, action) => {
       state.listUser = action.payload.data;
     });
-
     builder.addCase(doChangeActiveUser.fulfilled, (state, action) => {
       const userid = action.payload.data;
 

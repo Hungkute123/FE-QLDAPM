@@ -31,7 +31,7 @@ export const CreateDiscountCode = () => {
     const startTime = start.getTime();
     const end = new Date(e.target.elements.end_time.value);
     const endTime = end.getTime();
-    const local = new Date().getTime();
+    const localTime = new Date().getTime();
     if (endTime - startTime <= 0) {
       Swal.fire({
         icon: 'error',
@@ -39,7 +39,7 @@ export const CreateDiscountCode = () => {
       });
       return;
     }
-    if (endTime - local <= 0) {
+    if (endTime - localTime <= 0) {
       Swal.fire({
         icon: 'error',
         title: 'Thời gian kết thúc không thể sau thời gian hiện tại',

@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const Helmet = props => {
+export const Helmet = () => {
 
-    document.title = 'Fahasa - ' + props.title
+    document.title = 'Fahasa - ' 
 
     return (
         <div>
-            {props.children}
+           
         </div>
     )
 }

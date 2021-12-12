@@ -24,7 +24,7 @@ import { useHistory } from 'react-router-dom';
 
 export const AddNewProduct = () => {
   const dispatch = useAppDispatch();
-  const history  = useHistory()
+  const history = useHistory();
   const [categoryLevelOne, SetCategoryLeveOne] = useState([]);
   const [categoryLevelTwo, SetCategoryLeveTwo] = useState([]);
   const [categoryLevelThree, SetCategoryLeveThree] = useState([]);
@@ -43,7 +43,13 @@ export const AddNewProduct = () => {
   const [selectedFileThree, setSelectedFileThree] = useState();
   const [preview, setPreview] = useState('');
   const [contentEditor, setContentEditor] = useState();
-  const {account} = useSelector((state: RootState) => state.userSlice);
+  const [coverImage, setCoverImage] = useState('');
+  const [imageOne, setImageOne] = useState('');
+  const [imageTwo, setImageTwo] = useState('');
+  const [imageThree, setImageThree] = useState('');
+  const [isSpinnerOne, setIsSpinnerOne] = useState(false);
+  const [isSpinnerTwo, setIsSpinnerTwo] = useState(false);
+  const { account } = useSelector((state: RootState) => state.userSlice);
   const editorRef = useRef(null);
   useEffect(() => {
     const getCategoryLevelZero = async () => {
@@ -69,49 +75,103 @@ export const AddNewProduct = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('id_user', String(account.IDUser));
-    formData.append('id_category', String(idCategory));
-    formData.append('product_name', e.target.elements.product_name.value);
-    formData.append('cover_image', selectedFile);
-    formData.append('image_one', selectedFileOne);
-    formData.append('image_two', selectedFileTwo);
-    formData.append('image_three', selectedFileThree);
-    formData.append('product_price', e.target.elements.product_price.value);
-    formData.append('product_discount', e.target.elements.product_discount.value);
-    formData.append('product_weight', e.target.elements.product_weight.value);
-    formData.append(
-      'product_package_size',
-      String(e.target.elements.product_width.value) +
+    //-------------use formData with multer---------------------
+    // const formData = new FormData();
+    // formData.append('id_user', String(account.IDUser));
+    // formData.append('id_category', String(idCategory));
+    // formData.append('product_name', e.target.elements.product_name.value);
+    // formData.append('cover_image', selectedFile);
+    // formData.append('image_one', selectedFileOne);
+    // formData.append('image_two', selectedFileTwo);
+    // formData.append('image_three', selectedFileThree);
+    // formData.append('product_price', e.target.elements.product_price.value);
+    // formData.append('product_discount', e.target.elements.product_discount.value);
+    // formData.append('product_weight', e.target.elements.product_weight.value);
+    // formData.append(
+    //   'product_package_size',
+    //   String(e.target.elements.product_width.value) +
+    //     'x' +
+    //     String(e.target.elements.product_length.value) +
+    //     'x' +
+    //     String(e.target.elements.product_height.value),
+    // );
+    // formData.append('product_quantity', e.target.elements.product_quantity.value);
+    // formData.append('description', contentEditor);
+    // if (isBook === true) {
+    //   formData.append('type_product', 'Book');
+    //   formData.append('product_author', e.target.elements.product_author.value);
+    //   formData.append('product_supplier', e.target.elements.product_supplier.value);
+    //   formData.append(
+    //     'product_publishing_company',
+    //     e.target.elements.product_publishing_company.value,
+    //   );
+    //   formData.append('product_cover_form', e.target.elements.product_cover_form.value);
+    //   formData.append('product_translator', e.target.elements.product_translator.value);
+    //   formData.append('product_publishing_year', e.target.elements.product_publishing_year.value);
+    //   formData.append('product_number_of_page', e.target.elements.product_number_of_page.value);
+    // } else {
+    //   formData.append('type_product', 'Item');
+    //   formData.append('product_origin', e.target.elements.product_origin.value);
+    //   formData.append('product_trademark', e.target.elements.product_trademark.value);
+    //   formData.append('product_processing_place', e.target.elements.product_processing_place.value);
+    //   formData.append('product_color', e.target.elements.product_color.value);
+    //   formData.append('product_material', e.target.elements.product_material.value);
+    // }
+    // formData.append('status', String(status));
+    //-------------use base64EncodedImage with cloudinary---------------------
+    if(status === 0){
+      setIsSpinnerOne(true)
+    }else{
+      setIsSpinnerTwo(true)
+    }
+    let typeProduct;
+    if (isBook === true) {
+      typeProduct = {
+        type_product: 'Book',
+        product_author: e.target.elements.product_author.value,
+        product_supplier: e.target.elements.product_supplier_book.value,
+        product_publishing_company: e.target.elements.product_publishing_company.value,
+        product_cover_form: e.target.elements.product_cover_form.value,
+        product_translator: e.target.elements.product_translator.value,
+        product_publishing_year: e.target.elements.product_publishing_year.value,
+        product_number_of_page: e.target.elements.product_number_of_page.value,
+      };
+    } else {
+      typeProduct = {
+        type_product: 'Item',
+        product_origin: e.target.elements.product_origin.value,
+        product_supplier: e.target.elements.product_supplier_item.value,
+        product_trademark: e.target.elements.product_trademark.value,
+        product_processing_place: e.target.elements.product_processing_place.value,
+        product_color: e.target.elements.product_color.value,
+        product_material: e.target.elements.product_material.value,
+      };
+    }
+    const formData = {
+      id_user: String(account.IDUser),
+      id_category: String(idCategory),
+      product_name: e.target.elements.product_name.value,
+      cover_image: coverImage,
+      image_one: imageOne,
+      image_two: imageTwo,
+      image_three: imageThree,
+      product_price: e.target.elements.product_price.value,
+      product_discount: e.target.elements.product_discount.value,
+      product_weight: e.target.elements.product_weight.value,
+      product_package_size:
+        String(e.target.elements.product_width.value) +
         'x' +
         String(e.target.elements.product_length.value) +
         'x' +
         String(e.target.elements.product_height.value),
-    );
-    formData.append('product_quantity', e.target.elements.product_quantity.value);
-    formData.append('description', contentEditor);
-    if (isBook === true) {
-      formData.append('type_product', 'Book');
-      formData.append('product_author', e.target.elements.product_author.value);
-      formData.append('product_supplier', e.target.elements.product_supplier.value);
-      formData.append(
-        'product_publishing_company',
-        e.target.elements.product_publishing_company.value,
-      );
-      formData.append('product_cover_form', e.target.elements.product_cover_form.value);
-      formData.append('product_translator', e.target.elements.product_translator.value);
-      formData.append('product_publishing_year', e.target.elements.product_publishing_year.value);
-      formData.append('product_number_of_page', e.target.elements.product_number_of_page.value);
-    } else {
-      formData.append('type_product', 'Item');
-      formData.append('product_origin', e.target.elements.product_origin.value);
-      formData.append('product_trademark', e.target.elements.product_trademark.value);
-      formData.append('product_processing_place', e.target.elements.product_processing_place.value);
-      formData.append('product_color', e.target.elements.product_color.value);
-      formData.append('product_material', e.target.elements.product_material.value);
-    }
-    formData.append('status', String(status));
+      product_quantity: e.target.elements.product_quantity.value,
+      description: contentEditor,
+      ...typeProduct,
+      status: String(status),
+    };
     const isSucccess = (await dispatch(doAddNewProduct(formData))).payload;
+    setIsSpinnerOne(false);
+    setIsSpinnerTwo(false);
     if (isSucccess.data === true) {
       Swal.fire({
         icon: 'success',
@@ -183,6 +243,11 @@ export const AddNewProduct = () => {
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
+    const readerCoverImage = new FileReader();
+    readerCoverImage.readAsDataURL(selectedFile);
+    readerCoverImage.onloadend = () => {
+      setCoverImage(String(readerCoverImage.result));
+    };
 
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
@@ -205,7 +270,11 @@ export const AddNewProduct = () => {
 
     const objectUrl = URL.createObjectURL(selectedFileOne);
     setPreviewOne(objectUrl);
-
+    const readerImageOne = new FileReader();
+    readerImageOne.readAsDataURL(selectedFileOne);
+    readerImageOne.onloadend = () => {
+      setImageOne(String(readerImageOne.result));
+    };
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFileOne]);
@@ -227,7 +296,11 @@ export const AddNewProduct = () => {
 
     const objectUrl = URL.createObjectURL(selectedFileTwo);
     setPreviewTwo(objectUrl);
-
+    const readerImageTwo = new FileReader();
+    readerImageTwo.readAsDataURL(selectedFileTwo);
+    readerImageTwo.onloadend = () => {
+      setImageTwo(String(readerImageTwo.result));
+    };
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFileTwo]);
@@ -249,7 +322,11 @@ export const AddNewProduct = () => {
 
     const objectUrl = URL.createObjectURL(selectedFileThree);
     setPreviewThree(objectUrl);
-
+    const readerImageThree = new FileReader();
+    readerImageThree.readAsDataURL(selectedFileThree);
+    readerImageThree.onloadend = () => {
+      setImageThree(String(readerImageThree.result));
+    };
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFileThree]);
@@ -469,7 +546,7 @@ export const AddNewProduct = () => {
                 tagName="description"
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 init={{
-                  selector: 'textarea',
+                  //selector: 'textarea',
                   height: 400,
                   placeholder: 'Nhập mô tả sản phẩm của bạn',
                   plugins: 'paste image link autolink lists table media',
@@ -627,12 +704,27 @@ export const AddNewProduct = () => {
               </div>
               <FormBook required={isBook}></FormBook>
               <div className="add-new-product__btn">
-                <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
-                  Lưu & Ẩn
-                </Button>
-                <Button variant="danger" type="submit" onClick={() => SetStatus(1)}>
-                  Lưu & Hiển thị
-                </Button>
+              {isSpinnerOne === false ? (
+             <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
+             Lưu & Ẩn
+           </Button>
+            ) : (
+              <Button variant="primary" disabled>
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                Lưu & Ẩn
+              </Button>
+            )}
+             {isSpinnerTwo === false ? (
+              <Button variant="danger" type="submit" onClick={() => SetStatus(1)}>
+              Lưu & Hiển thị
+            </Button>
+            ) : (
+              <Button variant="primary" disabled>
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                Lưu & Hiển thị
+              </Button>
+            )}
+               
               </div>
             </div>
           </div>
@@ -645,12 +737,26 @@ export const AddNewProduct = () => {
               </div>
               <FormItem required={isItem}></FormItem>
               <div className="add-new-product__btn">
-                <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
-                  Lưu & Ẩn
-                </Button>
-                <Button variant="danger" type="submit" onClick={() => SetStatus(1)}>
-                  Lưu & Hiển thị
-                </Button>
+              {isSpinnerOne === false ? (
+             <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
+             Lưu & Ẩn
+           </Button>
+            ) : (
+              <Button variant="primary" disabled>
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                Lưu & Ẩn
+              </Button>
+            )}
+             {isSpinnerTwo === false ? (
+              <Button variant="danger" type="submit" onClick={() => SetStatus(1)}>
+              Lưu & Hiển thị
+            </Button>
+            ) : (
+              <Button variant="primary" disabled>
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                Lưu & Hiển thị
+              </Button>
+            )}
               </div>
             </div>
           </div>

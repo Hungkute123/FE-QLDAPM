@@ -62,9 +62,9 @@ export const SellerSideBar = ({ current }: Sidebar) => {
         <div className="nav-online__content">
           <div className="nav-online__left">
             <Col sm={12}>
-              {social.map((item) => {
+              {social.map((item,move) => {
                 return (
-                  <Link target="_blank" to={item.href} title={item.title}>
+                  <Link key={move} target="_blank" to={item.href} title={item.title}>
                     <img alt="Facebook" src={item.src} style={{ width: '30px', height: 'auto' }} />
                   </Link>
                 );

@@ -31,8 +31,29 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     &__head {
-      background-color: #f2f3f7;
       font-weight: 600;
+    }
+  }
+  &__pagination {
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-evenly;
+    -ms-flex-pack: justify;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding: 0 15rem;
+    a {
+      border-radius: 7px;
+      padding: 0.1rem 1rem;
+      border: gray 1px solid;
+      cursor: pointer;
     }
   }
 }
