@@ -4,3 +4,4 @@ export * from './appSlice/productSlice';
 export * from './appSlice/favoriteSlice';
 export * from './appSlice/discountSlice';
 export * from './appSlice/userSlice';
+export * from './appSlice/statisticSlice';

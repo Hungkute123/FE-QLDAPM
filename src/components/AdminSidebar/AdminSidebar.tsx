@@ -31,8 +31,8 @@ export const AdminSidebar = ({ current }: Sidebar) => {
   const [itemNav, setItemNav] = useState([
     { href: '/admin/manage-user', title: 'Quản lý tài khoản người dùng' },
     { href: '/admin/manage-categories', title: 'Quản lý gian hàng' },
-    { href: '/admin/manage-report', title: 'Danh sách báo cáo' },
-    { href: '/admin/sales-report', title: 'Thống kê hệ thống' },
+    { href: '/admin/manage-report', title: 'Thống kê số lượng bán hàng' },
+    { href: '/admin/sales-report', title: 'Thống kê lượt đăng ký mới' },
   ]);
 
   return (
