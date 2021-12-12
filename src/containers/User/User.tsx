@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './User.scss';
 
 import {
@@ -20,7 +20,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
 
 export const User = () => {
-  const location = useLocation();
+  const location = useLocation().pathname;
 
   const renderLayout = (children: any, index: number) => {
     return (
@@ -37,163 +37,31 @@ export const User = () => {
     );
   };
 
-  switch (location.pathname) {
+  switch (location) {
     case '/account':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={0}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserDashboard></UserDashboard>
-            </Col>
-          </Row>
-        </div>
-      );
+      return renderLayout(<UserDashboard></UserDashboard>, 0);
     case '/account/edit':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={1}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserInfo></UserInfo>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
+      return renderLayout(<UserInfo></UserInfo>, 1);
     case '/account/address':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={2}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserAddress></UserAddress>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
+      return renderLayout(<UserAddress></UserAddress>, 2);
     case '/account/address/edit':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={2}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserCreateAddress></UserCreateAddress>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
+      return renderLayout(<UserCreateAddress></UserCreateAddress>, 2);
     case '/account/order':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={3}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserOrder></UserOrder>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
+      return renderLayout(<UserOrder></UserOrder>, 3);
     case '/account/voucher':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={4}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserVoucher></UserVoucher>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/account/seriesbook':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={6}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserSeriesBook></UserSeriesBook>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/account/history':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={7}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserHistory></UserHistory>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/account/review':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={8}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserReview></UserReview>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/account/notification':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={9}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserNotification></UserNotification>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
-    case '/account/newsletter':
-      return (
-        <div className="account">
-          <Row>
-            <Col lg={3} md={3}>
-              <UserSidebar current={10}></UserSidebar>
-            </Col>
-            <Col lg={9} md={9}>
-              <UserNewsLetter></UserNewsLetter>
-            </Col>
-          </Row>
-        </div>
-      );
-      break;
+      return renderLayout(<UserVoucher></UserVoucher>, 4);
     case '/wishlist':
       return renderLayout(<Wishlist></Wishlist>, 5);
-      break;
+    case '/account/seriesbook':
+      return renderLayout(<UserSeriesBook></UserSeriesBook>, 6);
+    case '/account/history':
+      return renderLayout(<UserHistory></UserHistory>, 7);
+    case '/account/review':
+      return renderLayout(<UserReview></UserReview>, 8);
+    case '/account/notification':
+      return renderLayout(<UserNotification></UserNotification>, 9);
+    case '/account/newsletter':
+      return renderLayout(<UserNewsLetter></UserNewsLetter>, 10);
     default:
       return <div></div>;
   }
