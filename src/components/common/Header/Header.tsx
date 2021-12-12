@@ -8,6 +8,7 @@ import { AccountHeader } from '../../AccountHeader/AccountHeader';
 import { ChooseLanguage } from '../../ChooseLanguage/ChooseLanguage';
 import { getQueryStringValue } from '../../../helpers';
 
+
 export const Header = () => {
   const history = useHistory();
   const location = useLocation();
@@ -33,7 +34,7 @@ export const Header = () => {
       setTextSearch(getQueryStringValue('text'));
     }
   }, [location]);
-
+  
   return (
     <div className="header">
       <div className="advertisement">

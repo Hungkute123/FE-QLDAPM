@@ -6,7 +6,7 @@ export const CardProduct: React.FC<ICardProduct> = ({ price, title, thumbnail, p
   const history = useHistory();
   const handleClick = () => {
     console.log(Id, price);
-    history.push(`/${Id}`);
+    history.push(`/product-detail/${Id}`);
     
   }
   return (
