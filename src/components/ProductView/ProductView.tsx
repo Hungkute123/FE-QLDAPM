@@ -16,69 +16,123 @@ export const ProductView = () => {
     const productId = useParams();
     useEffect(() => {
         async function fetchMyAPI() {
-          let response = await productApi.getProductByIDProduct(productId)
-          setProduct(response.data.data[0]); 
-          console.log("response", response);
-            
-          setPath(response.data.Path)   
+            let response = await productApi.getProductByIDProduct(productId)
+            setProduct(response.data.data[0]);
+            console.log("response", response);
+
+            setPath(response.data.Path)
         }
-    
+
         fetchMyAPI()
-      }, [])
+    }, [])
     const [product, setProduct] = useState<any>({});
     const [path, setPath] = useState();
     const dispatch = useDispatch();
-    
+
     const handleClick = () => {
         dispatch(
-            addProduct({product, quantity, path: path})
+            addProduct({ product, quantity, path: path })
         );
     };
     return (
-        <div className="product">
-            <div className="product__images">
-                <div className="product__images__list">
-                    <div className="product__images__list__item">
-                        <img src={`${path}${product.SubImageOne}`} alt="" />
-                    </div>
-                    <div className="product__images__list__item">
-                        <img src={`${path}${product.SubImageTwo}`} alt="" />
-                    </div>
-                    <div className="product__images__list__item">
-                        <img src={`${path}${product.SubImageThree}`} alt="" />
-                    </div>
-                </div>
-                <div className="product__images__main">
-                    <img src={`${path}${product.Image}`} alt="" />
-                </div>
-            </div>
-            <div className="product__info">
-               <h1 className="product__info__title">{product.NameProduct}</h1>
-               <div className="product__info__item">
-                   <span className="product__info__item__price">
-                       {product.Price}
-                   </span>
-               </div>
-               <div className="product__info__item">
-                   <div className="product__info__item__title">Nhà xuất bản: {product.PublishingCompany}</div>                   
-               </div>
-               <div className="product__info__item">
-                   <div className="product__info__item__title">Tác giả: {product.Author}</div>
-               </div>
-               <div className="product__info__item">
-                   <div className="product__info__item__title">Hình thức bìa: {product.CoverForm}</div>
-               </div>
-               <div className="product__info__item">
-                   <div className="product__info__item__title">Số lượng: {product.Quantity}</div>    
-               </div>
-               <div className="product__info__item">
-                        <Button onClick={handleClick}>Thêm vào giỏ</Button>
-                        <Button>Mua ngay</Button>
-                </div>
-            </div>
-            
+        <div className="product-view kasitoo">
+            <div className="product-essential">
+                <div className="product-essential-media">
+                <div className="product-view-image">
+                    <div className="product-view-thumbnail">
+                        <div className="lightgallery">
+                            <a className="include-in-gallery" id="lightgallery-item-0">
+                                <img src={`${path}${product.SubImageOne}`} alt="" />
+				            </a> 
+                        
+                            <a className="include-in-gallery" id="lightgallery-item-1">
+                            <img src={`${path}${product.SubImageTwo}`} alt="" />
+				            </a> 
 
-        </div>
+                            <a className="include-in-gallery" id="lightgallery-item-2">
+                            <img src={`${path}${product.SubImageThree}`} alt="" />
+				            </a> 
+                        </div>
+                    </div>
+                    <div className="product-view-image-product">
+                        <img id="image" className='fhs-p-img' src={`${path}${product.Image}`} alt="" />
+                    </div>
+                    <div className="clear"></div>
+                </div>
+                <div className="product_view_add_box">
+                    <button type="button" title='Thêm vào giỏ hàng' className='btn-cart-to-cart'>
+                        <span className='fhs_icon_cart'></span>
+                        <span>Thêm vào giỏ hàng</span>
+                    </button>
+                    <button type="button" title='Mua ngay' className='btn-buy-now'>
+                        <span>Mua ngay</span>
+                    </button>
+                </div>
+                </div>
+                <div className="product-essential-detail">
+                    <h1>
+                        {product.NameProduct} 
+                    </h1>
+                    <div className="product-view-sa">
+                        <div className="product-view-sa_one">
+                            <div className="product-view-sa-supplier">
+                                <span>Nhà cung cấp: </span>
+                                <a href="">{product.PublishingCompany}</a>
+                            </div>
+                            <div className="product-view-sa-author">
+                                <span>Tác giả: </span>
+                                <a href="">{product.Author}</a>
+                            </div>
+                        </div>
+                        <div className="product-view-sa_two">
+                            <div className="product-view-sa-supplier">
+                                <span>Nhà xuất bản: </span>
+                                <a href="">{product.PublishingCompany}</a>
+                            </div>
+                            <div className="product-view-sa-author">
+                                <span>Hình thức bìa: </span>
+                                <a href="">{product.CoverForm}</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div className="col-md-12 price-block desktop_only">
+                        <div id='catalog-product-details-price' className="product_price price-block-left">
+                            <div className="price-box">
+                                <p className='special-price'>
+                                    <span className='price-label'>Special Price</span>
+                                    <span className='price' id='product-price-354592'>{product.Price}</span>
+                                </p>                        
+                            </div>
+                            </div> 
+                            <div className="clear"></div>
+                             
+                    </div>
+                    <div className="clear"></div>
+                    <div id="catalog-product-details-discount">
+                        <div className="product-view-quantity-box">
+                            <label htmlFor="qty">Số lượng:</label>
+                            <div className="product-view-quantity-box-block">
+                                <a className='btn-subtrack-qty'>
+                                    <img className='btn-subtrack-img' src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_minus2x.png" alt="" style={{width: 12, height: 2}}/>
+                                </a>
+                                <input type="text" name='qty' value="1" id='qty' className='input-text qty'/>
+                                <a className='btn-add-qty'>
+                                    <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png" alt="" style={{width: 12, height: 12}}/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="clear"></div>
+
+                    
+                  
+
+                </div>
+                </div>
+                <div className='clear'></div>
+            </div>
     );
 };
 
