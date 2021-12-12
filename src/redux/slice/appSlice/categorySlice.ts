@@ -105,7 +105,7 @@ export const categorySlice = createSlice({
 
     builder.addCase(getDetailCategoryByID.fulfilled, (state, action) => {
       state.status = 'success';
-
+    });
     builder.addCase(doGetOneCategory.pending, (state, action) => {
       state.oneCategory = {};
     });
