@@ -8,7 +8,7 @@ import 'boxicons';
 import { useDispatch, useSelector } from 'react-redux';
 import productApi from '../../services/aixos/productApi';
 import { RootState } from '../../redux/rootReducer';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { addProduct } from '../../redux';
 export const ProductView = () => {
@@ -27,12 +27,20 @@ export const ProductView = () => {
     }, [])
     const [product, setProduct] = useState<any>({});
     const [path, setPath] = useState();
+    const [qty, setQty] = useState(1);
     const dispatch = useDispatch();
 
     const handleClick = () => {
         dispatch(
-            addProduct({ product, quantity, path: path })
+            addProduct({ product, quantity: qty, path: path })
         );
+    };
+    const history = useHistory();
+    const handleClickBuyNow = () => {
+        dispatch(
+            addProduct({ product, quantity: qty, path: path })
+        );
+        history.push(`/cart`);
     };
     return (
         <div className="product-view kasitoo">
@@ -60,11 +68,11 @@ export const ProductView = () => {
                     <div className="clear"></div>
                 </div>
                 <div className="product_view_add_box">
-                    <button type="button" title='Thêm vào giỏ hàng' className='btn-cart-to-cart'>
+                    <button type="button" title='Thêm vào giỏ hàng' className='btn-cart-to-cart' onClick={() =>{handleClick()}}>
                         <span className='fhs_icon_cart'></span>
                         <span>Thêm vào giỏ hàng</span>
                     </button>
-                    <button type="button" title='Mua ngay' className='btn-buy-now'>
+                    <button type="button" title='Mua ngay' className='btn-buy-now' onClick={() =>{handleClickBuyNow()}}>
                         <span>Mua ngay</span>
                     </button>
                 </div>
@@ -114,11 +122,11 @@ export const ProductView = () => {
                         <div className="product-view-quantity-box">
                             <label htmlFor="qty">Số lượng:</label>
                             <div className="product-view-quantity-box-block">
-                                <a className='btn-subtrack-qty'>
+                                <a className='btn-subtrack-qty' onClick={() =>{setQty(qty-1)}}>
                                     <img className='btn-subtrack-img' src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_minus2x.png" alt="" style={{width: 12, height: 2}}/>
                                 </a>
-                                <input type="text" name='qty' value="1" id='qty' className='input-text qty'/>
-                                <a className='btn-add-qty'>
+                                <input type="text" name='qty' value={qty} id='qty' className='input-text qty'/>
+                                <a className='btn-add-qty' onClick={() =>{setQty(qty+1)}}>
                                     <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png" alt="" style={{width: 12, height: 12}}/>
                                 </a>
                             </div>
