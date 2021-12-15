@@ -5,10 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from "react-bootstrap";
 import { RootState } from '../../redux/rootReducer';
 import { Row, Col, Container } from 'react-bootstrap';
+import { addProduct, deleteCart } from '../../redux';
 import { BsTrashFill } from "react-icons/bs";
 export const Cart = () => {
+    const dispatch = useDispatch();
     const cart = useSelector((state: RootState) => state.cartSlice);
     console.log("cart", cart.products);
+    
     return (
         <>
             <Container>
@@ -32,7 +35,7 @@ export const Cart = () => {
                                                     <div className="item-product-cart">
                                                     <div className="img-product-cart">
                                                         <a href="" className="product-image">
-                                                            <img src={`${cart.path}${product.Image}`} alt="" 
+                                                            <img src={`${cart.path}${product.image}`} alt="" 
                                                             style={{width:120, height:120}}/>
                                                         </a>
                                                     </div>
@@ -40,14 +43,14 @@ export const Cart = () => {
                                                         <div className="info-product-cart">
                                                             <div>
                                                                 <h2 className="product-name-full-text">
-                                                                    <a href="">{product.NameProduct}</a>
+                                                                    <a href="">{product.name}</a>
                                                                 </h2>
                                                             </div>
                                                             <div className="price-original">
                                                                 <div className="cart-price">
                                                                     <div className="cart-fhsItem-price">
                                                                         <div>
-                                                                            <span className="price">{product.Price}</span>
+                                                                            <span className="price">{product.price}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -60,7 +63,7 @@ export const Cart = () => {
                                                                         <img src="https://cdn0.fahasa.com/skin//frontend/ma_vanese/fahasa/images/ico_minus2x.png" alt=""
                                                                         style={{width: 12,height: 2, verticalAlign: "middle" }} />
                                                                     </a>
-                                                                    <input type="text" className="qty-carts" value="1"/>
+                                                                    <input type="text" className="qty-carts" value={product.quantity}/>
                                                                     <a href="" className="btn-add-qty">
                                                                         <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png" alt=""
                                                                         style={{width: 12,height: 12, verticalAlign: "middle" }} />
@@ -70,7 +73,7 @@ export const Cart = () => {
                                                             <div className="cart-price-total">
                                                                 <span className="cart-price">
                                                                     <span className="price">
-                                                                    {product.Price}
+                                                                    {product.price * product.quantity}
                                                                     </span>
                                                                 </span>
                                                                 </div>    
@@ -189,4 +192,3 @@ export const Cart = () => {
         </>
     )
 }
-

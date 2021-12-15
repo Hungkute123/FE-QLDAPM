@@ -32,7 +32,7 @@ export const ProductView = () => {
 
     const handleClick = () => {
         dispatch(
-            addProduct({ product, quantity: qty, path: path })
+            addProduct({ product, path: path })
         );
     };
     const history = useHistory();
@@ -143,5 +143,4 @@ export const ProductView = () => {
             </div>
     );
 };
-
 

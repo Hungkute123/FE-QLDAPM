@@ -53,7 +53,7 @@ export const Home = () => {
     setTimeout(()=>{ dispatch(getCalculator({ IDCategory: 196, limit: 5 }));
     dispatch(getShockingPriceToy({ IDCategory: 138, limit: 4 }));},3000);
   }, [dispatch]);
-
+  const cart = useSelector((state: RootState) => state.cartSlice);
   return (
     <div className="home">
       <MenuSlideshow />
