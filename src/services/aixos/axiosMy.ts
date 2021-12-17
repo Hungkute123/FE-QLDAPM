@@ -5,13 +5,15 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import queryString from 'query-string';
 const baseURL = process.env.URL_MY_API;
 // const token = readCookie(EToken.COMUNITY_ACCESS_KEY);
+const token = localStorage.getItem('jwt');
+
 const buildysURL = process.env.REACT_APP_LINK_BUILDYS;
 
 const axiosMy = axios.create({
   baseURL: baseURL + "/api/",
   headers: {
     "content-type": "application/json",
-    Authorization: "",
+    Authorization: token,
   },
   paramsSerializer: params => queryString.stringify(params),
 });
