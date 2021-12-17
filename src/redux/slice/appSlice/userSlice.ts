@@ -54,6 +54,10 @@ export const doChangeActiveUser = createAsyncThunk('user/active-user', async (pa
   return await userApi.activeUser(params).then((res) => res.data);
 });
 
+export const doChangeRoleUser = createAsyncThunk('user/role-user', async (params: any) => {
+  return await userApi.changeRoleUser(params).then((res) => res.data);
+});
+
 interface IInitialState {
   isUser: boolean;
   OTP: string;
@@ -130,10 +134,21 @@ export const userSlice = createSlice({
 
       if (userid) {
         const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
-        console.log('index', index);
 
         if (index >= 0) {
           state.listUser[index].active = !state.listUser[index].active;
+        }
+      }
+    });
+
+    builder.addCase(doChangeRoleUser.fulfilled, (state, action) => {
+      const { role, userid } = action.payload.data;
+
+      if (userid) {
+        const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
+
+        if (index >= 0) {
+          state.listUser[index].typeofuser = role;
         }
       }
     });

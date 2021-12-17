@@ -1,21 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector, doGetListStatisticByYear } from '../../../redux';
 import './SellerReport.scss';
 import { Line } from 'react-chartjs-2';
 import { ArcElement } from 'chart.js';
 import Chart from 'chart.js/auto';
+import Datetime from 'react-datetime';
+
 Chart.register(ArcElement);
+import 'react-datetime/css/react-datetime.css';
 
 export const SellerReport = () => {
   const dispatch = useAppDispatch();
   const { listStatistic } = useAppSelector((state) => state.statisticSlice);
+  const currentYear = new Date().getFullYear();
+  const [year, setYear] = useState(currentYear);
 
   useEffect(() => {
-    dispatch(doGetListStatisticByYear({ IDYear: 2021 }));
-  }, []);
+    dispatch(doGetListStatisticByYear({ IDYear: year }));
+  }, [year]);
 
   return (
     <div className="seller-report">
+      <div style={{ margin: '20px 0px', width: '150px' }}>
+        <p style={{ marginBottom: '10px' }}>Chọn năm:</p>
+        <Datetime
+          dateFormat="YYYY"
+          timeFormat={false}
+          value={year.toString()}
+          onChange={(date: any) => setYear(date.year())}
+        />
+      </div>
+
       <Line
         data={{
           labels: [
@@ -56,7 +71,7 @@ export const SellerReport = () => {
             },
             title: {
               display: true,
-              text: 'Thống kê lượt đăng ký mới',
+              text: `Thống kê lượt đăng ký mới năm ${year}`,
             },
           },
         }}

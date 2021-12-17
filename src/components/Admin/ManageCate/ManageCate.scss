@@ -1,0 +1,14 @@
+.category-manage {
+  background-color: #fff;
+  height: 400px;
+
+  &__empty {
+    font-size: 30px;
+    text-align: center;
+    margin: 30px;
+  }
+
+  .MuiPaper-elevation1 {
+    box-shadow: none !important;
+  }
+}

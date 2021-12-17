@@ -19,10 +19,13 @@ import {
   getCategoryProductByIDParentLevelOne,
   getCategoryProductByIDParentLevelTwo,
   getCategoryProductByLevelZero,
+  doGetAllCategory,
+  doGetSearchCategory,
 } from '../../../redux';
 import { Form } from 'react-bootstrap';
 import { Button as Button2 } from 'react-bootstrap';
-
+import { useDebounce } from '../../../hooks';
+import './ManageCate.scss';
 const headCells: readonly HeadCell[] = [
   {
     id: 'IDCategory',
@@ -35,12 +38,6 @@ const headCells: readonly HeadCell[] = [
     numeric: false,
     disablePadding: true,
     label: 'Tên danh mục',
-  },
-  {
-    id: 'Level',
-    numeric: true,
-    disablePadding: false,
-    label: 'Cấp danh mục',
   },
   {
     id: 'ParentName',
@@ -59,13 +56,23 @@ export const ManageCate = () => {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [level, setLevel] = React.useState(0);
+  const [search, setSearch] = React.useState(0);
+  const debouncedSearchTerm = useDebounce(search, 500);
 
-  const { categoryLevelZero } = useAppSelector((state) => state.categorySlice);
+  const { listCategory } = useAppSelector((state) => state.categorySlice);
 
   React.useEffect(() => {
-    dispatch(getCategoryProductByLevelZero({ level: level }));
-  }, [level]);
+    // dispatch(getCategoryProductByLevelZero({ level: level }));
+    dispatch(doGetAllCategory());
+  }, []);
+
+  React.useEffect(() => {
+    if (debouncedSearchTerm) {
+      dispatch(doGetSearchCategory({ text: debouncedSearchTerm }));
+    } else {
+      dispatch(doGetAllCategory());
+    }
+  }, [debouncedSearchTerm]);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: any) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -75,7 +82,7 @@ export const ManageCate = () => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = categoryLevelZero.data?.map((n: any) => n.IDCategory);
+      const newSelecteds = listCategory.data?.map((n: any) => n.IDCategory);
       setSelected(newSelecteds);
       return;
     }
@@ -119,130 +126,133 @@ export const ManageCate = () => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 && categoryLevelZero && categoryLevelZero.data
-      ? Math.max(0, (1 + page) * rowsPerPage - categoryLevelZero.length)
+    page > 0 && listCategory && listCategory.data
+      ? Math.max(0, (1 + page) * rowsPerPage - listCategory.length)
       : 0;
 
   const handleEditRow = (IDCategory: string) => {
     history.push(`/admin/category/${IDCategory}`);
   };
 
-  const handleOnChangeSelect = (e: any) => {
-    setLevel(e.target.value);
-  };
-
   return (
-    <Box sx={{ width: '100%', position: 'relative' }}>
-      <Paper>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          title="Quản lý danh sách các danh mục"
-        />
-        {categoryLevelZero && categoryLevelZero.data ? (
-          <>
-            <TableContainer>
-              <Table>
-                <EnhancedTableHead
-                  numSelected={selected.length}
-                  order={order}
-                  orderBy={orderBy}
-                  onSelectAllClick={handleSelectAllClick}
-                  onRequestSort={handleRequestSort}
-                  rowCount={categoryLevelZero.data.length}
-                  headCells={headCells}
-                />
-                <TableBody>
-                  {categoryLevelZero.data &&
-                    stableSort(categoryLevelZero.data, getComparator(order, orderBy))
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      ?.map((row: any, index) => {
-                        const isItemSelected = isSelected(row.IDCategory);
-                        const labelId = `enhanced-table-checkbox-${index}`;
+    <div className="category-manage">
+      <Box sx={{ width: '100%', position: 'relative' }}>
+        <Paper>
+          <EnhancedTableToolbar
+            numSelected={selected.length}
+            title="Quản lý danh sách các danh mục"
+          />
+          {listCategory && listCategory.data ? (
+            <>
+              <TableContainer>
+                <Table>
+                  <EnhancedTableHead
+                    numSelected={selected.length}
+                    order={order}
+                    orderBy={orderBy}
+                    onSelectAllClick={handleSelectAllClick}
+                    onRequestSort={handleRequestSort}
+                    rowCount={listCategory.data.length}
+                    headCells={headCells}
+                  />
+                  <TableBody>
+                    {listCategory.data &&
+                      stableSort(listCategory.data, getComparator(order, orderBy))
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        ?.map((row: any, index) => {
+                          const isItemSelected = isSelected(row.IDCategory);
+                          const labelId = `enhanced-table-checkbox-${index}`;
 
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            aria-checked={isItemSelected}
-                            tabIndex={-1}
-                            key={row.IDCategory}
-                            selected={isItemSelected}
-                          >
-                            <TableCell
-                              padding="checkbox"
-                              onClick={(event) => handleClick(event, row.IDCategory)}
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              aria-checked={isItemSelected}
+                              tabIndex={-1}
+                              key={row.IDCategory}
+                              selected={isItemSelected}
                             >
-                              <Checkbox
+                              <TableCell
+                                padding="checkbox"
+                                onClick={(event) => handleClick(event, row.IDCategory)}
+                              >
+                                {/* <Checkbox
                                 color="primary"
                                 checked={isItemSelected}
                                 inputProps={{
                                   'aria-labelledby': labelId,
                                 }}
-                              />
-                            </TableCell>
-                            <TableCell component="th" id={labelId} scope="row" padding="none">
-                              {row.IDCategory}
-                            </TableCell>
-                            <TableCell align="left">{row.Name}</TableCell>
-                            <TableCell align="left">{parseInt(row.Level) + 1}</TableCell>
-                            <TableCell align="left">{row?.ParentName}</TableCell>
-                            <TableCell>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => handleEditRow(row.IDCategory)}
-                              >
-                                Chỉnh sửa
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                  {emptyRows > 0 && (
-                    <TableRow
-                      style={{
-                        height: (dense ? 33 : 53) * emptyRows,
-                      }}
-                    >
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[10, 20, 30]}
-              component="div"
-              count={categoryLevelZero.data.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />{' '}
-          </>
-        ) : (
-          <></>
-        )}
-      </Paper>
+                              /> */}
+                              </TableCell>
+                              <TableCell component="th" id={labelId} scope="row" padding="none">
+                                {row.IDCategory}
+                              </TableCell>
+                              <TableCell align="left">{row.Name}</TableCell>
+                              {/* <TableCell align="left">{parseInt(row.Level) + 1}</TableCell> */}
+                              <TableCell align="left">{row?.ParentName}</TableCell>
+                              <TableCell>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={() => handleEditRow(row.IDCategory)}
+                                >
+                                  Chỉnh sửa
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                    {emptyRows > 0 && (
+                      <TableRow
+                        style={{
+                          height: (dense ? 33 : 53) * emptyRows,
+                        }}
+                      >
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 20, 30]}
+                component="div"
+                count={listCategory.data.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />{' '}
+            </>
+          ) : (
+            <></>
+          )}
+        </Paper>
 
-      <div
-        style={{
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          top: 20,
-          right: 20,
-          width: '500px',
-        }}
-      >
-        <Button2
-          onClick={() => history.push('/admin/category/0')}
-          style={{ marginRight: '10px' }}
-          variant="success"
+        <div
+          style={{
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            top: 20,
+            right: 20,
+            width: '500px',
+          }}
         >
-          Thêm danh mục
-        </Button2>
-        <Form.Select
+          <Form.Control
+            style={{ width: '300px', marginRight: '10px' }}
+            type="text"
+            onChange={(e: any) => setSearch(e.target.value)}
+            placeholder="Tìm kiếm"
+          />
+          <Button2
+            onClick={() => history.push('/admin/category/0')}
+            style={{ marginRight: '10px' }}
+            variant="success"
+          >
+            Thêm danh mục
+          </Button2>
+          {/* <Form.Select
           style={{ width: '300px' }}
           aria-label="Chọn cấp của danh mục"
           onChange={handleOnChangeSelect}
@@ -250,8 +260,16 @@ export const ManageCate = () => {
           <option value="0">Danh mục cấp 1</option>
           <option value="1">Danh mục cấp 2</option>
           <option value="2">Danh mục cấp 3</option>
-        </Form.Select>
-      </div>
-    </Box>
+        </Form.Select> */}
+        </div>
+      </Box>
+
+      {!listCategory ||
+        (!listCategory.length && (
+          <div className="category-manage__empty">
+            <p>Không có danh mục phù hợp</p>
+          </div>
+        ))}
+    </div>
   );
 };

@@ -46,6 +46,11 @@ const userApi = {
     const url = `user/active-user`;
     return await axiosMy.get(url, { params });
   },
+
+  changeRoleUser: async (params: any) => {
+    const url = `user/update-role`;
+    return await axiosMy.patch(url, params);
+  },
 };
 
 export default userApi;

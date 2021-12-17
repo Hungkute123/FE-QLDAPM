@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import { getInfo } from '../../redux/slice/appSlice/userSlice';
 import { useAppDispatch } from '../../redux/store';
-
+import { GrUserAdmin } from 'react-icons/gr';
 export const AccountHeader = () => {
   const history = useHistory();
   const [showOptions, setShowOptions] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isSeller, setIsSeller] = useState(false);
-  const {isAccount, account} = useSelector((state: RootState) => state.userSlice);
+  const { isAccount, account } = useSelector((state: RootState) => state.userSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -32,12 +32,12 @@ export const AccountHeader = () => {
   const handleOnLeave = () => {
     setShowOptions(false);
   };
-  const handleLogout = () =>{
+  const handleLogout = () => {
     window.localStorage.clear();
     history.push({
       pathname: `/account`,
     });
-  }
+  };
   return (
     <div className="account-header" onMouseEnter={handleOnEnter} onMouseLeave={handleOnLeave}>
       {!isAccount ? (
@@ -58,25 +58,36 @@ export const AccountHeader = () => {
             }`}
           >
             <div className="account-header__list">
-            <div className="account-header__option">
-                <BsShop size={20} />
-                <span>
-                  <Link to="/seller/account-balance">Kênh người bán</Link>
-                </span>
-              </div>
+              {account.TypeOfUser === 2 ? (
+                <div className="account-header__option">
+                  <GrUserAdmin size={20} />
+                  <span>
+                    <Link to="/admin/manage-user">Quản lý hệ thống</Link>
+                  </span>
+                </div>
+              ) : account.TypeOfUser === 1 ? (
+                <div className="account-header__option">
+                  <BsShop size={20} />
+                  <span>
+                    <Link to="/seller/account-balance">Kênh người bán</Link>
+                  </span>
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="account-header__option">
                 <FiSettings size={20} />
                 <span>
                   <Link to="/account">Bảng điều khiển của khách hàng</Link>
                 </span>
               </div>
-              
-              <div className="account-header__option" onClick={handleLogout} >
-              <button><MdOutlineExitToApp size={20} />
-                <span>Thoát</span></button>
-                
+
+              <div className="account-header__option" onClick={handleLogout}>
+                <button>
+                  <MdOutlineExitToApp size={20} />
+                  <span>Thoát</span>
+                </button>
               </div>
-              
             </div>
           </div>
         </div>
