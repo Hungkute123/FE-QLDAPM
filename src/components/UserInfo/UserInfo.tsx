@@ -223,8 +223,6 @@ export const UserInfo = () => {
       CompanyEmail: emailOrder,
     };
 
-    console.log(information);
-
     const status = (
       await dispatch(
         addInformationVAT({ jwt: localStorage.getItem('jwt'), Information: information }),
