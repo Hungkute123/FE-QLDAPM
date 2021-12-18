@@ -83,6 +83,7 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-slick": "^0.28.1",
+    "redux-persist": "^6.0.0",
     "sweetalert2": "^11.1.10",
     "tinymce": "^5.10.1"
   },

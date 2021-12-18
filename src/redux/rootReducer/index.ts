@@ -7,8 +7,15 @@ import productSlice from '../slice/appSlice/productSlice';
 import userSlice from '../slice/appSlice/userSlice';
 import statisticSlice from '../slice/appSlice/statisticSlice';
 import cartSlice from "../slice/appSlice/cartSlice";
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-export const rootReducer = combineReducers({
+const persistConfig = {
+  key:'root',
+  storage,
+  whitelist: ['cartSlice']
+}
+const rootReducer = combineReducers({
   modalSlice,
   homeSlice,
   categorySlice,
@@ -20,3 +27,4 @@ export const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
+export default persistReducer(persistConfig, rootReducer);

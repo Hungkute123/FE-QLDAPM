@@ -8,6 +8,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { addProduct, deleteCart } from '../../redux';
 import { useHistory } from 'react-router-dom';
 import { BsTrashFill } from "react-icons/bs";
+import {transformPriceFormat} from '../../helpers';
 
 export const Cart = () => {
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export const Cart = () => {
                                                                 <div className="cart-price">
                                                                     <div className="cart-fhsItem-price">
                                                                         <div>
-                                                                            <span className="price">{product.price}</span>
+                                                                            <span className="price">{transformPriceFormat(product.price)}đ</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -82,7 +83,7 @@ export const Cart = () => {
                                                             <div className="cart-price-total">
                                                                 <span className="cart-price">
                                                                     <span className="price">
-                                                                    {product.price * product.quantity}
+                                                                    {transformPriceFormat(product.price * product.quantity)}đ                                  
                                                                     </span>
                                                                 </span>
                                                                 </div>    
@@ -112,14 +113,14 @@ export const Cart = () => {
                                                             <div className="title-cart-page-left">Thành tiền</div>
                                                         
                                                         <div className="number-cart-page-right">
-                                                            <span className="price">{cart.total}</span>
+                                                            <span className="price">{transformPriceFormat(cart.total)}đ </span>
                                                         </div>
                                                     </div>
                                                     <div className="total-cart-page">
-                                                            <div className="title-cart-page-left">Phí vận chuyển(Miễn phí)</div>
+                                                            <div className="title-cart-page-left">Phí vận chuyển</div>
                                                         
                                                         <div className="number-cart-page-right">
-                                                            <span className="price">0 đ</span>
+                                                            <span className="price">30,000 đ</span>
                                                         </div>
                                                     </div>
                                                     <div className="border-product"></div>

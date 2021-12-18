@@ -11,6 +11,7 @@ import { RootState } from '../../redux/rootReducer';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { addProduct } from '../../redux';
+import {transformPriceFormat} from '../../helpers';
 export const ProductView = () => {
     const [quantity, setQuantity] = useState(1);
     const productId = useParams();
@@ -110,7 +111,7 @@ export const ProductView = () => {
                             <div className="price-box">
                                 <p className='special-price'>
                                     <span className='price-label'>Special Price</span>
-                                    <span className='price' id='product-price-354592'>{product.Price}</span>
+                                    <span className='price' id='product-price-354592'>{transformPriceFormat(product.Price)}đ</span>
                                 </p>                        
                             </div>
                             </div> 

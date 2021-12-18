@@ -15,14 +15,6 @@ import {
 
 export const FormMethod = () => {
   const listOption = [
-    { title: 'Ví ZaloPay', id: 1, name: 'form-method-1', image: SvgMethod1 },
-    { title: 'Ví Moca', id: 2, name: 'form-method-2', image: SvgMethod2 },
-    { title: 'VNPAY', id: 3, name: 'form-method-3', image: SvgMethod3 },
-    { title: 'Ví ShopeePay', id: 4, name: 'form-method-4', image: SvgMethod4 },
-    { title: 'Ví Momo', id: 5, name: 'form-method-5', image: SvgMethod5 },
-    { title: 'Chuyển khoản ngân hàng', id: 6, name: 'form-method-6', image: SvgMethod6 },
-    { title: 'ATM / Internet banking', id: 7, name: 'form-method-7', image: SvgMethod7 },
-    { title: 'Visa / Master / JCB', id: 8, name: 'form-method-8', image: SvgMethod8 },
     {
       title: 'Thanh toán bằng tiền mặt khi giao dịch',
       id: 9,
