@@ -6,12 +6,21 @@ import { Button } from "react-bootstrap";
 import { RootState } from '../../redux/rootReducer';
 import { Row, Col, Container } from 'react-bootstrap';
 import { addProduct, deleteCart } from '../../redux';
+import { useHistory } from 'react-router-dom';
 import { BsTrashFill } from "react-icons/bs";
+
 export const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state: RootState) => state.cartSlice);
+    const user = useSelector((state: RootState) => state.userSlice);
+    const history = useHistory();
+    console.log("loged in", user.isAccount);
+    
     console.log("cart", cart.products);
     
+    const handleCheckoutBtnClicked = () => {
+        history.push(`/onestepcheckout/index`);
+    }
     return (
         <>
             <Container>
@@ -82,6 +91,9 @@ export const Cart = () => {
                                                     <div className="div-of-btn-remove-cart">
                                                         <BsTrashFill></BsTrashFill>
                                                     </div>
+                                                    
+                                                    
+
                                                 </div>
                                                 <div className="border-product"></div>
                                                 </>
@@ -114,12 +126,12 @@ export const Cart = () => {
                                                     </div>
                                                     <div className="checkout-type-button-cart" style={{alignContent: "center"}}>
                                                         <div className="method-button-cart">
-                                                            <Button title="Thanh toán" className="button btn-proceed-checkout btn-checkout">
+                                                            <Button title="Thanh toán" className="button btn-proceed-checkout btn-checkout" onClick={() =>{handleCheckoutBtnClicked()}}>
                                                                 <span>
                                                                     <span>Thanh toán</span>
                                                                 </span>
                                                             </Button>
-                                                            
+                                                            {user.isAccount ? '' : <><h1 className="notLoggedIn">Bạn chưa đăng nhập, vui lòng đăng nhập để thanh toán</h1></>} 
                                                         </div>
                                                     </div>
                                                 </div>
