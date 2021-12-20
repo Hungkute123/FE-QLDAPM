@@ -7,6 +7,7 @@ import productSlice from '../slice/appSlice/productSlice';
 import userSlice from '../slice/appSlice/userSlice';
 import statisticSlice from '../slice/appSlice/statisticSlice';
 import cartSlice from "../slice/appSlice/cartSlice";
+import orderSlice from "../slice/appSlice/orderSlice";
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   discountSlice,
   statisticSlice,
   cartSlice,
+  orderSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

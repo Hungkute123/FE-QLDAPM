@@ -1,16 +1,53 @@
 import React from 'react';
 import './OneStepCheckout.scss';
 import { OneStepBox, FormAddress, FormMethod, DiscountCard } from '../../components';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { BiArrowBack } from 'react-icons/bi';
-import { RootState } from '../../redux/rootReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {transformPriceFormat} from '../../helpers';
+import { doAddNewOrder, useAppDispatch, RootState } from '../../redux';
+import Swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 export const OneStepCheckout = () => {
   const cart = useSelector((state: RootState) => state.cartSlice);
-    const user = useSelector((state: RootState) => state.userSlice);
+  const {account} = useSelector((state: RootState) => state.userSlice);
+  const order = useSelector((state: RootState) => state.orderSlice);
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+  const handleSubmit =async (e: any) => {
+    e.preventDefault();
+    cart.products.map(async product =>  {
+      let order = {
+        id_user: String(account.IDUser),
+        id_product: String(product.id),
+        order_date: new Date().getTime(),
+        quantity: product.quantity,
+        status: 'đang xử lý'
+      };
+      console.log("order", order);
+      dispatch(doAddNewOrder)
+      const isSuccess = (await dispatch(doAddNewOrder(order))).payload;
+      if (isSuccess.data === true) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Thanh toán thành công',
+        });
+        history.push({
+          pathname: `/`,
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Thanh toán thất bại',
+        });
+      }
+    })
+    
+  }
   return (
-    <div className="one-step-checkout">
+    <div>
+      <Form onSubmit={handleSubmit}>
+         <div className="one-step-checkout">
       <div className="one-step-checkout__list-box">
         <OneStepBox title="ĐỊA CHỈ GIAO HÀNG">
           <FormAddress />
@@ -81,12 +118,15 @@ export const OneStepCheckout = () => {
               <BiArrowBack size={30} />
               <span>Quay về giỏ hàng</span>
             </div>
-            <Button className="one-step-checkout__button" variant="danger">
+            <Button className="one-step-checkout__button" variant="danger" type='submit'>
               Xác nhận thanh toán
             </Button>
           </div>
         </div>
       </div>
     </div>
+      </Form>
+    </div>
+   
   );
 };

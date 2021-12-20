@@ -184,3 +184,13 @@ interface IInformationVAT {
   CompanyCode: string;
   CompanyEmail: string;
 }
+
+interface IOrder {
+  IDOrder: number;
+  IDProduct: string;
+  IDUser: number;
+  OrderDate: string;
+  Quantity: number;
+  Rating: any;
+  Status: string;
+}
