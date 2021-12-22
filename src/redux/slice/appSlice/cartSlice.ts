@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CartItem } from "../../../components";
 
 const cartSlice = createSlice({
     name: "cart",
@@ -58,9 +59,50 @@ const cartSlice = createSlice({
                     return item.id!=state.products[action.payload].id
                 })
             }
+        },
+        increaseQuantity: (state, action) => {
+            const itemIndex = state.products.findIndex(
+                cartItem => cartItem.id === action.payload.id
+            )
+            state.products[itemIndex].quantity += 1;
+                let ttl = 0;
+                state.products.map(prd => {ttl += prd.price * prd.quantity});
+                state.total = ttl;
+        },
+        decreaseQuantity: (state, action) => {
+            const itemIndex = state.products.findIndex(
+                cartItem => cartItem.id === action.payload.id
+            )
+            if(state.products[itemIndex].quantity > 1){
+                state.products[itemIndex].quantity -= 1;
+                let ttl = 0;
+                state.products.map(prd => {ttl += prd.price * prd.quantity});
+                state.total = ttl;
+            } else if (state.products[itemIndex].quantity === 1){
+                const nextCartItems = state.products.filter(
+                    product => product.id !== action.payload.id
+                );
+                state.products = nextCartItems;
+                state.quantity -= 1;
+                let ttl = 0;
+                state.products.map(prd => {ttl += prd.price * prd.quantity});
+                state.total = ttl;
+                localStorage.setItem("product", JSON.stringify(state.products));
+            }
+        },
+        removeFromCart: (state, action) => {
+            const nextCartItems = state.products.filter(
+                product => product.id !== action.payload.id
+            )
+            state.products = nextCartItems;
+            state.quantity -= 1;
+            let ttl = 0;
+            state.products.map(prd => {ttl += prd.price * prd.quantity});
+            state.total = ttl;
+            localStorage.setItem("product", JSON.stringify(state.products));
         }
     },
 });
 
-export const {addProduct, deleteCart} = cartSlice.actions;
+export const {addProduct, deleteCart, decreaseQuantity, increaseQuantity, removeFromCart} = cartSlice.actions;
 export default cartSlice.reducer;

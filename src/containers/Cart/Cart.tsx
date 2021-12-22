@@ -5,22 +5,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from "react-bootstrap";
 import { RootState } from '../../redux/rootReducer';
 import { Row, Col, Container } from 'react-bootstrap';
-import { addProduct, deleteCart } from '../../redux';
+import { addProduct, deleteCart, removeFromCart, decreaseQuantity, increaseQuantity } from '../../redux';
 import { useHistory } from 'react-router-dom';
 import { BsTrashFill } from "react-icons/bs";
 import {transformPriceFormat} from '../../helpers';
 
 export const Cart = () => {
-    const dispatch = useDispatch();
     const cart = useSelector((state: RootState) => state.cartSlice);
     const user = useSelector((state: RootState) => state.userSlice);
     const history = useHistory();
     console.log("loged in", user.isAccount);
     
     console.log("cart", cart.products);
-    
+    const dispatch = useDispatch();
     const handleCheckoutBtnClicked = () => {
         history.push(`/onestepcheckout/index`);
+    }
+    const handleRemove = (product: any) => {
+        dispatch(removeFromCart(product));
+    }
+    const handleDecrease = (product: any) => {
+        dispatch(decreaseQuantity(product));
+    }
+    const handleIncrease = (product: any) => {
+        dispatch(increaseQuantity(product));
     }
     return (
         <>
@@ -69,12 +77,12 @@ export const Cart = () => {
                                                         <div className="number-product-cart">
                                                             <div className="product-view-quantity-box">
                                                                 <div className="product-view-quantity-box-block">
-                                                                    <a href="" className="btn-subtract-qty">
+                                                                    <a href="" className="btn-subtract-qty" onClick={() => handleDecrease(product)}>
                                                                         <img src="https://cdn0.fahasa.com/skin//frontend/ma_vanese/fahasa/images/ico_minus2x.png" alt=""
                                                                         style={{width: 12,height: 2, verticalAlign: "middle" }} />
                                                                     </a>
                                                                     <input type="text" className="qty-carts" value={product.quantity}/>
-                                                                    <a href="" className="btn-add-qty">
+                                                                    <a href="" className="btn-add-qty" onClick={() => handleIncrease(product)}>
                                                                         <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_plus2x.png" alt=""
                                                                         style={{width: 12,height: 12, verticalAlign: "middle" }} />
                                                                     </a>
@@ -89,7 +97,7 @@ export const Cart = () => {
                                                                 </div>    
                                                         </div>                                             
                                                     </div>
-                                                    <div className="div-of-btn-remove-cart">
+                                                    <div className="div-of-btn-remove-cart" onClick={() => {handleRemove(product)}}>
                                                         <BsTrashFill></BsTrashFill>
                                                     </div>
                                                     

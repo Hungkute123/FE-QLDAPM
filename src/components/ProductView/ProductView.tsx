@@ -32,15 +32,20 @@ export const ProductView = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(
-            addProduct({ product, path: path })
-        );
+        for (let index = 0; index < qty; index++) {
+            dispatch(
+                addProduct({ product, path: path })
+            );
+        }
+        
     };
     const history = useHistory();
     const handleClickBuyNow = () => {
-        dispatch(
-            addProduct({ product, quantity: qty, path: path })
-        );
+        for (let index = 0; index < qty; index++) {
+            dispatch(
+                addProduct({ product, path: path })
+            );
+        }
         history.push(`/cart`);
     };
     return (
