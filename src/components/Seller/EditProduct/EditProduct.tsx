@@ -1020,7 +1020,7 @@ export const EditProduct = () => {
                 required={isBook}
                 valueAuthor={state.product_author}
                 onInputAuthor={(e: any) =>
-                  dispatchDataForm({ type: 'PRODUCT_HEIGHT', payload: e.target.value })
+                  dispatchDataForm({ type: 'PRODUCT_AUTHOR', payload: e.target.value })
                 }
                 valueSupplierBook={state.product_supplier_book}
                 onInputSupplierBook={(e: any) =>

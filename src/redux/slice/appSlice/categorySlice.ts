@@ -57,7 +57,12 @@ export const doGetAllCategory = createAsyncThunk('category/doGetAllCategory', as
 export const doGetSearchCategory = createAsyncThunk('category/doGetSearchCategory', async (params: any) => {
   return await categoryApi.searchCate(params).then((res) => res.data);
 });
-
+export const doGetCategoryProductByIDParent = createAsyncThunk(
+  'category/doGetCategoryProductByIDParent',
+  async (params: any) => {
+    return await categoryApi.getCategoryProductByIDParent(params).then((res) => res.data);
+  },
+);
 interface IInitialState {
   categoryLevelZero: any;
   categoryLevelOne: any;
@@ -138,6 +143,12 @@ export const categorySlice = createSlice({
     builder.addCase(doGetSearchCategory.fulfilled, (state, action) => {
       state.status = 'success';
       state.listCategory = action.payload;
+    });
+    builder.addCase(doGetCategoryProductByIDParent.pending, (state, action) => {
+      
+    });
+    builder.addCase(doGetCategoryProductByIDParent.fulfilled, (state, action) => {
+      state.status = 'success';
     });
   },
 });
