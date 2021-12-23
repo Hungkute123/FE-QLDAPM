@@ -397,7 +397,22 @@ button.button span span {
     padding: 0 !important;
     background: none !important;
 }
-
+.content {
+    margin-top: 15px;
+}
+.product_view_content {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+}
+.product_view_content-title {
+    font-size: 1.45em;
+    font-weight: 700;
+}
+.product_view_content em {
+    font-style: italic;
+    text-align: justify;
+}
 // @mixin flex($align-item, $justify-content) {
 //     display: flex;
 //     align-items: $align-item;

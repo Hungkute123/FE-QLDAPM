@@ -19,7 +19,7 @@ export const ProductView = () => {
         async function fetchMyAPI() {
             let response = await productApi.getProductByIDProduct(productId)
             setProduct(response.data.data[0]);
-            console.log("response", response);
+            console.log("response", response.data.data[0]);
 
             setPath(response.data.Path)
         }
@@ -49,6 +49,7 @@ export const ProductView = () => {
         history.push(`/cart`);
     };
     return (
+        <>
         <div className="product-view kasitoo">
             <div className="product-essential">
                 <div className="product-essential-media">
@@ -147,6 +148,14 @@ export const ProductView = () => {
                 </div>
                 <div className='clear'></div>
             </div>
+
+            <div className="content product_view_content" id='product_view_info'>
+                    <div className="product_view_content-title">Thông tin sản phẩm</div>
+                    <p style={{textAlign: 'justify'}}>
+                        <em>{product.Description}</em>
+                    </p>
+                </div>
+            </>
     );
 };
 
