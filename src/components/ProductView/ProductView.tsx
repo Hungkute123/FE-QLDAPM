@@ -12,25 +12,36 @@ import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { addProduct } from '../../redux';
 import {transformPriceFormat} from '../../helpers';
+import { isArray } from 'react-select/dist/declarations/src/utils';
 export const ProductView = () => {
     const [quantity, setQuantity] = useState(1);
     const productId = useParams();
+    
+    const [product, setProduct] = useState<any>({});
+    const [publisher, setPublisher] = useState('');
+    const [supplier, setSupplier] = useState('');
+    const [path, setPath] = useState();
+    const [qty, setQty] = useState(1);
     useEffect(() => {
         async function fetchMyAPI() {
             let response = await productApi.getProductByIDProduct(productId)
-            setProduct(response.data.data[0]);
-            console.log("response", response.data.data[0]);
-
+            console.log("response", response);
             setPath(response.data.Path)
+            setProduct(response.data.data[0]);
+            setPublisher(response.data.data[0].Publishser[0].Name);
+            setSupplier(response.data.data[0].Supplier[0].Name)
+   
+
+            
+            console.log(response.data.Path);
+            
         }
 
         fetchMyAPI()
     }, [])
-    const [product, setProduct] = useState<any>({});
-    const [path, setPath] = useState();
-    const [qty, setQty] = useState(1);
+   
+    
     const dispatch = useDispatch();
-
     const handleClick = () => {
         for (let index = 0; index < qty; index++) {
             dispatch(
@@ -49,7 +60,7 @@ export const ProductView = () => {
         history.push(`/cart`);
     };
     return (
-        <>
+        <div className='detail-product'>
         <div className="product-view kasitoo">
             <div className="product-essential">
                 <div className="product-essential-media">
@@ -91,22 +102,36 @@ export const ProductView = () => {
                     <div className="product-view-sa">
                         <div className="product-view-sa_one">
                             <div className="product-view-sa-supplier">
-                                <span>Nhà cung cấp: </span>
-                                <a href="">{product.PublishingCompany}</a>
+                            {product.TypeProduct == 'Book'? 
+                            <><span>Nhà cung cấp: </span>
+                            <a href="">{supplier}</a></>: 
+                            <><span>Nhà cung cấp: </span>
+                            <a href="">{product.Supplier}</a></> }    
                             </div>
                             <div className="product-view-sa-author">
-                                <span>Tác giả: </span>
-                                <a href="">{product.Author}</a>
+                            {product.TypeProduct == 'Book'? 
+                            <><span>Tác giả: </span>
+                            <a href="">{product.Author}</a></>: 
+                            <><span>Xuất xứ: </span>
+                            <a href="">{product.Origin}</a></> }   
                             </div>
                         </div>
                         <div className="product-view-sa_two">
                             <div className="product-view-sa-supplier">
-                                <span>Nhà xuất bản: </span>
-                                <a href="">{product.PublishingCompany}</a>
+                            {product.TypeProduct == 'Book'? 
+                            <><span>Nhà xuất bản: </span>
+                            <a href="">{publisher}</a></>: 
+                            <><span>Nơi sản xuất: </span>
+                            <a href="">{product.ProcessingPlace}</a></> }
+                                
                             </div>
                             <div className="product-view-sa-author">
-                                <span>Hình thức bìa: </span>
-                                <a href="">{product.CoverForm}</a>
+                            {product.TypeProduct == 'Book'? 
+                            <><span>Hình thức bìa: </span>
+                            <a href="">{product.CoverForm}</a></>: 
+                            <><span>Vật liệu: </span>
+                            <a href="">{product.Material}</a></> }
+                                
                             </div>
                         </div>
 
@@ -155,7 +180,8 @@ export const ProductView = () => {
                         <em>{product.Description}</em>
                     </p>
                 </div>
-            </>
+            <div/>
+            </div>
     );
 };
 
