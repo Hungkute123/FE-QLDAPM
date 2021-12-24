@@ -132,9 +132,6 @@
     display: inline-block;
     width: auto;
 }
-form {
-    display: inline;
-}
 input, select, textarea {
     width: 100%;
     border: 2px solid #e6e6e6;
@@ -335,16 +332,13 @@ img {
     border-bottom-color: rgb(53, 58, 60);
 }
 .cart-ui-content.row .col-sm-4 {
-    padding-right: 0
-px
-!important;
+    padding-right: 0px!important;
     flex-grow: 1;
 }
 .total-cart-right {
     position: -webkit-sticky;
     position: sticky;
-    top: 10
-px
+    top: 10px
 ;
 }
 .block-total-cart {
@@ -354,11 +348,7 @@ px
 .total-cart-page {
     display: flex;
     font-size: 1.2em;
-    padding: 10
-px
- 16
-px
-;
+    padding: 10px 16px;
 }
 .title-cart-page-left {
     flex-basis: 65%;

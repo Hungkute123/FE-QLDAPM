@@ -60,7 +60,7 @@ export const ProductView = () => {
         history.push(`/cart`);
     };
     return (
-        <div className='detail-product'>
+        <>
         <div className="product-view kasitoo">
             <div className="product-essential">
                 <div className="product-essential-media">
@@ -181,7 +181,7 @@ export const ProductView = () => {
                     </p>
                 </div>
             <div/>
-            </div>
+            </>
     );
 };
 

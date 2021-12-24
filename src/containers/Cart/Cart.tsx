@@ -32,6 +32,7 @@ export const Cart = () => {
     }
     return (
         <>
+        <div className="div-of-cart">
             <Container>
             <Row>
                 <Col lg={12} md={12} sm={12} xs={12} className="cart-page">
@@ -154,6 +155,7 @@ export const Cart = () => {
                 </Col>
             </Row>
             </Container>
+            </div>
             {/* <div className="cart">
                 <div className="cart__list">
                     {cart.products.map(product => (
@@ -210,6 +212,6 @@ export const Cart = () => {
                     </div>
                 </div>
             </div> */}
-        </>
+    </>
     )
 }
