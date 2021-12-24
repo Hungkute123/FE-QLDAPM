@@ -15,11 +15,21 @@ import {
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation } from 'react-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux';
+import { useHistory } from 'react-router-dom';
 
 export const Seller = () => {
+  const history = useHistory();
   const [kindScreen, setKindScreen] = useState(0);
   const location = useLocation();
+  const { account } = useSelector((state: RootState) => state.userSlice);
   useEffect(() => {
+    if(account.TypeOfUser != 1){
+      history.push({
+        pathname: `/`,
+      });
+    }
     if (location.pathname === '/seller/account-balance') setKindScreen(0);
     if (location.pathname === '/seller/revenue') setKindScreen(1);
     if (location.pathname === '/seller/add-new-product') setKindScreen(2);

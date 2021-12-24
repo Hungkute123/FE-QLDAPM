@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ListProduct, Menu } from '../../components';
 import { Button, Tabs } from '../../components/common';
 import { HomeBanner } from '../../components/HomeBanner/HomeBanner';
@@ -66,7 +67,7 @@ export const Home = () => {
             <div>
               <ListProduct listproducts={trend.data} path={trend.Path} />
               <div className="home__btn">
-                <Button>Xem Thêm</Button>
+                <Link to="/catalogsearch/result?text=sách"><Button>Xem Thêm</Button></Link>
               </div>
             </div>,
             <div>
@@ -86,7 +87,7 @@ export const Home = () => {
             <div>
               <ListProduct listproducts={textbook.data} path={textbook.Path} />
               <div className="home__btn">
-                <Button>Xem Thêm</Button>
+              <Link to="/catalogsearch/result?text=sách giáo khoa"><Button>Xem Thêm</Button></Link>
               </div>
             </div>,
           ]}
@@ -101,13 +102,13 @@ export const Home = () => {
             <div>
               <ListProduct listproducts={mask.data} path={mask.Path} />
               <div className="home__btn">
-                <Button>Xem Thêm</Button>
+              <Link to="/catalogsearch/result?text=khẩu trang"><Button>Xem Thêm</Button></Link>
               </div>
             </div>,
             <div>
               <ListProduct listproducts={handwash.data} path={handwash.Path} />
               <div className="home__btn">
-                <Button>Xem Thêm</Button>
+              <Link to="/catalogsearch/result?text=rửa tay"><Button>Xem Thêm</Button></Link>
               </div>
             </div>,
           ]}
@@ -122,13 +123,13 @@ export const Home = () => {
           <div>
             <ListProduct listproducts={toptoy.data} path={toptoy.Path} />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=đồ chơi"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
           <div>
             <ListProduct listproducts={rubik.data} path={rubik.Path} />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=rubik"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
         ]}
@@ -143,13 +144,13 @@ export const Home = () => {
           <div>
             <ListProduct listproducts={paintingbook.data} path={paintingbook.Path} />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=tập tô"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
           <div>
             <ListProduct listproducts={paintingbook.data} path={paintingbook.Path} />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=tập tô"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
         ]}
@@ -167,7 +168,7 @@ export const Home = () => {
               path={childrenreadingstories.Path}
             />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=truyện"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
         ]}
@@ -182,7 +183,7 @@ export const Home = () => {
           <div>
             <ListProduct listproducts={calculator.data} path={calculator.Path} />
             <div className="home__btn">
-                <Button>Xem Thêm</Button>
+            <Link to="/catalogsearch/result?text=máy tính"><Button>Xem Thêm</Button></Link>
               </div>
           </div>,
         ]}
@@ -209,7 +210,7 @@ export const Home = () => {
                     numCol={2}
                   />
                   <div className="home__btn">
-                    <Button>Xem Thêm</Button>
+                  <Link to="/catalogsearch/result?text=đồ chơi"><Button>Xem Thêm</Button></Link>
                   </div>
                 </Col>
               </Row>

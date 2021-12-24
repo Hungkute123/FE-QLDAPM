@@ -205,6 +205,7 @@ export const FormBook: React.FC<IFormBook> = ({
               name="supplier"
               // value={listProductSupplier.Name}
               //value={supplier.name}
+              defaultValue={listProductSupplier[1]}
               options={listProductSupplier}
               styles={customStyles}
               placeholder={'Chọn nhà cung cấp'}
@@ -224,7 +225,7 @@ export const FormBook: React.FC<IFormBook> = ({
               isSearchable
               name="publisher"
               options={listProductPublisher}
-              //getOptionValue={(option) => `${option['id']}`}
+              defaultValue={{ id: 5, label: "Select Dept", value: '0' }}
               styles={customStyles}
               placeholder={'Chọn nhà xuất bản'}
               onChange={handleChangePublisher}
@@ -266,7 +267,7 @@ export const FormBook: React.FC<IFormBook> = ({
               isSearchable
               name="year"
               options={listYear}
-              //getOptionValue={(option) => `${option['id']}`}
+              defaultValue={{value: valuePublishingYear, label: valuePublishingYear}}
               styles={customStyles}
               placeholder={'Chọn năm sản xuất'}
               onChange={handleChangeYear}
