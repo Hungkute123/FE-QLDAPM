@@ -17,10 +17,10 @@ import {
   UserNewsLetter,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 
 export const User = () => {
-  const location = useLocation().pathname;
+  let location = useLocation().pathname;
 
   const renderLayout = (children: any, index: number) => {
     return (
@@ -37,6 +37,10 @@ export const User = () => {
     );
   };
 
+  if (location.slice(0, location.lastIndexOf('/')) == '/address/edit') {
+    location = '/address/edit';
+  }
+
   switch (location) {
     case '/account':
       return renderLayout(<UserDashboard></UserDashboard>, 0);
@@ -44,7 +48,9 @@ export const User = () => {
       return renderLayout(<UserInfo></UserInfo>, 1);
     case '/account/address':
       return renderLayout(<UserAddress></UserAddress>, 2);
-    case '/account/address/edit':
+    case '/account/address/create':
+      return renderLayout(<UserCreateAddress></UserCreateAddress>, 2);
+    case '/address/edit':
       return renderLayout(<UserCreateAddress></UserCreateAddress>, 2);
     case '/account/order':
       return renderLayout(<UserOrder></UserOrder>, 3);

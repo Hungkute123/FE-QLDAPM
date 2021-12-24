@@ -38,9 +38,7 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
   };
   useEffect(() => {
     fecthInfo();
-    return () => {
-      console.log('isAccount:', isAccount);
-    };
+    return;
   }, [location]);
 
   const render = (props: any) => {
@@ -75,7 +73,7 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
         <Component {...props} />
       </Layout>
     ) : (
-      <div></div>
+      <Redirect to="/" />
     );
   };
 
