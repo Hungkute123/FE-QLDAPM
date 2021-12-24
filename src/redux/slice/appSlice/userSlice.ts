@@ -45,6 +45,11 @@ export const updateUserAddress = createAsyncThunk(
     return await userApi.getInfo(params).then((res) => res.data);
   },
 );
+export const doGetUserAddress = createAsyncThunk(
+  'user/get-all-address',
+  async(params: any) => {
+  return await userApi.getUserAddress(params).then((res) => res.data);
+});
 
 export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
   return await userApi.getAllUser().then((res) => res.data);
@@ -66,6 +71,7 @@ interface IInitialState {
   status: boolean;
   message: string;
   informationVAT: IInformationVAT;
+  address: IAddress;
   listUser: any;
 }
 
@@ -77,6 +83,7 @@ const initialState = {
   status: false,
   message: '',
   informationVAT: {},
+  address: {},
   listUser: [],
 } as IInitialState;
 
@@ -119,6 +126,9 @@ export const userSlice = createSlice({
       state.status = action.payload.data;
       state.message = action.payload.message;
     });
+    builder.addCase(doGetUserAddress.fulfilled, (state, action) => {
+      state.address = action.payload.data;
+    })
     builder.addCase(updateUserAddress.fulfilled, (state, action) => {
       state.status = action.payload.data;
       state.message = action.payload.message;

@@ -184,6 +184,18 @@ interface IInformationVAT {
   CompanyCode: string;
   CompanyEmail: string;
 }
+interface IAddress {
+  IDUser: number;
+  FirstName: string;
+  LastName: string;
+  Phone: string;
+  Address: string;
+  City: string;
+  District: string;
+  Warn: string;
+  PaymentAddress: number;
+  DeliveryAddress: number;
+}
 
 interface IOrder {
   IDOrder: number;

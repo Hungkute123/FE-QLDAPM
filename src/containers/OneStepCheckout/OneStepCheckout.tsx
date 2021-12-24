@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './OneStepCheckout.scss';
 import { OneStepBox, FormAddress, FormMethod, DiscountCard } from '../../components';
 import { Button, Form } from 'react-bootstrap';
@@ -8,9 +8,15 @@ import {transformPriceFormat} from '../../helpers';
 import { doAddNewOrder, useAppDispatch, RootState } from '../../redux';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
+import {
+  getInformationVAT,
+  doGetUserAddress,
+} from '../../redux/slice/appSlice/userSlice';
 export const OneStepCheckout = () => {
   const cart = useSelector((state: RootState) => state.cartSlice);
-  const {account} = useSelector((state: RootState) => state.userSlice);
+  const {account, address} = useSelector((state: RootState) => state.userSlice);
+  console.log("address",address);
+
   const order = useSelector((state: RootState) => state.orderSlice);
   const dispatch = useAppDispatch();
   const history = useHistory();
