@@ -21,7 +21,6 @@ export const AccountHeader = () => {
   useEffect(() => {
     dispatch(getInfo({ jwt: localStorage.getItem('jwt') }));
     return () => {
-      console.log('haha');
     };
   }, [isOpen]);
 
@@ -35,7 +34,7 @@ export const AccountHeader = () => {
   const handleLogout = () => {
     window.localStorage.clear();
     history.push({
-      pathname: `/account`,
+      pathname: `/log-out`,
     });
   };
   return (
