@@ -63,6 +63,12 @@ export const doGetCategoryProductByIDParent = createAsyncThunk(
     return await categoryApi.getCategoryProductByIDParent(params).then((res) => res.data);
   },
 );
+export const doGetCategoryProductByIDParentWithSetLimit = createAsyncThunk(
+  'category/doGetCategoryProductByIDParentWithSetLimit',
+  async (params: any) => {
+    return await categoryApi.getCategoryProductByIDParentWithSetLimit(params).then((res) => res.data);
+  },
+);
 interface IInitialState {
   categoryLevelZero: any;
   categoryLevelOne: any;
@@ -149,6 +155,13 @@ export const categorySlice = createSlice({
     });
     builder.addCase(doGetCategoryProductByIDParent.fulfilled, (state, action) => {
       state.status = 'success';
+    });
+    builder.addCase(doGetCategoryProductByIDParentWithSetLimit.pending, (state, action) => {
+      state.categoryLevelZero = [];
+    });
+    builder.addCase(doGetCategoryProductByIDParentWithSetLimit.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.categoryLevelZero = action.payload;
     });
   },
 });
