@@ -208,7 +208,17 @@ export const Routers = () => {
           footer={Footer}
         />
         <PrivateRouter
-          path={'/account/address/edit'}
+          path={'/account/address/create'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Sổ địa chỉ - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+        <PrivateRouter
+          path={'/address/edit/:ID'}
           component={User}
           layout={HeaderFooterLayout}
           isHasHeader={true}

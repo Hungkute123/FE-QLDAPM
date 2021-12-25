@@ -42,7 +42,22 @@ export const addUserAddress = createAsyncThunk('user/add-user-address', async (p
 export const updateUserAddress = createAsyncThunk(
   'user/update-user-address',
   async (params: any) => {
-    return await userApi.getInfo(params).then((res) => res.data);
+    return await userApi.updateUserAddress(params).then((res) => res.data);
+  },
+);
+
+export const getAllUserAddress = createAsyncThunk('user/get-all-address', async (params: any) => {
+  return await userApi.getAllUserAddress(params).then((res) => res.data);
+});
+
+export const getUserAddress = createAsyncThunk('user/get-address', async (params: any) => {
+  return await userApi.getUserAddress(params).then((res) => res.data);
+});
+
+export const deleteUserAddress = createAsyncThunk(
+  'user/delete-user-address',
+  async (params: any) => {
+    return await userApi.deleteUserAddress(params).then((res) => res.data);
   },
 );
 export const doGetUserAddress = createAsyncThunk(
@@ -73,6 +88,10 @@ interface IInitialState {
   informationVAT: IInformationVAT;
   address: IAddress;
   listUser: any;
+  deliveryAddress: Array<IUserAddress>;
+  paymentAddress: Array<IUserAddress>;
+  ortherAddress: Array<IUserAddress>;
+  itemAddress: IUserAddress;
 }
 
 const initialState = {
@@ -85,6 +104,10 @@ const initialState = {
   informationVAT: {},
   address: {},
   listUser: [],
+  deliveryAddress: [],
+  paymentAddress: [],
+  ortherAddress: [],
+  itemAddress: {},
 } as IInitialState;
 
 export const userSlice = createSlice({
@@ -130,6 +153,31 @@ export const userSlice = createSlice({
       state.address = action.payload.data;
     })
     builder.addCase(updateUserAddress.fulfilled, (state, action) => {
+      state.status = action.payload.data;
+      state.message = action.payload.message;
+    });
+    builder.addCase(getAllUserAddress.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        const address: Array<IUserAddress> = action.payload.data;
+        state.paymentAddress = [];
+        state.deliveryAddress = [];
+        state.ortherAddress = [];
+
+        address.map((item) => {
+          if (!!item.PaymentAddress) {
+            state.paymentAddress.push(item);
+          } else if (!!item.DeliveryAddress) {
+            state.deliveryAddress.push(item);
+          } else {
+            state.ortherAddress.push(item);
+          }
+        });
+      }
+    });
+    builder.addCase(getUserAddress.fulfilled, (state, action) => {
+      state.itemAddress = action.payload.data;
+    });
+    builder.addCase(deleteUserAddress.fulfilled, (state, action) => {
       state.status = action.payload.data;
       state.message = action.payload.message;
     });

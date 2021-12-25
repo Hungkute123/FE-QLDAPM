@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Header.scss';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import Notification from '../../Notification/Notification';
 import Cart from '../../Cart/Cart';
 import { AccountHeader } from '../../AccountHeader/AccountHeader';
 import { ChooseLanguage } from '../../ChooseLanguage/ChooseLanguage';
 import { getQueryStringValue } from '../../../helpers';
-
 
 export const Header = () => {
   const history = useHistory();
@@ -43,9 +42,9 @@ export const Header = () => {
       <Container className="main-header">
         <Row>
           <Col md={2} className="logo">
-            <a href="/">
+            <Link to="/">
               <img alt="Fahasa" src="/logo.png" />
-            </a>
+            </Link>
           </Col>
           <Col md={7} className="header-search-box">
             <Form className="form-inline" onSubmit={handleSubmit}>

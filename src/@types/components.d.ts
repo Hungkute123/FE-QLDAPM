@@ -184,7 +184,9 @@ interface IInformationVAT {
   CompanyCode: string;
   CompanyEmail: string;
 }
-interface IAddress {
+
+interface IUserAddress {
+  ID: number;
   IDUser: number;
   FirstName: string;
   LastName: string;
@@ -192,9 +194,12 @@ interface IAddress {
   Address: string;
   City: string;
   District: string;
-  Warn: string;
-  PaymentAddress: number;
-  DeliveryAddress: number;
+  Ward: string;
+  PaymentAddress: boolean;
+  DeliveryAddress: boolean;
+  CodeCity: number;
+  CodeDistrict: number;
+  CodeWard: number;
 }
 
 interface IOrder {
