@@ -35,6 +35,14 @@ const categoryApi = {
         const url = 'category/add-cate'
         return await axiosMy.post(url, params)
     },
-    
+    getAllCate: async () => {
+        const url = 'category/all-cate'
+        return await axiosMy.get(url)
+    },
+
+    searchCate: async (params: any) => {
+        const url = 'category/search-cate'
+        return await axiosMy.get(url, {params})
+    },
 }
 export default categoryApi;

@@ -9,7 +9,7 @@
   background-color: #fff;
   margin-bottom: 15px;
   &__content {
-    width: 50%;
+    width: 100%;
   }
   &__title {
     h1 {
@@ -36,14 +36,14 @@
     }
   }
   &__mr-40 {
-    margin-right: 40px;
+    margin-right: 47px;
     margin-bottom: 15px;
   }
   &__level {
     margin: 5px;
   }
   &__search {
-    width: 73%;
+    width: 69%;
   }
   label {
     padding-top: 2px !important;
@@ -54,5 +54,19 @@
   }
   &__return {
     margin-right: 20px;
+  }
+  &__sample {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    img {
+      height: 532px;
+      border: 1px solid #ccc;
+      border-radius: 5%;
+      padding: 10px;
+    }
   }
 }

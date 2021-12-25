@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import { loginWithEmail, registerWithEmail, sendOTP } from '../../redux/slice/appSlice/userSlice';
+import { useHistory } from 'react-router-dom';
 
 export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
   const [emailLogin, setEmailLogin] = useState('');
@@ -17,8 +18,8 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
   const [emailRegister, setEmailRegister] = useState('');
   const [passwordRegister, setPasswordRegister] = useState('');
   const [codeOTP, setCodeOTP] = useState('');
-  const { isUser, OTP } = useSelector((state: RootState) => state.userSlice);
-
+  const { isUser, OTP,account } = useSelector((state: RootState) => state.userSlice);
+  const history = useHistory();
   const dispatch = useAppDispatch();
 
   const checkEmail = (email: string): boolean => {
@@ -53,6 +54,16 @@ export const LoginModal: React.FC<IModal> = ({ isOpen, setIsOpen }) => {
       });
 
       setIsOpen(false);
+      if(account.TypeOfUser === 1){
+        history.push({
+          pathname: `/seller/product-management`,
+        });
+      }
+      if(account.TypeOfUser === 2){
+        history.push({
+          pathname: `/admin/manage-user`,
+        });
+      }
     } else {
       Swal.fire({
         icon: 'error',

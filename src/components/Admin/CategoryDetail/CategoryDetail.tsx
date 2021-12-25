@@ -6,7 +6,9 @@ import {
   doGetOneCategory,
   doDeleteCategory,
   doUpdateCategory,
+  doAddCategory,
   getCategoryProductByLevelZero,
+  doGetAllCategory,
 } from '../../../redux';
 import { useParams, useHistory } from 'react-router';
 import { Form, Col, Row, Button, Modal } from 'react-bootstrap';
@@ -15,34 +17,37 @@ import { ModalConfirm } from '../../../components';
 export const CategoryDetail = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const { oneCategory, categoryLevelZero } = useAppSelector((state) => state.categorySlice);
+  const { oneCategory, listCategory } = useAppSelector((state) => state.categorySlice);
   const { IDCategory } = useParams<any>();
-  const [valueLevel, setValueLevel] = useState<any>(oneCategory.Level);
-  const [data, setData] = useState<any>(categoryLevelZero?.data || []);
+  const [valueLevel, setValueLevel] = useState<any>(oneCategory?.Level);
+  const [data, setData] = useState<any>(listCategory?.data || []);
   const [idParent, setIdParent] = useState<any>(oneCategory?.IDParent || []);
   const [name, setName] = useState<any>(oneCategory?.Name || []);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const isCreateCate = IDCategory === '0' ? true : false;
+
   useEffect(() => {
-    if (IDCategory) {
-      dispatch(doGetOneCategory({ IDCategory: IDCategory }));
-    }
+    dispatch(doGetOneCategory({ IDCategory: IDCategory }));
   }, [IDCategory]);
 
   useEffect(() => {
-    setValueLevel(oneCategory.Level);
+    dispatch(doGetAllCategory());
+  }, []);
+
+  useEffect(() => {
+    setValueLevel(oneCategory?.Level);
 
     if (oneCategory) {
       setIdParent(oneCategory.IDParent);
       setName(oneCategory.Name);
-      dispatch(getCategoryProductByLevelZero({ level: oneCategory.Level - 1 }));
     }
   }, [oneCategory]);
 
   useEffect(() => {
-    setData(categoryLevelZero?.data || []);
-  }, [categoryLevelZero]);
+    setData(listCategory?.data || []);
+  }, [listCategory]);
 
   const handleReturn = () => {
     history.goBack();
@@ -58,14 +63,26 @@ export const CategoryDetail = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    dispatch(
-      doUpdateCategory({
-        IDCategory: IDCategory,
-        Name: name,
-        Level: valueLevel,
-        IDParent: idParent,
-      }),
-    );
+    if (isCreateCate) {
+      dispatch(
+        doAddCategory({
+          Name: name,
+          Level: valueLevel,
+          IDParent: idParent || 0,
+        }),
+      );
+      history.push('/admin/manage-categories');
+    } else {
+      dispatch(
+        doUpdateCategory({
+          IDCategory: IDCategory,
+          Name: name,
+          Level: valueLevel,
+          IDParent: idParent,
+        }),
+      );
+    }
+
     setShowSuccess(true);
   };
 
@@ -76,6 +93,9 @@ export const CategoryDetail = () => {
 
   return (
     <div className="category-detail">
+      <h3 style={{ fontSize: 25, fontWeight: 500, marginBottom: '20px' }}>
+        {isCreateCate ? 'Tạo danh mục' : 'Chỉnh sửa danh mục'}
+      </h3>
       <Form onSubmit={handleSubmit}>
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
           <Form.Label column sm={2}>
@@ -117,52 +137,6 @@ export const CategoryDetail = () => {
             </Form.Select>
           </Col>
         </Form.Group>
-        <fieldset>
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            name="level"
-            defaultValue={1}
-            onChange={handleChange}
-          >
-            <Form.Label as="legend" column sm={2}>
-              Level
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Check
-                type="radio"
-                disabled
-                label="Level 1"
-                checked={valueLevel === 0 ? true : false}
-                value="1"
-                name="level"
-                id="1"
-                onChange={(e: any) => handleOnChangeRadio(0)}
-              />
-              <Form.Check
-                type="radio"
-                label="Level 2"
-                value="2"
-                disabled
-                checked={valueLevel === 1 ? true : false}
-                name="level"
-                id="2"
-                onChange={(e: any) => handleOnChangeRadio(1)}
-              />
-
-              <Form.Check
-                type="radio"
-                label="Level 3"
-                disabled
-                checked={valueLevel === 2 ? true : false}
-                value="3"
-                name="level"
-                id="3"
-                onChange={(e: any) => handleOnChangeRadio(2)}
-              />
-            </Col>
-          </Form.Group>
-        </fieldset>
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
@@ -177,14 +151,16 @@ export const CategoryDetail = () => {
             <Button style={{ margin: '0px 10px', width: '100px' }} type="submit">
               Cập nhật
             </Button>
-            <Button
-              variant="danger"
-              onClick={() => setShowConfirm(true)}
-              type="button"
-              style={{ position: 'absolute', right: 130 }}
-            >
-              Xóa danh mục
-            </Button>
+            {isCreateCate || (
+              <Button
+                variant="danger"
+                onClick={() => setShowConfirm(true)}
+                type="button"
+                style={{ position: 'absolute', right: 130 }}
+              >
+                Xóa danh mục
+              </Button>
+            )}
           </Col>
         </Form.Group>
       </Form>

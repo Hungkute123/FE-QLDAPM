@@ -11,3 +11,7 @@ interface IParamsSearchProduct {
 interface IParamsAddFavorite {
   productid?: string;
 }
+
+interface IParamsStatisticByYear {
+  IDYear: number;
+}

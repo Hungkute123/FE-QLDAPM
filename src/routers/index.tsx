@@ -352,6 +352,16 @@ export const Routers = () => {
           isHasHeader={true}
           header={Header}
         />
+        <PrivateRouter
+          exact={true}
+          path={'/log-out'}
+          component={Home}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          isHasFooter={true}
+          footer={Footer}
+        />
       </Switch>
     </Router>
   );

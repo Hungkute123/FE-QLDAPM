@@ -1,7 +1,8 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import  {store, persistor} from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,7 +12,9 @@ import "./index.scss";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate persistor={persistor}>
+      <App />
+      </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

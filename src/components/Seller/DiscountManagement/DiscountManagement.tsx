@@ -64,6 +64,7 @@ const Discounts: React.FC<IDiscounts> = ({ currentItems, itemOffset }) => {
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
       ) : (
         currentItems.map((item: any, i: number) => {

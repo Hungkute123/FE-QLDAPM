@@ -201,3 +201,13 @@ interface IUserAddress {
   CodeDistrict: number;
   CodeWard: number;
 }
+
+interface IOrder {
+  IDOrder: number;
+  IDProduct: string;
+  IDUser: number;
+  OrderDate: string;
+  Quantity: number;
+  Rating: any;
+  Status: string;
+}

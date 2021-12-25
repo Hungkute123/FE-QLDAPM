@@ -50,12 +50,32 @@ export const doAddCategory = createAsyncThunk('category/doAddCategory', async (p
   return await categoryApi.addCategory(params).then((res) => res.data);
 });
 
+export const doGetAllCategory = createAsyncThunk('category/doGetAllCategory', async () => {
+  return await categoryApi.getAllCate().then((res) => res.data);
+});
+
+export const doGetSearchCategory = createAsyncThunk('category/doGetSearchCategory', async (params: any) => {
+  return await categoryApi.searchCate(params).then((res) => res.data);
+});
+export const doGetCategoryProductByIDParent = createAsyncThunk(
+  'category/doGetCategoryProductByIDParent',
+  async (params: any) => {
+    return await categoryApi.getCategoryProductByIDParent(params).then((res) => res.data);
+  },
+);
+export const doGetCategoryProductByIDParentWithSetLimit = createAsyncThunk(
+  'category/doGetCategoryProductByIDParentWithSetLimit',
+  async (params: any) => {
+    return await categoryApi.getCategoryProductByIDParentWithSetLimit(params).then((res) => res.data);
+  },
+);
 interface IInitialState {
   categoryLevelZero: any;
   categoryLevelOne: any;
   categoryLevelTwo: any;
   oneCategory: any;
   status: string;
+  listCategory: any;
 }
 const initialState = {
   categoryLevelZero: [],
@@ -63,6 +83,7 @@ const initialState = {
   categoryLevelTwo: [],
   oneCategory: {},
   status: '',
+  listCategory: []
 } as IInitialState;
 
 export const categorySlice = createSlice({
@@ -112,6 +133,35 @@ export const categorySlice = createSlice({
     builder.addCase(doGetOneCategory.fulfilled, (state, action) => {
       state.status = 'success';
       state.oneCategory = action.payload.data;
+    });
+
+    builder.addCase(doGetAllCategory.pending, (state, action) => {
+      state.listCategory = {};
+    });
+    builder.addCase(doGetAllCategory.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.listCategory = action.payload;
+    });
+
+    builder.addCase(doGetSearchCategory.pending, (state, action) => {
+      state.listCategory = {};
+    });
+    builder.addCase(doGetSearchCategory.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.listCategory = action.payload;
+    });
+    builder.addCase(doGetCategoryProductByIDParent.pending, (state, action) => {
+      
+    });
+    builder.addCase(doGetCategoryProductByIDParent.fulfilled, (state, action) => {
+      state.status = 'success';
+    });
+    builder.addCase(doGetCategoryProductByIDParentWithSetLimit.pending, (state, action) => {
+      state.categoryLevelZero = [];
+    });
+    builder.addCase(doGetCategoryProductByIDParentWithSetLimit.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.categoryLevelZero = action.payload;
     });
   },
 });
