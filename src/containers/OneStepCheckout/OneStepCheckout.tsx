@@ -28,7 +28,7 @@ export const OneStepCheckout = () => {
         id_product: String(product.id),
         order_date: new Date().getTime(),
         quantity: product.quantity,
-        status: 'đang xử lý'
+        status: 'đang xử lý',
       };
       console.log("order", order);
       dispatch(doAddNewOrder)
@@ -51,7 +51,7 @@ export const OneStepCheckout = () => {
     
   }
   return (
-    <div>
+    <div className='one-step-checkout-page'>
       <Form onSubmit={handleSubmit}>
          <div className="one-step-checkout">
       <div className="one-step-checkout__list-box">
