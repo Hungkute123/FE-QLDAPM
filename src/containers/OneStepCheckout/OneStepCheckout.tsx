@@ -22,7 +22,7 @@ export const OneStepCheckout = () => {
         id_product: String(product.id),
         order_date: new Date().getTime(),
         quantity: product.quantity,
-        status: 'đang xử lý'
+        status: 'Đang xử lý'
       };
       console.log("order", order);
       dispatch(doAddNewOrder)
