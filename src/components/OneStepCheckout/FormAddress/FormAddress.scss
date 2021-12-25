@@ -1,3 +1,4 @@
+.form-address{
 .fhs_checkout_block {
     padding: 8px 16px;
     background-color: white;
@@ -10,8 +11,6 @@
 }
 .fhs_checkout_block > .fhs_checkout_block_content > .fhs_checkout_block_address_list {
     padding: 4px 0;
-}
-.fhs_checkout_block > .fhs_checkout_block_content > .fhs_checkout_block_address_list .fhs_checkout_block_address_list_items {
 }
 .fhs_checkout_block > .fhs_checkout_block_content > .fhs_checkout_block_address_list .fhs_checkout_block_address_list_items li, .fhs_checkout_block > .fhs_checkout_block_content > .fhs_checkout_block_address_list .fhs_checkout_block_address_list_items li > div {
     display: flex;
@@ -101,4 +100,4 @@ input[type="checkbox"], input[type="radio"] {
     content: "";
     position: absolute;
     display: none;
-}
+}}

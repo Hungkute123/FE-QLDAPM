@@ -37,7 +37,18 @@ const userApi = {
     const url = 'user/update-user-address';
     return await axiosMy.patch(url, requestOption );
   },
-
+  getAllUserAddress: async (params: any) => {
+    const url = `user/get-all-address`;
+    return await axiosMy.get(url, { params });
+  },
+  getUserAddress: async (params: any) => {
+    const url = `user/get-address`;
+    return await axiosMy.get(url, { params });
+  },
+  deleteUserAddress: async (params: any) => {
+    const url = `user/delete-user-address`;
+    return await axiosMy.delete(url, { params });
+  },
   getAllUser: async () => {
     const url = `user/get-all-user`;
     return await axiosMy.get(url);

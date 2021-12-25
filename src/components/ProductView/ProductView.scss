@@ -1,3 +1,4 @@
+.product-view{
 .product-view.kasitoo {
     display: block;
     width: 100%;
@@ -412,6 +413,34 @@ button.button span span {
 .product_view_content em {
     font-style: italic;
     text-align: justify;
+}
+.product_view_tab_content_ad {
+    overflow: hidden;
+    max-height: 600px;
+}
+.product_view_tab_content_additional {
+    border-bottom: 1px solid #c1c1c1;
+}
+.data-table {
+    border: none;
+    box-shadow: none;
+    width: 100%;
+}
+.data-table tbody th, .data-table tbody td {
+    font-size: 1.1em;
+    border: none;
+    padding: 4px;
+}
+.table-label {
+    display: table-cell;
+    padding-left: 0 !important;
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+    color: #777;
+}
 }
 // @mixin flex($align-item, $justify-content) {
 //     display: flex;

@@ -1,97 +1,4 @@
-// @mixin flex($align-item, $justify-content) {
-//     display: flex;
-//     align-items: $align-item;
-//     justify-content: $justify-content;
-// }
-// $box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-// $header-shrink-height: 70px;
-// $main-color: #4267b2;
-// .cart {
-//     @include flex(flex-start, flex-start);
-
-
-//     &__list {
-//         width: 60%;
-
-//     }
-
-//     &__info {
-//         padding: 20px;
-//         margin-right: 30px;
-//         margin-top: 30px;
-//         box-shadow: $box-shadow;
-//         position: sticky;
-//         top: calc(#{$header-shrink-height} + 20px);
-
-//         &__txt {
-//             & > * {
-//                 margin-bottom: 10px;
-//             }
-
-//             p {
-//                 font-size: 1.25rem;
-//             }
-
-//             &__price {
-//                 @include flex(center, space-between);
-//                 padding: 10px 0;
-//                 font-size: 1.25rem;
-
-//                 span:nth-child(2) {
-//                     font-size: 2rem;
-//                     color: $main-color;
-//                     font-weight: 600;
-//                 }
-//             }
-//         }
-
-//         &__btn {
-//             & > * {
-//                 margin-bottom: 20px;
-//             }
-//         }
-//     }
-
-//     &__item {
-//         @include flex(center, flex-start);
-//         margin-bottom: 20px;
-
-//         &__image {
-//             // width: 10%;
-//             margin-right: 20px;
-
-//             img {
-//                 height: 150px;
-//             }
-//         }
-
-//         &__info {
-//             @include flex(center, space-between);
-//             flex-grow: 1;
-
-//             &__name {
-//                 width: 40%;
-//             }
-
-//             &__name,
-//             &__price {
-//                 font-size: 1.25rem;
-//             }
-//         }
-
-//         &__del {
-//             font-size: 1.5rem;
-
-//             i {
-//                 cursor: pointer;
-
-//                 &:hover {
-//                     color: $main-color;
-//                 }
-//             }
-//         }
-//     }
-// }
+.cart-page{
 .row {
     margin-right: -15px;
     margin-left: -15px;
@@ -132,14 +39,11 @@
     display: inline-block;
     width: auto;
 }
-form {
-    display: inline;
-}
 input, select, textarea {
     width: 100%;
     border: 2px solid #e6e6e6;
 }
-.button, input {
+input {
     height: 39px;
     line-height: 1.42857;
 }
@@ -335,16 +239,13 @@ img {
     border-bottom-color: rgb(53, 58, 60);
 }
 .cart-ui-content.row .col-sm-4 {
-    padding-right: 0
-px
-!important;
+    padding-right: 0px!important;
     flex-grow: 1;
 }
 .total-cart-right {
     position: -webkit-sticky;
     position: sticky;
-    top: 10
-px
+    top: 10px
 ;
 }
 .block-total-cart {
@@ -354,11 +255,7 @@ px
 .total-cart-page {
     display: flex;
     font-size: 1.2em;
-    padding: 10
-px
- 16
-px
-;
+    padding: 10px 16px;
 }
 .title-cart-page-left {
     flex-basis: 65%;
@@ -372,19 +269,26 @@ px
 .total-cart-page .number-cart-page-right .price {
     font-size: 1em;
 }
-.checkout-type-button-cart{
-    text-align: center;
+.cart-ui-content .price {
+    font-family: sans-serif!important;
 }
-.method-button-cart {
-    padding-left: 16px;
-    padding-right: 16px;
-    background-color: white;
+.checkout-cart-index #content {
+    overflow: visible;
+    padding: 0!important;
+    box-shadow: none;
+    border: 0;
+    background: transparent!important;
+    font-family: 'Nunito Sans' !important;
 }
-.checkout-type-button-cart Button {
+.checkout-type-button-cart button {
     width: 100%;
     margin: 0px 0px 10px 0px;
     border: none;
-    color: red;
+}
+.checkout-type-button-cart button span {
+    font-size: 18px;
+    border-radius: 8px;
+    color: white !important;
 }
 button.button span span {
     border: 0;
@@ -393,4 +297,5 @@ button.button span span {
 }
 .notLoggedIn{
     color: red;
+}
 }
