@@ -70,6 +70,7 @@ export const FormAddress = () => {
     //     <button type="submit">Click</button>
     //   </Form>
     // </div>
+    <div className='form-address'>
     <div id='fhs_checkout_block_address' className="fhs_checkout_block">
       <div className="fhs_checkout_block_content">
         <div className="fhs_checkout_block_address_list">
@@ -90,6 +91,7 @@ export const FormAddress = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

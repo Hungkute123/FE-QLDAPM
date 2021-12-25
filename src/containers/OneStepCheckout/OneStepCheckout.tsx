@@ -16,7 +16,8 @@ export const OneStepCheckout = () => {
   const cart = useSelector((state: RootState) => state.cartSlice);
   const {account, address} = useSelector((state: RootState) => state.userSlice);
   console.log("address",address);
-
+  const moment = require('moment');
+  
   const order = useSelector((state: RootState) => state.orderSlice);
   const dispatch = useAppDispatch();
   const history = useHistory();
@@ -26,7 +27,7 @@ export const OneStepCheckout = () => {
       let order = {
         id_user: String(account.IDUser),
         id_product: String(product.id),
-        order_date: new Date().getTime(),
+        order_date: moment(new Date().toLocaleDateString()).format('MMMM d, YYYY'),
         quantity: product.quantity,
         status: 'đang xử lý',
       };
