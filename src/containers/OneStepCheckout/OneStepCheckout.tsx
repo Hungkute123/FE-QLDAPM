@@ -4,8 +4,9 @@ import { OneStepBox, FormAddress, FormMethod, DiscountCard } from '../../compone
 import { Button, Form } from 'react-bootstrap';
 import { BiArrowBack } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../redux';
 import {transformPriceFormat} from '../../helpers';
-import { doAddNewOrder, useAppDispatch, RootState } from '../../redux';
+import { doAddNewOrder, RootState, getAllUserAddress } from '../../redux';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import {
@@ -14,12 +15,23 @@ import {
 } from '../../redux/slice/appSlice/userSlice';
 export const OneStepCheckout = () => {
   const cart = useSelector((state: RootState) => state.cartSlice);
-  const {account, address} = useSelector((state: RootState) => state.userSlice);
-  console.log("address",address);
+  const {account} = useSelector((state: RootState) => state.userSlice);
+  const deliveryAddress: Array<IUserAddress> = useAppSelector(
+    (state: RootState) => state.userSlice.deliveryAddress,
+  );
+  const paymentAddress: Array<IUserAddress> = useAppSelector(
+    (state: RootState) => state.userSlice.paymentAddress,
+  );
+  const ortherAddress: Array<IUserAddress> = useAppSelector(
+    (state: RootState) => state.userSlice.ortherAddress,
+  );
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllUserAddress({ jwt: localStorage.getItem('jwt') }));
+  }, []);
   const moment = require('moment');
   
   const order = useSelector((state: RootState) => state.orderSlice);
-  const dispatch = useAppDispatch();
   const history = useHistory();
   const handleSubmit =async (e: any) => {
     e.preventDefault();
