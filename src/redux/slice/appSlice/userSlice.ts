@@ -60,6 +60,11 @@ export const deleteUserAddress = createAsyncThunk(
     return await userApi.deleteUserAddress(params).then((res) => res.data);
   },
 );
+export const doGetUserAddress = createAsyncThunk(
+  'user/get-all-address',
+  async(params: any) => {
+  return await userApi.getUserAddress(params).then((res) => res.data);
+});
 
 export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
   return await userApi.getAllUser().then((res) => res.data);
@@ -67,6 +72,10 @@ export const doGetAllUser = createAsyncThunk('user/get-all-user', async () => {
 
 export const doChangeActiveUser = createAsyncThunk('user/active-user', async (params: any) => {
   return await userApi.activeUser(params).then((res) => res.data);
+});
+
+export const doChangeRoleUser = createAsyncThunk('user/role-user', async (params: any) => {
+  return await userApi.changeRoleUser(params).then((res) => res.data);
 });
 
 interface IInitialState {
@@ -77,6 +86,7 @@ interface IInitialState {
   status: boolean;
   message: string;
   informationVAT: IInformationVAT;
+  address: IAddress;
   listUser: any;
   deliveryAddress: Array<IUserAddress>;
   paymentAddress: Array<IUserAddress>;
@@ -92,6 +102,7 @@ const initialState = {
   status: false,
   message: '',
   informationVAT: {},
+  address: {},
   listUser: [],
   deliveryAddress: [],
   paymentAddress: [],
@@ -138,6 +149,9 @@ export const userSlice = createSlice({
       state.status = action.payload.data;
       state.message = action.payload.message;
     });
+    builder.addCase(doGetUserAddress.fulfilled, (state, action) => {
+      state.address = action.payload.data;
+    })
     builder.addCase(updateUserAddress.fulfilled, (state, action) => {
       state.status = action.payload.data;
       state.message = action.payload.message;
@@ -178,10 +192,21 @@ export const userSlice = createSlice({
 
       if (userid) {
         const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
-        console.log('index', index);
 
         if (index >= 0) {
           state.listUser[index].active = !state.listUser[index].active;
+        }
+      }
+    });
+
+    builder.addCase(doChangeRoleUser.fulfilled, (state, action) => {
+      const { role, userid } = action.payload.data;
+
+      if (userid) {
+        const index = state.listUser.findIndex((item: any) => item.userid === parseInt(userid));
+
+        if (index >= 0) {
+          state.listUser[index].typeofuser = role;
         }
       }
     });

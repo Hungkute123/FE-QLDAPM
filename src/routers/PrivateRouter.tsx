@@ -42,6 +42,10 @@ export const PrivateRouter: React.FC<IPrivateRouter> = ({
   }, [location]);
 
   const render = (props: any) => {
+    console.log(location)
+    if (isAccount == false && location === '/log-out') {
+      return <Redirect to="/" />;
+    }
     return isFetch == false ? (
       <div style={{ marginTop: '20px' }}>
         <Spinner animation="grow" variant="primary" />

@@ -46,6 +46,18 @@ const productApi = {
   patchProduct: async (requestOption: any) =>{
     const url = 'products/patch-product';
     return await axiosMy.patch(url, requestOption );
-  }
+  },
+  getAllProduct: async () => {
+    const url = 'products/all';
+    return await axiosMy.get(url);
+  },
+  getAllProductPublisher: async () => {
+    const url = 'products/all-product-publisher';
+    return await axiosMy.get(url);
+  },
+  getAllProductSupplier: async () => {
+    const url = 'products/all-product-supplier';
+    return await axiosMy.get(url);
+  },
 };
 export default productApi;

@@ -36,7 +36,9 @@ const Products: React.FC<IProducts> = ({ currentItems, itemOffset }) => {
               <td className="text-center">{item.Status === 0 ? 'Ẩn' : 'Hiện'}</td>
               <td className="text-center">
                 <button>
-                  <BsEye></BsEye>
+                  <Link to={`/product-detail/${item.IDProduct}`}>
+                    <BsEye></BsEye>
+                  </Link>
                 </button>
               </td>
               <td className="text-center">

@@ -3,8 +3,9 @@ import './Category.scss';
 import { GroupCategory } from './GroupCategory/GroupCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
-import { getCategoryProductByLevelZero, resetCategoryLevelTwo } from '../../redux/slice/appSlice/categorySlice';
+import { doGetCategoryProductByIDParentWithSetLimit, getCategoryProductByLevelZero, resetCategoryLevelTwo } from '../../redux/slice/appSlice/categorySlice';
 import LazyLoad from 'react-lazyload';
+import { Link } from 'react-router-dom';
 
 export const Category:React.FC<ICategory> = ({className}) => {
   const [isShown, setIsShown] = useState(false);
@@ -12,7 +13,7 @@ export const Category:React.FC<ICategory> = ({className}) => {
   const { categoryLevelZero } = useSelector((state: RootState) => state.categorySlice);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoryProductByLevelZero({ level: 0 }));
+    dispatch(doGetCategoryProductByIDParentWithSetLimit({ idparent: 0, limit: 9 }));
   }, [dispatch]);
   return (
     <div
@@ -34,10 +35,10 @@ export const Category:React.FC<ICategory> = ({className}) => {
                   setIDParent(Number(item.IDCategory));
                   dispatch(resetCategoryLevelTwo());
                 }}>
-                <a href="">
+                <Link to={`/catalogsearch/result?text=${item.Name}`}>
                   {item.Name}
                   <b className="caret"></b>
-                </a>
+                </Link>
               </li>
             );
           })}

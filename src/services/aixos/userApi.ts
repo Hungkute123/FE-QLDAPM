@@ -49,7 +49,6 @@ const userApi = {
     const url = `user/delete-user-address`;
     return await axiosMy.delete(url, { params });
   },
-
   getAllUser: async () => {
     const url = `user/get-all-user`;
     return await axiosMy.get(url);
@@ -57,6 +56,11 @@ const userApi = {
   activeUser: async (params: any) => {
     const url = `user/active-user`;
     return await axiosMy.get(url, { params });
+  },
+
+  changeRoleUser: async (params: any) => {
+    const url = `user/update-role`;
+    return await axiosMy.patch(url, params);
   },
 };
 

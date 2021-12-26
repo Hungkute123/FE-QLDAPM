@@ -13,15 +13,22 @@ import {
 } from '@material-ui/core';
 import { getComparator, stableSort, EnhancedTableToolbar, EnhancedTableHead } from '../';
 import { useHistory } from 'react-router';
-import { useAppDispatch, doGetAllUser, useAppSelector, doChangeActiveUser } from '../../../redux';
+import {
+  useAppDispatch,
+  doGetAllUser,
+  useAppSelector,
+  doChangeActiveUser,
+  doChangeRoleUser,
+} from '../../../redux';
+import { Form } from 'react-bootstrap';
 
 const headCells: readonly HeadCell[] = [
-  {
-    id: 'fullname',
-    numeric: false,
-    disablePadding: true,
-    label: 'Họ và tên',
-  },
+  // {
+  //   id: 'fullname',
+  //   numeric: false,
+  //   disablePadding: true,
+  //   label: 'Họ và tên',
+  // },
   {
     id: 'phonenumber',
     numeric: true,
@@ -34,12 +41,12 @@ const headCells: readonly HeadCell[] = [
     disablePadding: false,
     label: 'Email',
   },
-  {
-    id: 'active',
-    numeric: true,
-    disablePadding: false,
-    label: 'Trạng thái',
-  },
+  // {
+  //   id: 'active',
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: 'Trạng thái',
+  // },
   {
     id: 'typeofuser',
     numeric: true,
@@ -67,7 +74,7 @@ export const ManageUser = () => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = listUser.map((n) => n.userid);
+      const newSelecteds = listUser.map((n: any) => n.userid);
       setSelected(newSelecteds);
       return;
     }
@@ -116,6 +123,10 @@ export const ManageUser = () => {
     dispatch(doChangeActiveUser({ active: active, userid: userid }));
   };
 
+  const handleOnChangeSelect = (e: any, userid: string) => {
+    dispatch(doChangeRoleUser({ role: e.target.value, userid: userid }));
+  };
+
   React.useEffect(() => {
     dispatch(doGetAllUser());
   }, []);
@@ -155,31 +166,43 @@ export const ManageUser = () => {
                         padding="checkbox"
                         onClick={(event) => handleClick(event, row.userid)}
                       >
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
+                        {/* {index + 1} */}
+                      </TableCell>
+                      {/* <TableCell align="left">
+                        {row.firstname && row.lastname ? row.firstname + ' ' + row.lastname : ''}
+                      </TableCell> */}
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.phonenumber}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.firstname && row.lastname ? row.firstname + ' ' + row.lastname : ''}
-                      </TableCell>
-                      <TableCell align="left">{row.phonenumber}</TableCell>
 
-                      <TableCell style={{ minWidth: '150px' }} align="left">
+                      {/* <TableCell style={{ minWidth: '150px' }} align="left">
                         {row.active ? 'Đã kích hoạt' : 'Chưa kích hoạt'}
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell align="left">
-                        {row.typeofuser === 0
+                        {/* {row.typeofuser === 0
                           ? 'Người dùng'
                           : row.typeofuser === 1
                           ? 'Người bán'
                           : row.typeofuser === 2
                           ? 'Quản trị viên'
-                          : ''}
+                          : ''} */}
+                        <Form.Select
+                          style={{ width: '200px' }}
+                          aria-label="Chọn cấp của danh mục"
+                          onChange={(e: any) => handleOnChangeSelect(e, row.userid)}
+                          defaultValue={row.typeofuser}
+                        >
+                          <option value="0" disabled={row.typeofuser === 2 ? true : false}>
+                            Người dùng
+                          </option>
+                          <option value="1" disabled={row.typeofuser === 2 ? true : false}>
+                            Người bán
+                          </option>
+                          <option value="2" disabled>
+                            Quản trị viên
+                          </option>
+                        </Form.Select>
                       </TableCell>
                       <TableCell style={{ minWidth: '200px' }}>
                         <Button

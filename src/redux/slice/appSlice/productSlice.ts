@@ -39,7 +39,24 @@ export const doGetProductByIDProduct = createAsyncThunk(
 export const doPatchProduct = createAsyncThunk('product/doPatchProduct', async (body: any) => {
   return await productApi.patchProduct(body).then((res) => res.data);
 });
-
+export const doGetAllProduct = createAsyncThunk(
+  'product/getAllProduct',
+  async () => {
+    return await productApi.getAllProduct().then((res) => res.data);
+  },
+);
+export const doGetAllProductPublisher = createAsyncThunk(
+  'product/getAllProductPublisher',
+  async () => {
+    return await productApi.getAllProductPublisher().then((res) => res.data);
+  },
+);
+export const doGetAllProductSupplier = createAsyncThunk(
+  'product/getAllProductSupplier',
+  async () => {
+    return await productApi.getAllProductSupplier().then((res) => res.data);
+  },
+);
 
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
@@ -150,6 +167,36 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(doPatchProduct.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do get all product
+    builder.addCase(doGetAllProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProduct.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do get all product publisher
+    builder.addCase(doGetAllProductPublisher.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProductPublisher.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProductPublisher.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do get all product supplier
+    builder.addCase(doGetAllProductSupplier.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProductSupplier.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doGetAllProductSupplier.rejected, (state, action) => {
       state.isLoading = false;
     });
   },
