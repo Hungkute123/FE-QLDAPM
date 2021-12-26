@@ -4,6 +4,7 @@ import { BsEye, BsPencilSquare } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { doGetProductByIDUser, RootState, useAppDispatch } from '../../../redux';
+import {transformPriceFormat} from '../../../helpers';
 import ReactPaginate from 'react-paginate';
 import './ProductManagement.scss';
 interface IProducts {
@@ -30,9 +31,9 @@ const Products: React.FC<IProducts> = ({ currentItems, itemOffset }) => {
             <tr key={i}>
               <td className="text-center">{itemOffset + i + 1}</td>
               <td>{item.NameProduct}</td>
-              <td className="text-center">{item.Price}đ</td>
+              <td className="text-center">{transformPriceFormat(item.Price)}đ</td>
               <td className="text-center">{item.Quantity}</td>
-              <td className="text-center">10</td>
+              <td className="text-center">{item.Sold}</td>
               <td className="text-center">{item.Status === 0 ? 'Ẩn' : 'Hiện'}</td>
               <td className="text-center">
                 <button>
