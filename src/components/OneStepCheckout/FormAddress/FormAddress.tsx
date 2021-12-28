@@ -5,8 +5,7 @@ import { DropdownAddress } from './DropdownAddress/DropdownAddress';
 import { Form } from 'react-bootstrap';
 import { doAddNewOrder, useAppDispatch, RootState, useAppSelector } from '../../../redux';
 import { deleteUserAddress, getAllUserAddress } from '../../../redux/slice/appSlice/userSlice';
-
-export const FormAddress = () => {
+export const FormAddress = (props : any) => {
   // const dispatch = useAppDispatch();
   // const [address, setAddress] = useState('');
   // const [city, setCity] = useState('');
@@ -59,7 +58,15 @@ export const FormAddress = () => {
     e.preventDefault();
     console.log(e.currentTarget.fullname2.value);
   };
+  const [adr, setAdr] = useState('');
+  
+  const handleChange = (e: any) => {
+    setAdr(e.target.value);
+    props.passChildData(e.target.value);
+    
+  };
 
+  
   return (
     // <div className="form-address">
     //   <Form onSubmit={handleSubmit}>
@@ -93,10 +100,11 @@ export const FormAddress = () => {
               <li className="fhs_checkout_block_address_list_item">
                 <div>
                 {ortherAddress.map((item, index) => {
+                  const adr = `${item.FirstName} ${item.LastName} | ${item.Address}, ${item.Ward}, ${item.District}, ${item.City} | ${item.Phone}`
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value="713282" checked/>
+                  value={adr} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
@@ -111,10 +119,11 @@ export const FormAddress = () => {
               <li className="fhs_checkout_block_address_list_item">
                 <div>
                 {paymentAddress.map((item, index) => {
+                  const adr = `${item.FirstName} ${item.LastName} | ${item.Address}, ${item.Ward}, ${item.District}, ${item.City} | ${item.Phone}`
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value="713282" checked/>
+                  value={adr} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
@@ -129,10 +138,11 @@ export const FormAddress = () => {
               <li className="fhs_checkout_block_address_list_item">
                 <div>
                 {deliveryAddress.map((item, index) => {
+                  const adr = `${item.FirstName} ${item.LastName} | ${item.Address}, ${item.Ward}, ${item.District}, ${item.City} | ${item.Phone}`
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value="713282" checked/>
+                  value={adr} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
