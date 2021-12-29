@@ -48,6 +48,7 @@ export const FormAddress = (props : any) => {
   const ortherAddress: Array<IUserAddress> = useAppSelector(
     (state: RootState) => state.userSlice.ortherAddress,
   );
+  
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -91,7 +92,11 @@ export const FormAddress = (props : any) => {
     //     <button type="submit">Click</button>
     //   </Form>
     // </div>
+    
     <div className='form-address'>
+      {deliveryAddress.length == 0 && paymentAddress.length == 0 && ortherAddress.length == 0 && 
+    <>
+    <h1>bạn chưa có địa chỉ, hãy thêm địa chỉ thanh toán vào sổ địa chỉ</h1></>}
     <div id='fhs_checkout_block_address' className="fhs_checkout_block">
       <div className="fhs_checkout_block_content">
         <div className="fhs_checkout_block_address_list">

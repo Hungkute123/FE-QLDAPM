@@ -37,7 +37,6 @@ export const OneStepCheckout = () => {
         price: product.quantity * product.price + 30000,
         address: childData,
       };
-      dispatch(doAddNewOrder)
       const isSuccess = (await dispatch(doAddNewOrder(order))).payload;
       if (isSuccess.data === true) {
         Swal.fire({
