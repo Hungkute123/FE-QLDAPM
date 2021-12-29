@@ -33,7 +33,7 @@ export const OneStepCheckout = () => {
         id_product: String(product.id),
         order_date: moment(new Date().toLocaleDateString()).format('MMMM d, YYYY'),
         quantity: product.quantity,
-        status: 'Đang xử lý',
+        status: 'Chờ xác nhận',
         price: product.quantity * product.price + 30000,
         address: childData,
       };
