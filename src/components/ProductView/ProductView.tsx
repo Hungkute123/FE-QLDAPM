@@ -250,7 +250,7 @@ export const ProductView = () => {
                         </table>
                     </div>
                 </div>
-                <p style={{ textAlign: 'justify' }}>
+                <p style={{ textAlign: 'justify', marginTop:20 }}>
                     {product.Description}
                 </p>
             </div>
