@@ -1,58 +1,111 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UserOrder.scss';
 
 import Slider, { Settings } from 'react-slick';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import orderApi from '../../services/aixos/orderApi';
+import { useAppSelector } from '../../redux';
+import { RootState } from '../../redux/rootReducer';
 
 export const UserOrder = () => {
-  const listOrder = [
+  const titleOrder = [
     {
-      title: '2',
+      quantity: 0,
       text: 'Tất Cả',
     },
     {
-      title: '0',
+      quantity: 0,
       text: 'Chờ thanh toán',
     },
     {
-      title: '0',
+      quantity: 0,
       text: 'Chờ xác nhận',
     },
     {
-      title: '0',
+      quantity: 0,
       text: 'Đang xử lý',
     },
     {
-      title: '0',
+      quantity: 0,
       text: 'Hoàn tất',
     },
     {
-      title: '2',
+      quantity: 0,
       text: 'Bị hủy',
     },
   ];
 
-  const listInfo = [
-    {
-      id: '102295665',
-      day: '07/11/2021',
-      name: 'Hùng Nguyễn Đình',
-      money: '124.000 đ',
-      status: 'Bị hủy',
-      url: '/account/order',
-    },
-    {
-      id: '102295665',
-      day: '07/11/2021',
-      name: 'Hùng Nguyễn Đình',
-      money: '124.000 đ',
-      status: 'Bị hủy',
-      url: '/account/order',
-    },
-  ];
+  // useSelector
+  const userInfo = useAppSelector((state: RootState) => state.userSlice.account);
+
+  const [listOrder, setListOrder] = useState<Array<IOrder>>();
+
+  const fetchOrder = async () => {
+    const listOrder: any = await orderApi.getOrder({
+      jwt: localStorage.getItem('jwt'),
+      IDUser: userInfo.IDUser,
+    });
+    setListOrder(listOrder.data);
+  };
+
+  useEffect(() => {
+    fetchOrder();
+  }, []);
+
+  listOrder &&
+    listOrder.map((item: any) => {
+      switch (item.Status) {
+        case 'Chờ thanh toán':
+          titleOrder[1].quantity++;
+          titleOrder[0].quantity++;
+          break;
+        case 'Chờ xác nhận':
+          titleOrder[2].quantity++;
+          titleOrder[0].quantity++;
+          break;
+        case 'Đang xử lý':
+          titleOrder[3].quantity++;
+          titleOrder[0].quantity++;
+          break;
+        case 'Hoàn tất':
+          titleOrder[4].quantity++;
+          titleOrder[0].quantity++;
+          break;
+        case 'Bị hủy':
+          titleOrder[5].quantity++;
+          titleOrder[0].quantity++;
+          break;
+        default:
+          break;
+      }
+    });
 
   const [isFocus, setIsFocues] = useState(0);
+  let statusOrder: string;
+
+  switch (isFocus) {
+    case 0:
+      statusOrder = 'Tất cả';
+      break;
+    case 1:
+      statusOrder = 'Chờ thanh toán';
+      break;
+    case 2:
+      statusOrder = 'Chờ xác nhận';
+      break;
+    case 3:
+      statusOrder = 'Đang xử lý';
+      break;
+    case 4:
+      statusOrder = 'Hoàn tất';
+      break;
+    case 5:
+      statusOrder = 'Bị hủy';
+      break;
+    default:
+      break;
+  }
 
   const settings: Settings = {
     dots: true,
@@ -71,7 +124,7 @@ export const UserOrder = () => {
           </div>
           <div className="order__tab-content">
             <Slider {...settings}>
-              {listOrder.map((item, moves) => {
+              {titleOrder.map((item, moves) => {
                 return (
                   <div
                     className={`order__item ${isFocus == moves ? 'order__item--focus' : ''}`}
@@ -83,7 +136,7 @@ export const UserOrder = () => {
                         isFocus == moves ? 'order__item--focus-color' : ''
                       }`}
                     >
-                      {item.title}
+                      {item.quantity}
                     </div>
                     <div
                       className={`order__item--text ${
@@ -114,20 +167,24 @@ export const UserOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {listInfo.map((item, moves) => {
-                return (
-                  <tr key={moves}>
-                    <td>{item.id}</td>
-                    <td>{item.day}</td>
-                    <td>{item.name}</td>
-                    <td>{item.money}</td>
-                    <td>{item.status}</td>
-                    <td>
-                      <Link to={item.url}>Xem chi tiết</Link>
-                    </td>
-                  </tr>
-                );
-              })}
+              {listOrder &&
+                listOrder.map((item, index) => {
+                  if (item.Status == statusOrder || statusOrder == 'Tất cả') {
+                    return (
+                      <tr key={`order-${index}`}>
+                        <td>{item.IDProduct}</td>
+                        <td>{item.OrderDate}</td>
+                        <td>{userInfo.FirstName}</td>
+                        <td></td>
+                        <td>{item.Status}</td>
+                        <td>
+                          <Link to={'/'}>Xem chi tiết</Link>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })}
+              {titleOrder[isFocus].quantity == 0 && <p>Bạn chưa có đơn hàng nào.</p>}
             </tbody>
           </Table>
         </div>
