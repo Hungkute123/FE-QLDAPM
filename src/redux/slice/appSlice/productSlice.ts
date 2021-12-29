@@ -57,7 +57,12 @@ export const doGetAllProductSupplier = createAsyncThunk(
     return await productApi.getAllProductSupplier().then((res) => res.data);
   },
 );
-
+export const doUpdateSoldProduct = createAsyncThunk(
+  'product/UpdateSoldProduct',
+  async (body:any) => {
+    return await productApi.updateSoldProduct(body).then((res) => res.data);
+  },
+);
 type IInitialState = {
   listSearchProduct: Array<IProduct>;
   favoriteList: Array<IProduct>;
@@ -197,6 +202,16 @@ export const productSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(doGetAllProductSupplier.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    //do update sold product
+    builder.addCase(doUpdateSoldProduct.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doUpdateSoldProduct.fulfilled, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(doUpdateSoldProduct.rejected, (state, action) => {
       state.isLoading = false;
     });
   },

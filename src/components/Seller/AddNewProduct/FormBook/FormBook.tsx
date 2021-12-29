@@ -225,7 +225,7 @@ export const FormBook: React.FC<IFormBook> = ({
               isSearchable
               name="publisher"
               options={listProductPublisher}
-              defaultValue={{ id: 5, label: "Select Dept", value: '0' }}
+              // defaultValue={{ id: 5, label: "Select Dept", value: '0' }}
               styles={customStyles}
               placeholder={'Chọn nhà xuất bản'}
               onChange={handleChangePublisher}
@@ -267,7 +267,7 @@ export const FormBook: React.FC<IFormBook> = ({
               isSearchable
               name="year"
               options={listYear}
-              defaultValue={{value: valuePublishingYear, label: valuePublishingYear}}
+              //defaultValue={{value: valuePublishingYear, label: valuePublishingYear}}
               styles={customStyles}
               placeholder={'Chọn năm sản xuất'}
               onChange={handleChangeYear}
@@ -275,20 +275,6 @@ export const FormBook: React.FC<IFormBook> = ({
           </div>
         </div>
       </div>
-      {/* <div className="form-book__item">
-        <InputFormProduct
-          title="Năm sản xuất"
-          type="number"
-          placeholder="Nhập năm sản xuất"
-          id="product_publishing_year"
-          name="product_publishing_year"
-          required={required}
-          min="0"
-          max="2023"
-          value={valuePublishingYear}
-          onInput={onInputPublishingYear}
-        />
-      </div> */}
       <div className="form-book__item">
         <InputFormProduct
           title="Tổng số trang"

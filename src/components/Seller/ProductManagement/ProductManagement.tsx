@@ -22,8 +22,8 @@ const Products: React.FC<IProducts> = ({ currentItems, itemOffset }) => {
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
+          {/* <td></td>
+          <td></td> */}
         </tr>
       ) : (
         currentItems.map((item: any, i: number) => {
@@ -34,7 +34,7 @@ const Products: React.FC<IProducts> = ({ currentItems, itemOffset }) => {
               <td className="text-center">{transformPriceFormat(item.Price)}đ</td>
               <td className="text-center">{item.Quantity}</td>
               <td className="text-center">{item.Sold}</td>
-              <td className="text-center">{item.Status === 0 ? 'Ẩn' : 'Hiện'}</td>
+              {/* <td className="text-center">{item.Status === 0 ? 'Ẩn' : 'Hiện'}</td> */}
               <td className="text-center">
                 <button>
                   <Link to={`/product-detail/${item.IDProduct}`}>
@@ -42,13 +42,13 @@ const Products: React.FC<IProducts> = ({ currentItems, itemOffset }) => {
                   </Link>
                 </button>
               </td>
-              <td className="text-center">
+              {/* <td className="text-center">
                 <Link to={`/seller/edit-product/${item.IDProduct}`}>
                   <button>
                     <BsPencilSquare></BsPencilSquare>
                   </button>
                 </Link>
-              </td>
+              </td> */}
             </tr>
           );
         })
@@ -97,7 +97,7 @@ export const ProductManagement = () => {
       setListProduct(tempListProduct);
     } else {
       const list = tempListProduct.filter((tempListProduct) =>
-        tempListProduct.NameProduct.includes(inputs),
+        tempListProduct.NameProduct.toLowerCase().includes(inputs.toLowerCase()),
       );
       setListProduct(list);
       setPageCount(0);
@@ -124,7 +124,7 @@ export const ProductManagement = () => {
                 <th style={{ width: '4%' }} className="text-center">
                   STT
                 </th>
-                <th style={{ width: '49%' }} className="text-center">
+                <th style={{ width: '64%' }} className="text-center">
                   Tên sản phẩm
                 </th>
                 <th style={{ width: '12%' }} className="text-center">
@@ -136,15 +136,15 @@ export const ProductManagement = () => {
                 <th style={{ width: '7%' }} className="text-center">
                   Đã bán
                 </th>
-                <th style={{ width: '10%' }} className="text-center">
+                {/* <th style={{ width: '10%' }} className="text-center">
                   Tình trạng
-                </th>
+                </th> */}
                 <th style={{ width: '5%' }} className="text-center">
                   Xem
                 </th>
-                <th style={{ width: '5%' }} className="text-center">
+                {/* <th style={{ width: '5%' }} className="text-center">
                   Sửa
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
