@@ -29,8 +29,8 @@ export const SellerSideBar = ({ current }: Sidebar) => {
   ]);
 
   const [itemNav, setItemNav] = useState([
-    { href: '/seller/account-balance', title: 'Số dư tài khoản' },
-    { href: '/seller/revenue', title: 'Doanh thu' },
+    // { href: '/seller/account-balance', title: 'Số dư tài khoản' },
+    // { href: '/seller/revenue', title: 'Doanh thu' },
     { href: '/seller/add-new-product', title: 'Thêm sản phẩm' },
     { href: '/seller/product-management', title: 'Quản lý sản phẩm' },
     { href: '/seller/order-management', title: 'Quản lý đơn hàng' },

@@ -30,43 +30,43 @@ export const Seller = () => {
         pathname: `/`,
       });
     }
-    if (location.pathname === '/seller/account-balance') setKindScreen(0);
-    if (location.pathname === '/seller/revenue') setKindScreen(1);
-    if (location.pathname === '/seller/add-new-product') setKindScreen(2);
-    if (location.pathname === '/seller/product-management') setKindScreen(3);
-    if (location.pathname === '/seller/order-management') setKindScreen(4);
-    if (location.pathname === '/seller/voucher') setKindScreen(5);
+    // if (location.pathname === '/seller/account-balance') setKindScreen(0);
+    // if (location.pathname === '/seller/revenue') setKindScreen(1);
+    if (location.pathname === '/seller/add-new-product') setKindScreen(0);
+    if (location.pathname === '/seller/product-management') setKindScreen(1);
+    if (location.pathname === '/seller/order-management') setKindScreen(2);
+    if (location.pathname === '/seller/voucher') setKindScreen(3);
     if (location.pathname.slice(0, location.pathname.lastIndexOf('/')) === '/seller/edit-product')
-      setKindScreen(6);
-    if (location.pathname === '/seller/create-discount-code') setKindScreen(7);
-    if (location.pathname === '/seller/create-promotion') setKindScreen(8);
+      setKindScreen(4);
+    if (location.pathname === '/seller/create-discount-code') setKindScreen(5);
+    if (location.pathname === '/seller/create-promotion') setKindScreen(6);
     if (
       location.pathname.slice(0, location.pathname.lastIndexOf('/')) ===
       '/seller/edit-discount-code'
     )
-      setKindScreen(9);
+      setKindScreen(7);
   }, [location]);
   const renderBody = (kind: number) => {
     switch (kind) {
+      // case 0:
+      //   return <AccountBalance />;
+      // case 1:
+      //   return <Revenue />;
       case 0:
-        return <AccountBalance />;
-      case 1:
-        return <Revenue />;
-      case 2:
         return <AddNewProduct />;
-      case 3:
+      case 1:
         return <ProductManagement />;
-      case 4:
+      case 2:
         return <OrderManagement />;
-      case 5:
+      case 3:
         return <DiscountManagement />;
-      case 6:
+      case 4:
         return <EditProduct />;
-      case 7:
+      case 5:
         return <CreateDiscountCode />;
-      case 8:
+      case 6:
         return <CreatePromotion />;
-      case 9:
+      case 7:
         return <EditDiscountCode />;
       default:
         return <></>;

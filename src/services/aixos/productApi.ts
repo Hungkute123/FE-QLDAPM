@@ -34,18 +34,18 @@ const productApi = {
   },
   getProductByIDUser: async (params: any) => {
     const url = 'products/iduser';
-    return await axiosMy.get(url , {params});
+    return await axiosMy.get(url, { params });
   },
-  addNewProduct: async (requestOption: any) =>{
+  addNewProduct: async (requestOption: any) => {
     const url = 'products/add-new-product';
-  //   const config = {     
-  //     headers: { 'content-type': 'multipart/form-data' }
-  // }
-    return await axiosMy.post(url, requestOption );
+    //   const config = {
+    //     headers: { 'content-type': 'multipart/form-data' }
+    // }
+    return await axiosMy.post(url, requestOption);
   },
-  patchProduct: async (requestOption: any) =>{
+  patchProduct: async (requestOption: any) => {
     const url = 'products/patch-product';
-    return await axiosMy.patch(url, requestOption );
+    return await axiosMy.patch(url, requestOption);
   },
   getAllProduct: async () => {
     const url = 'products/all';
@@ -58,6 +58,10 @@ const productApi = {
   getAllProductSupplier: async () => {
     const url = 'products/all-product-supplier';
     return await axiosMy.get(url);
+  },
+  updateSoldProduct: async (body: any) => {
+    const url = 'products/update-sold-product';
+    return await axiosMy.patch(url, body);
   },
 };
 export default productApi;

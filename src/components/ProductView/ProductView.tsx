@@ -251,7 +251,7 @@ export const ProductView = () => {
                     </div>
                 </div>
                 <p style={{ textAlign: 'justify', marginTop:20 }}>
-                    {product.Description}
+                <div dangerouslySetInnerHTML={{ __html: product.Description }}></div>
                 </p>
             </div>
             <div />
