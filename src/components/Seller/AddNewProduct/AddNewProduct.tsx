@@ -671,7 +671,7 @@ export const AddNewProduct = () => {
                 onEditorChange={handleEditorChange}
               />
             </div>
-            <Form.Group as={Row} className="mb-3 mt-10" controlId="formCity" key="1">
+            {/* <Form.Group as={Row} className="mb-3 mt-10" controlId="formCity" key="1">
               <Form.Label column sm={2}>
                 Tỉnh/Thành phố
               </Form.Label>
@@ -715,7 +715,7 @@ export const AddNewProduct = () => {
                   })}
                 </Form.Control>
               </Col>
-            </Form.Group>
+            </Form.Group> */}
             <div className="add-new-product__margin-10">
               <InputFormProduct
                 title="Giá sản phẩm"
@@ -863,7 +863,7 @@ export const AddNewProduct = () => {
               {isBook ? <FormBook required={isBook}></FormBook> : ''}
               {isItem ? <FormItem required={isItem}></FormItem> : ''}
               <div className="add-new-product__btn">
-                {isSpinnerOne === false ? (
+                {/* {isSpinnerOne === false ? (
                   <Button variant="secondary" style={{ marginRight: '10px' }} type="submit">
                     Lưu & Ẩn
                   </Button>
@@ -878,10 +878,10 @@ export const AddNewProduct = () => {
                     />
                     Lưu & Ẩn
                   </Button>
-                )}
+                )} */}
                 {isSpinnerTwo === false ? (
                   <Button variant="danger" type="submit" onClick={() => SetStatus(1)}>
-                    Lưu & Hiển thị
+                    Tạo sản phẩm
                   </Button>
                 ) : (
                   <Button variant="primary" disabled>
@@ -892,7 +892,7 @@ export const AddNewProduct = () => {
                       role="status"
                       aria-hidden="true"
                     />
-                    Lưu & Hiển thị
+                    Tạo sản phẩm
                   </Button>
                 )}
               </div>
