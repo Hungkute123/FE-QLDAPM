@@ -126,8 +126,8 @@ export const OneStepCheckout = () => {
               <span style={{ fontWeight: 'bold', color: '#F39801', fontSize: 20 }}>{transformPriceFormat(cart.total + 30000)}đ</span>
             </div>
           </div>
-          <div className="one-step-checkout__footer__bottom"  onClick={() => {history.push(`/cart`)}} style={{cursor: "pointer"}}>
-            <div>
+          <div className="one-step-checkout__footer__bottom" >
+            <div  onClick={() => {history.push(`/cart`)}} style={{cursor: "pointer"}}>
               <BiArrowBack size={30}/>
               <span>Quay về giỏ hàng</span>
             </div>
