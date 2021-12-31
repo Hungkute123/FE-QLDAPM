@@ -175,10 +175,10 @@ export const UserOrder = () => {
                         <td>{item.IDProduct}</td>
                         <td>{item.OrderDate}</td>
                         <td>{userInfo.FirstName}</td>
-                        <td></td>
+                        <td>{item.Price}đ</td>
                         <td>{item.Status}</td>
                         <td>
-                          <Link to={'/'}>Xem chi tiết</Link>
+                          <Link to={`/order/detail/${item.IDOrder}`}>Xem chi tiết</Link>
                         </td>
                       </tr>
                     );

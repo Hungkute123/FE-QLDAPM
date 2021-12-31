@@ -132,7 +132,7 @@ export const Routers = () => {
           isHasFooter={true}
           footer={Footer}
         />
-        
+
         <PrivateRouter
           path={'/seller/create-discount-code'}
           component={Seller}
@@ -239,6 +239,17 @@ export const Routers = () => {
         />
 
         <PrivateRouter
+          path={'/order/detail/:ID'}
+          component={User}
+          layout={HeaderFooterLayout}
+          isHasHeader={true}
+          header={Header}
+          titleHeader="Chi tiết đơn hàng - Fahasa"
+          isHasFooter={true}
+          footer={Footer}
+        />
+
+        <PrivateRouter
           path={'/account/voucher'}
           component={User}
           layout={HeaderFooterLayout}
@@ -314,7 +325,6 @@ export const Routers = () => {
           footer={Footer}
         />
       </Switch>
-
 
       <Switch>
         <PublicRouter

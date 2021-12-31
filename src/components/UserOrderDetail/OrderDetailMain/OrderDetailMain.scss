@@ -1,0 +1,94 @@
+.order-detail-main {
+    padding: 10px 20px;
+
+    &__box {
+        display: flex;
+    }
+
+    &__view-box {
+        flex: 1;
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title-box {
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    &__title {
+        font-size: 1.1em;
+        text-transform: uppercase;
+        color: black;
+        font-weight: bold;
+    }
+
+    &__info-box {
+        flex: 100%;
+        display: flex;
+        flex-direction: column;
+
+        address {
+            line-height: 20px;
+        }
+    }
+
+    &__status-order {
+        display: flex;
+        margin-top: 10px;
+        border: 1px solid #e0e0e0;
+        padding: 10px 0px;
+    }
+
+    &__view-status {
+        flex: 1;
+        text-align: center;
+        position: relative;
+    }
+
+    &__icon-status {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__img1-status,
+    &__img2-status,
+    &__img3-status {
+        height: 60px;
+        width: 60px;
+        align-self: center;
+        border: 3px solid #fa0001;
+        border-radius: 50%;
+    }
+
+    &__img1-status {
+        background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/order/ico_donhangmoi_red.svg)
+            no-repeat center;
+    }
+
+    &__img2-status {
+        background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/order/ico_dangxuly_red.svg)
+            no-repeat center;
+    }
+
+    &__img3-status {
+        background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/order/ico_huy_red.svg) no-repeat
+            center;
+    }
+
+    &__content-status {
+        margin-top: 10px;
+    }
+
+    &__process-status {
+        background: #fa0001;
+        position: absolute;
+        top: calc(50% - 25px);
+        height: 3px;
+        width: calc(100% - 60px);
+        left: calc(50% + 30px);
+    }
+}

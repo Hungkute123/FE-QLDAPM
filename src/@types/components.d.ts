@@ -210,4 +210,6 @@ interface IOrder {
   Quantity: number;
   Rating: any;
   Status: string;
+  Address: string;
+  Price: number;
 }

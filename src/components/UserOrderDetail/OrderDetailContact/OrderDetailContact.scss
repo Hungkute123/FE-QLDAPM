@@ -1,0 +1,41 @@
+.order-detail-contact {
+    padding: 10px 20px;
+
+    &__title {
+        font-size: 1.1em;
+        text-transform: uppercase;
+        color: black;
+        font-weight: bold;
+    }
+
+    &__view-contact {
+        margin: 10px 0;
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 0px;
+        }
+    }
+
+    &__border {
+        border-top: 2px;
+        height: 2px;
+        border-top-color: #f0f0f0;
+        border-top-style: solid;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    &__date-contact {
+        color: #b5b5b5;
+        display: flex;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+}

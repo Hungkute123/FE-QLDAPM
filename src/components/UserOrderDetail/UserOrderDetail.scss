@@ -1,0 +1,18 @@
+.order-detail {
+    background-color: #fff;
+
+    &__border-block {
+        height: 10px;
+        width: 100%;
+        background: #f0f0f0;
+    }
+}
+
+.order-null {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100%;
+}
