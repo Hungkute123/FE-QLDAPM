@@ -3,34 +3,40 @@ import './OneStepCheckout.scss';
 import { OneStepBox, FormAddress, FormMethod, DiscountCard } from '../../components';
 import { Button, Form } from 'react-bootstrap';
 import { BiArrowBack } from 'react-icons/bi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../redux';
 import {transformPriceFormat} from '../../helpers';
-import { doAddNewOrder, useAppDispatch, RootState } from '../../redux';
+import { doAddNewOrder, RootState, getAllUserAddress } from '../../redux';
+import { clearCart, removeFromCart } from '../../redux';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router-dom';
 import {
   getInformationVAT,
   doGetUserAddress,
 } from '../../redux/slice/appSlice/userSlice';
+import { propTypes } from 'react-bootstrap/esm/Image';
 export const OneStepCheckout = () => {
   const cart = useSelector((state: RootState) => state.cartSlice);
-  const {account, address} = useSelector((state: RootState) => state.userSlice);
-  console.log("address",address);
-
-  const order = useSelector((state: RootState) => state.orderSlice);
+  const {account} = useSelector((state: RootState) => state.userSlice);
   const dispatch = useAppDispatch();
+  const dp = useDispatch();
+  const moment = require('moment');
+  
+  const order = useSelector((state: RootState) => state.orderSlice);
   const history = useHistory();
+  const [childData, setChildData] = useState("");
   const handleSubmit =async (e: any) => {
     e.preventDefault();
     cart.products.map(async product =>  {
       let order = {
         id_user: String(account.IDUser),
         id_product: String(product.id),
-        order_date: new Date().getTime(),
+        order_date: moment(new Date().toLocaleDateString()).format('MMMM d, YYYY'),
         quantity: product.quantity,
-        status: 'đang xử lý',
+        status: 'Đang xử lý',
+        price: product.quantity * product.price + 30000,
+        address: childData,
       };
-      console.log("order", order);
       dispatch(doAddNewOrder)
       const isSuccess = (await dispatch(doAddNewOrder(order))).payload;
       if (isSuccess.data === true) {
@@ -47,16 +53,17 @@ export const OneStepCheckout = () => {
           title: 'Thanh toán thất bại',
         });
       }
+      dispatch(removeFromCart(product));
     })
-    
   }
+  
   return (
     <div className='one-step-checkout-page'>
       <Form onSubmit={handleSubmit}>
          <div className="one-step-checkout">
       <div className="one-step-checkout__list-box">
         <OneStepBox title="ĐỊA CHỈ GIAO HÀNG">
-          <FormAddress />
+          <FormAddress passChildData={setChildData} />
         </OneStepBox>
         <OneStepBox title="PHƯƠNG THỨC VẬN CHUYỂN">
           <div className="fhs_checkout_block_content">
@@ -119,9 +126,9 @@ export const OneStepCheckout = () => {
               <span style={{ fontWeight: 'bold', color: '#F39801', fontSize: 20 }}>{transformPriceFormat(cart.total + 30000)}đ</span>
             </div>
           </div>
-          <div className="one-step-checkout__footer__bottom">
+          <div className="one-step-checkout__footer__bottom"  onClick={() => {history.push(`/cart`)}} style={{cursor: "pointer"}}>
             <div>
-              <BiArrowBack size={30} />
+              <BiArrowBack size={30}/>
               <span>Quay về giỏ hàng</span>
             </div>
             <Button className="one-step-checkout__button" variant="danger" type='submit'>

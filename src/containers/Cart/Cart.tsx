@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from "react-bootstrap";
 import { RootState } from '../../redux/rootReducer';
 import { Row, Col, Container } from 'react-bootstrap';
-import { addProduct, deleteCart, removeFromCart, decreaseQuantity, increaseQuantity } from '../../redux';
+import { addProduct, removeFromCart, decreaseQuantity, increaseQuantity } from '../../redux';
 import { useHistory } from 'react-router-dom';
 import { BsTrashFill } from "react-icons/bs";
 import {transformPriceFormat} from '../../helpers';

@@ -20,7 +20,7 @@ export const AdminHome = () => {
   const { account } = useSelector((state: RootState) => state.userSlice);
 
   useEffect(() => {
-    if(account.TypeOfUser != 1){
+    if(account.TypeOfUser != 2){
       history.push({
         pathname: `/`,
       });
