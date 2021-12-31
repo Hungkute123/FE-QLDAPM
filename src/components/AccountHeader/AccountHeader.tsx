@@ -68,7 +68,7 @@ export const AccountHeader = () => {
                 <div className="account-header__option">
                   <BsShop size={20} />
                   <span>
-                    <Link to="/seller/account-balance">Kênh người bán</Link>
+                    <Link to="/seller/product-management">Kênh người bán</Link>
                   </span>
                 </div>
               ) : (

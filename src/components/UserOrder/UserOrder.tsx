@@ -172,9 +172,9 @@ export const UserOrder = () => {
                   if (item.Status == statusOrder || statusOrder == 'Tất cả') {
                     return (
                       <tr key={`order-${index}`}>
-                        <td>{item.IDProduct}</td>
+                        <td>{item.IDOrder}</td>
                         <td>{item.OrderDate}</td>
-                        <td>{userInfo.FirstName}</td>
+                        <td>{item.FirstName} {item.LastName}</td>
                         <td>{item.Price}đ</td>
                         <td>{item.Status}</td>
                         <td>
