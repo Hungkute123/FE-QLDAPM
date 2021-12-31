@@ -38,7 +38,7 @@ export const OrderDetailModal: React.FC<IOrderDetailModal> = ({ show, handleClos
                         <span>Đơn hàng: </span>
                         <span>{item.IDOrder}</span>
                       </div>
-                      <div className={`${className}__process`}>Đơn hàng {item.StatusOrder}</div>
+                      <div className={`${className}__process`}>Mã đơn hàng {item.StatusOrder}</div>
                       <div className={`${className}__title-order`}>
                         <span>Tổng tiền: </span>
                         <span>{transformPriceFormat(item.OrderPrice)}đ</span>
@@ -97,7 +97,7 @@ export const OrderDetailModal: React.FC<IOrderDetailModal> = ({ show, handleClos
                     {/* <span className={`${className}__price-old`}>135.000đ</span> */}
                   </div>
                   <div className={`${className}__cell`}>{item.QuantityOrder}</div>
-                  <div className={`${className}__cell`}>{transformPriceFormat(item.OrderPrice)}đ</div>
+                  <div className={`${className}__cell`}>{transformPriceFormat(item.Price*item.QuantityOrder)}đ</div>
                 </div>
               </div>
             </div>
@@ -108,11 +108,23 @@ export const OrderDetailModal: React.FC<IOrderDetailModal> = ({ show, handleClos
                 <p className={`${className}__total-price`}>
                   <span className={`${className}__price`}>Thành tiền:</span>
                 </p>
+                <p className={`${className}__total-price`}>
+              <span className={`${className}__price`}>Phí vận chuyển: </span>
+            </p>
+            <p className={`${className}__total-price`}>
+              <span className={`${className}__price`}>Tổng Số Tiền (gồm VAT): </span>
+            </p>
               </div>
               <div className={`${className}__total-left`}>
                 <p className={`${className}__total-price`}>
-                  <span className={`${className}__price`}>{transformPriceFormat(item.OrderPrice)}đ</span>
+                  <span className={`${className}__price`}>{transformPriceFormat(item.Price*item.QuantityOrder)}đ</span>
                 </p>
+                <p className={`${className}__total-price`}>
+              <span className={`${className}__price`}>30.000đ</span>
+            </p>
+            <p className={`${className}__total-price`}>
+              <span className={`${className}__price`}>{transformPriceFormat(item.OrderPrice)}đ</span>
+            </p>
               </div>
             </div>
           </div>
