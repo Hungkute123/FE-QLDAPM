@@ -11,8 +11,12 @@ import { transformPriceFormat } from '../../../helpers';
 import './OrderManagement.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
+import { OrderDetailModal } from './OrderDetailModal/OrderDetailModal';
 export const OrderManagement = () => {
   const dispatch = useAppDispatch();
+  const [modalShow, setModalShow] = useState(false);
+  const [orderDetail, setOrderDetail] = useState<any>({});
+  const [path, SetPath] = useState('');
   const [unpaidMoney, setUnpaidMoney] = useState(0);
   const [paidMoney, setPaidMoney] = useState(0);
   let [orderProcessing, setOrderProcessing] = useState([]);
@@ -22,6 +26,7 @@ export const OrderManagement = () => {
   const { account } = useSelector((state: RootState) => state.userSlice);
   const fetchOrder = async () => {
     const order = (await dispatch(doGetOrderOfSeller({ IDUser: account.IDUser }))).payload;
+    SetPath(order.Path);
     if (order.data != null || order.data != undefined) {
       for (let i = 0; i < order.data.length; i++) {
         if (order.data[i].StatusOrder === 'Chờ xác nhận') {
@@ -86,16 +91,22 @@ export const OrderManagement = () => {
     Quantity: number,
     Sold: number,
   ) => {
-    const total = Sold +Quantity;
+    const total = Sold + Quantity;
     const check = (await dispatch(doUpdateStatus({ status: 'Hoàn tất', IDOrder: IDOrder })))
       .payload;
-    doUpdateSoldProduct({ IDProduct: IDProduct, sold: total });
+    dispatch(doUpdateSoldProduct({ IDProduct: IDProduct, sold: total }));
     if (check.data === true) {
       handleData();
     }
   };
   return (
     <>
+      <OrderDetailModal
+        show={modalShow}
+        handleClose={setModalShow}
+        item={orderDetail}
+        path={path}
+      />
       <div className="revenue">
         <div className="revenue__content">
           <div className="revenue__title">
@@ -159,7 +170,7 @@ export const OrderManagement = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orderProcessing ? (
+                    {orderProcessing.length === 0 ? (
                       <tr>
                         <td></td>
                         <td>Không có đơn hàng</td>
@@ -178,19 +189,33 @@ export const OrderManagement = () => {
                             <td className="text-center">{item.NameProduct}</td>
                             <td className="text-center">{item.QuantityOrder}</td>
                             <td className="text-center">{transformPriceFormat(item.Price)}đ</td>
-                            <td className="text-center">Ba Đình Hà Nội</td>
                             <td className="text-center">
-                              <button>
+                              {item.Address}, {item.Ward}, {item.District}, {item.City}
+                            </td>
+                            <td className="text-center">
+                              <button
+                                title="Xem chi tiết"
+                                onClick={() => {
+                                  setOrderDetail(item);
+                                  setModalShow(true);
+                                }}
+                              >
                                 <BsEye></BsEye>
                               </button>
                             </td>
                             <td className="text-center">
-                              <button onClick={() => handleCanceled(item.IDOrder)}>
+                              <button
+                                title="Hủy đơn hàng"
+                                onClick={() => handleCanceled(item.IDOrder)}
+                              >
                                 <BsXCircle color={'#DC143C'}></BsXCircle>
                               </button>
                             </td>
                             <td className="text-center">
-                              <button onClick={() => handleDelivering(item.IDOrder)}>
+                              <button
+                                title="Xác nhận đơn hàng"
+                                onClick={() => handleDelivering(item.IDOrder)}
+                              >
                                 <BsCheckCircle color={'#7FFF00'}></BsCheckCircle>
                               </button>
                             </td>
@@ -204,7 +229,7 @@ export const OrderManagement = () => {
             </Tab>
             <Tab eventKey="tab-two" title="Đơn hàng đã hủy">
               <div className="product-management__table">
-                <Table responsive="sm">
+                <Table hover responsive="sm">
                   <thead className="product-management__table__head">
                     <tr>
                       <th style={{ width: '4%' }} className="text-center">
@@ -247,10 +272,18 @@ export const OrderManagement = () => {
                             <td className="text-center">{index + 1}</td>
                             <td className="text-center">{item.NameProduct}</td>
                             <td className="text-center">{item.QuantityOrder}</td>
-                            <td className="text-center">{transformPriceFormat(item.Price)}đ</td>
-                            <td className="text-center">Ba Đình Hà Nội</td>
+                            <td className="text-center">{transformPriceFormat(item.OrderPrice)}đ</td>
                             <td className="text-center">
-                              <button>
+                              {item.Address}, {item.Ward}, {item.District}, {item.City}
+                            </td>
+                            <td className="text-center">
+                              <button
+                                title="Xem chi tiết"
+                                onClick={() => {
+                                  setOrderDetail(item);
+                                  setModalShow(true);
+                                }}
+                              >
                                 <BsEye></BsEye>
                               </button>
                             </td>
@@ -311,14 +344,23 @@ export const OrderManagement = () => {
                             <td className="text-center">
                               {transformPriceFormat(item.Price * item.QuantityOrder)}đ
                             </td>
-                            <td className="text-center">Ba Đình Hà Nội</td>
                             <td className="text-center">
-                              <button>
+                              {item.Address}, {item.Ward}, {item.District}, {item.City}
+                            </td>
+                            <td className="text-center">
+                              <button
+                                title="Xem chi tiết"
+                                onClick={() => {
+                                  setOrderDetail(item);
+                                  setModalShow(true);
+                                }}
+                              >
                                 <BsEye></BsEye>
                               </button>
                             </td>
                             <td className="text-center">
                               <button
+                                title="Đánh dấu giao hoàn thành"
                                 onClick={() =>
                                   handleDelivered(
                                     item.IDOrder,
@@ -387,9 +429,17 @@ export const OrderManagement = () => {
                             <td className="text-center">{item.NameProduct}</td>
                             <td className="text-center">{item.QuantityOrder}</td>
                             <td className="text-center">{transformPriceFormat(item.Price)}đ</td>
-                            <td className="text-center">Ba Đình Hà Nội</td>
                             <td className="text-center">
-                              <button>
+                              {item.Address}, {item.Ward}, {item.District}, {item.City}
+                            </td>
+                            <td className="text-center">
+                              <button
+                                title="Xem chi tiết"
+                                onClick={() => {
+                                  setOrderDetail(item);
+                                  setModalShow(true);
+                                }}
+                              >
                                 <BsEye></BsEye>
                               </button>
                             </td>
