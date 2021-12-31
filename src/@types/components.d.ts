@@ -203,6 +203,8 @@ interface IUserAddress {
 }
 
 interface IOrder {
+  FirstName: string | number | boolean | {} | ReactElement<any, string | JSXElementConstructor<any>> | ReactNodeArray | ReactPortal;
+  LastName: any;
   IDOrder: number;
   IDProduct: string;
   IDUser: number;

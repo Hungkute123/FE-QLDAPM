@@ -20,11 +20,6 @@ export const AdminHome = () => {
   const { account } = useSelector((state: RootState) => state.userSlice);
 
   useEffect(() => {
-    if(account.TypeOfUser != 2){
-      history.push({
-        pathname: `/`,
-      });
-    }
     if (location.pathname === '/admin/manage-user') setKindScreen(0);
     if (location.pathname === '/admin/manage-categories') setKindScreen(1);
     if (location.pathname === '/admin/manage-report') setKindScreen(2);
