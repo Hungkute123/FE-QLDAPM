@@ -86,7 +86,6 @@ interface IInitialState {
   status: boolean;
   message: string;
   informationVAT: IInformationVAT;
-  address: IAddress;
   listUser: any;
   deliveryAddress: Array<IUserAddress>;
   paymentAddress: Array<IUserAddress>;
@@ -102,7 +101,6 @@ const initialState = {
   status: false,
   message: '',
   informationVAT: {},
-  address: {},
   listUser: [],
   deliveryAddress: [],
   paymentAddress: [],
@@ -149,9 +147,6 @@ export const userSlice = createSlice({
       state.status = action.payload.data;
       state.message = action.payload.message;
     });
-    builder.addCase(doGetUserAddress.fulfilled, (state, action) => {
-      state.address = action.payload.data;
-    })
     builder.addCase(updateUserAddress.fulfilled, (state, action) => {
       state.status = action.payload.data;
       state.message = action.payload.message;

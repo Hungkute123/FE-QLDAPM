@@ -15,6 +15,7 @@ import {
   UserReview,
   UserNotification,
   UserNewsLetter,
+  UserOrderDetail,
 } from '../../components';
 import { Row, Col } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
@@ -41,6 +42,10 @@ export const User = () => {
     location = '/address/edit';
   }
 
+  if (location.slice(0, location.lastIndexOf('/')) == '/order/detail') {
+    location = '/order/detail';
+  }
+
   switch (location) {
     case '/account':
       return renderLayout(<UserDashboard></UserDashboard>, 0);
@@ -54,6 +59,8 @@ export const User = () => {
       return renderLayout(<UserCreateAddress></UserCreateAddress>, 2);
     case '/account/order':
       return renderLayout(<UserOrder></UserOrder>, 3);
+    case '/order/detail':
+      return renderLayout(<UserOrderDetail></UserOrderDetail>, 3);
     case '/account/voucher':
       return renderLayout(<UserVoucher></UserVoucher>, 4);
     case '/wishlist':
