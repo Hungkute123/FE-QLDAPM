@@ -31,7 +31,7 @@ export const OneStepCheckout = () => {
       let order = {
         id_user: String(account.IDUser),
         id_product: String(product.id),
-        order_date: moment(new Date().toLocaleDateString()).format('MMMM d, YYYY'),
+        order_date: moment().format('MMMM Do YYYY, h:mm:ss a'),
         quantity: product.quantity,
         status: 'Chờ xác nhận',
         price: product.quantity * product.price + 30000,
