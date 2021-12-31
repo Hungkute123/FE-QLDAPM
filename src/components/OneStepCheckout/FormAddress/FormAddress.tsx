@@ -109,7 +109,7 @@ export const FormAddress = (props : any) => {
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value={adr} onChange={handleChange}/>
+                  value={item.ID} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
@@ -128,7 +128,7 @@ export const FormAddress = (props : any) => {
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value={adr} onChange={handleChange}/>
+                  value={item.ID} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
@@ -147,7 +147,7 @@ export const FormAddress = (props : any) => {
                     return (
                   <label className="fhs-radio-big">				
                   <input type="radio" name="fhs_checkout_block_address_list_item_option" id="fhs_checkout_block_address_list_item_713282" className='fhs_checkout_block_address_list_item_option'
-                  value={adr} onChange={handleChange}/>
+                  value={item.ID} onChange={handleChange}/>
                   
                   <span className="radiomark-big">
                   </span>
